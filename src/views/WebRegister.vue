@@ -16,11 +16,27 @@
             <el-form-item label="确认密码" prop="checkPass">
               <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
             </el-form-item>
+            <el-form-item label="兴趣爱好" prop="type">
+              <el-checkbox-group v-model="ruleForm.type">
+                <el-checkbox label="言情" name="type"></el-checkbox>
+                <el-checkbox label="奇幻" name="type"></el-checkbox>
+                <el-checkbox label="武侠" name="type"></el-checkbox>
+                <el-checkbox label="健康" name="type"></el-checkbox>
+                <el-checkbox label="管理" name="type"></el-checkbox>
+                <el-checkbox label="设计" name="type"></el-checkbox>
+                <el-checkbox label="职场" name="type"></el-checkbox>
+                <el-checkbox label="美食" name="type"></el-checkbox>
+                <el-checkbox label="编程" name="type"></el-checkbox>
+                <el-checkbox label="通信" name="type"></el-checkbox>
+                <el-checkbox label="色情  " name="type"></el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
 
             <el-form-item>
               <el-button  type="primary" @click="submitForm('ruleForm')">提交</el-button>
               <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
+
 
           </el-form>
         </div>
@@ -42,24 +58,7 @@ export default {
         callback(new Error('不正确的邮箱'));
       }
     };
-    const checkAge = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('邮箱不能为空'));
-      }
-      setTimeout(() => {
-        // !Number.isInteger(value)
-        let choice = value instanceof String
-        if (choice) {
-          callback(new Error('请输入正确的邮箱'));
-        } else {
-          if (value.length>7&&value.length<20) {
-            callback(new Error('不正确的邮箱格式'));
-          } else {
-            callback(new Error('不正确的邮箱格式'));
-          }
-        }
-      }, 1000);
-    };
+
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'));
@@ -83,8 +82,8 @@ export default {
       ruleForm: {
         pass: '',
         checkPass: '',
-        age: '',
-        email:''
+        email:'',
+        type:[]
       },
       rules: {
         pass: [
@@ -93,12 +92,12 @@ export default {
         checkPass: [
           { validator: validatePass2, trigger: 'blur' }
         ],
-        age: [
-          { validator: checkAge, trigger: 'blur' }
-        ],
         email: [
           {validator:checkMail,trigger:'blur'}
-        ]
+        ],
+        type: [
+          { type: 'array', required: true, message: '请至少选择一个兴趣爱好', trigger: 'change' }
+        ],
       }
     };
   },
