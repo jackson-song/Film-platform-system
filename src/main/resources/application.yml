@@ -1,17 +1,17 @@
 #数据库连接的驱动、url、用户名、密码，修改自己的数据库名称 用户名 密码 部分
 spring:
-datasource:
-driver-class-name: com.mysql.cj.jdbc.Driver #mysql8以上使用
-url: jdbc:mysql://127.0.0.1:3306/read?useUnicode=true &characterEncoding=utf-8 &useSSL=true & serverTimezone=Asia/Shanghai #mysql8以上必须添加serverTimezone时区设置
-username: root
-password: 52530
-#配置mybatis的xml路径、自动扫描实体类所在的包
-mybatis:
-mapper-locations: classpath:/mapper/*.xml
-type-aliases-package: com/read/read_book/entity
-configuration:
-map-underscore-to-camel-case: true #数据库字段下划线对应对象属性的驼峰命名转换 开启
-log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置log4j
-#服务器端口号
-server:
-port: 8088
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver #mysql8以上使用
+    url: jdbc:mysql://127.0.0.1:3306/read?useUnicode=true &characterEncoding=utf-8 &useSSL=true & serverTimezone=Asia/Shanghai #mysql8以上必须添加serverTimezone时区设置
+    username: root
+    password: 52530
+  #配置mybatis的xml路径、自动扫描实体类所在的包
+  mybatis:
+    mapper-locations: classpath:/mapper/*.xml
+    type-aliases-package: com/read/read_book/entity
+    configuration:
+    map-underscore-to-camel-case: true #数据库字段下划线对应对象属性的驼峰命名转换 开启
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置log4j
+  #服务器端口号
+#  server:
+#    port: 3000
