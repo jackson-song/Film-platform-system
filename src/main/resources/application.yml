@@ -1,5 +1,9 @@
 #数据库连接的驱动、url、用户名、密码，修改自己的数据库名称 用户名 密码 部分
 spring:
+#  mvc:
+#    view:
+#      prefix: /
+#      suffix: .html
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver #mysql8以上使用
     url: jdbc:mysql://127.0.0.1:3306/read?useUnicode=true &characterEncoding=utf-8 &useSSL=true & serverTimezone=Asia/Shanghai #mysql8以上必须添加serverTimezone时区设置
