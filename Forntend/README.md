@@ -31,7 +31,7 @@ http://localhost:8080/#/login
 
 
 
-![image-20230530154127820](https://gitee.com/JacksonSong/img/raw/master/img/image-20230530154127820.png)
+![image-20230530154127820](https://gitee.com/JacksonSong/img/blob/master/img/image-20230530154127820.pngimage-20230530154127820.png)
 
 输入如下地址可以看到register界面
 
@@ -39,7 +39,7 @@ http://localhost:8080/#/login
 http://localhost:8080/#/register
 ```
 
-![image-20230530154321926](https://gitee.com/JacksonSong/img/raw/master/img/image-20230530154321926.png)
+![image-20230530154321926](https://gitee.com/JacksonSong/img/blob/master/img/image-20230530154321926.png)
 
 如果没有node_modules目录时，就需要进行项目修复，来进行构建node项目在Frontend目录下打开cmd，输入如下命令:
 
@@ -47,6 +47,6 @@ http://localhost:8080/#/register
 npm audit fix --force
 ```
 
-![image-20230605205320388](https://gitee.com/JacksonSong/img/raw/master/img/image-20230605205320388.png)
+![image-20230605205320388](https://gitee.com/JacksonSong/img/blob/master/img/image-20230605205320388.png)
 
 结构目录如上图所示，即可成功运行。
