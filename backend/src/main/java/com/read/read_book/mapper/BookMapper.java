@@ -11,7 +11,9 @@ import java.util.List;
 @Mapper
 public interface BookMapper extends BaseMapper<Book> {
 
-    @Select("select * from book where ISBN = #{ISBN}")
+    @Select("select * from book where isbn = #{ISBN}")
     List<Book> SerachBookByISBN(@Param("ISBN") Long ISBN);
+
+//    List<Book> SearchBookByBookname(String bookname);
 
 }

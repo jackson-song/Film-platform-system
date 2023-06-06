@@ -12,11 +12,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book {
-    Long ISBN;
-    String Bookname;
+
+    Long isbn;
+    String bookname;
     String author;
     String press;
     Double bookgrading;
-    Date Publicationtime;
+    Date publicationtime;
     String synopsis;
 }

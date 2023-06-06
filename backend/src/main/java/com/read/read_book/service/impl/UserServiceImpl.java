@@ -16,9 +16,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    //注册
     @Override
     public Map<String, String> register(String username, String password, String confirmedPassword) {
-
         Map<String, String> map = new HashMap<>();
         if (username == null) {
             map.put("error_message", "用户名不能为空");
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
             return map;
         }
 
-        System.out.println("一切正常,准备插入数据");
+//        System.out.println("一切正常,准备插入数据");
 
         User user = new User(null, username, password);
         userMapper.insert(user);
@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
         map.put("error_message", "success");
         return map;
 
-
     }
+
+
 }
