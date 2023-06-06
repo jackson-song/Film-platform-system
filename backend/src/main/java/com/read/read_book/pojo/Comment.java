@@ -1,6 +1,5 @@
 package com.read.read_book.pojo;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
-    Integer cid;
-    Integer uid;
+    Integer userid;
+    Long isbn;
+    Integer rate;
     String comment;
 }

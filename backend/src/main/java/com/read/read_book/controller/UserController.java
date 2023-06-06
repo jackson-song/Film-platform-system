@@ -1,6 +1,5 @@
 package com.read.read_book.controller;
 
-
 import com.read.read_book.mapper.UserMapper;
 import com.read.read_book.pojo.Comment;
 import com.read.read_book.pojo.User;
@@ -55,6 +54,5 @@ public class UserController {
     public String user2() {
         return "hello user2";
     }
-
 
 }
