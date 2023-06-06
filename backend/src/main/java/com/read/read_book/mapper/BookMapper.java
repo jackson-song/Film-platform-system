@@ -12,6 +12,6 @@ import java.util.List;
 public interface BookMapper extends BaseMapper<Book> {
 
     @Select("select * from book where ISBN = #{ISBN}")
-    List<String> SerachBookByISBN(@Param("ISBN") Long ISBN);
+    List<Book> SerachBookByISBN(@Param("ISBN") Long ISBN);
 
 }

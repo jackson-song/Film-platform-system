@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
+    // @select的测试
     @Select("select comment from comment where uid = #{userid}")
     List<String> findallcomment(@Param("userid") int uid);
 

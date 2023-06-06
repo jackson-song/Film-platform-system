@@ -13,10 +13,10 @@ import java.util.Date;
 @NoArgsConstructor
 public class Book {
     Long ISBN;
-    String Book_name;
+    String Bookname;
     String author;
     String press;
-    double Book_grading;
-    Date Publication_time;
+    Double bookgrading;
+    Date Publicationtime;
     String synopsis;
 }
