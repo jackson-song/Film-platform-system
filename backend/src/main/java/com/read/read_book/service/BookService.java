@@ -8,5 +8,6 @@ public interface BookService {
 
     //书名模糊查询
     //select * from book where bookname like '%bookname%';
-    public List<Book> SearchBookByBookname(String bookname);
+    public List<Book> SearchBookByTitle(String title);
+
 }

@@ -16,9 +16,9 @@ public class BookServiceImpl implements BookService {
     BookMapper bookMapper;
 
     @Override
-    public List<Book> SearchBookByBookname(String bookname) {
+    public List<Book> SearchBookByTitle(String title) {
         QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("Bookname",bookname);
+        queryWrapper.like("Bookname",title);
         List<Book> books = bookMapper.selectList(queryWrapper);
         return books;
     }

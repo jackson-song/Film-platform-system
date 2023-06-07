@@ -14,25 +14,26 @@ import java.util.Map;
 @RestController
 public class UserController {
 
-//    @Autowired
-//    UserMapper userMapper;
+    @Autowired
+    UserMapper userMapper;
 
     @Autowired
     private UserService userService;
 
 //    数据库连接测试
-//    @RequestMapping("/user/all/")
-////  可以具体请求方式 例如GetMapping("/user/all)
-//    public List<User> getAll() {
-//        return userMapper.selectList(null);//null为查询所有用户
-//    }
+    @RequestMapping("/user/all/")
+//  可以具体请求方式 例如GetMapping("/user/all)
+    public List<User> getAll() {
+        return userMapper.selectList(null);//null为查询所有用户
+    }
 
 //    @RequestMapping("/login/{uid}")
 //    public List<String> getUserbyId(@PathVariable int uid) {
 //        return userMapper.findallcomment(uid);
 //    }
 
-    // 前端请求测试 (已完成,已能够正常插入数据,插入语句uid为null,数据库中需将uid设为自增,前端能够接收到所有信息,但无法显示变量erro_message)
+    // 前端请求测试 (已完成,已能够正常插入数据,插入语句uid为null,数据库中需将uid设为自增,前端能够接收到所有信息,
+    // 请注意UserServiceImpl中返回map的key)
     @PostMapping("/api/user/account/register/")
     public Map<String, String> register(@RequestParam Map<String, String> map) {
 //        System.out.println("接收到map" + map);
