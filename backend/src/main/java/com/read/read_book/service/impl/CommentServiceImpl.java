@@ -17,7 +17,7 @@ public class CommentServiceImpl implements CommentService {
     CommentMapper commentMapper;
 
     @Override
-    public List<Comment> getCommentByisbn(Long isbn) {
+    public List<Comment> getCommentByISBN(Long isbn) {
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("isbn",isbn);
         List<Comment> comments = commentMapper.selectList(queryWrapper);
@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> getCommentByuserid(Integer userid) {
+    public List<Comment> getCommentByUserid(Integer userid) {
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userid",userid);
         List<Comment> comments = commentMapper.selectList(queryWrapper);
