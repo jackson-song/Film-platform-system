@@ -6,9 +6,25 @@ import java.util.List;
 
 public interface CommentService {
 
-    //get all comments by ISBN
+    //书籍评论(未实现分页)
     public List<Comment> getCommentByISBN(Long isbn);
 
-    //get all comments by userid
+    //用户评论(未实现分页)
     public List<Comment> getCommentByUserid(Integer userid);
+
+    //热门评论
+
+
+    //最新评论
+
+
+    //发表评论
+
+
+    //修改评论
+
+
+    //删除评论,后台功能
+
+
 }
