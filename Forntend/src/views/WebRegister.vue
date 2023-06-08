@@ -37,7 +37,6 @@
               <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
 
-
           </el-form>
         </div>
       </div>
@@ -47,43 +46,43 @@
 </template>
 <script>
 export default {
-  data() {
-    const checkMail = (rule,value,callback) => {
-      const reg = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z]{2,4})+$/;
-      if(!value){
-        return callback(new Error('邮箱不能为空'));
-      }else if (reg.test(value)){
+  data () {
+    const checkMail = (rule, value, callback) => {
+      const reg = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z]{2,4})+$/
+      if (!value) {
+        return callback(new Error('邮箱不能为空'))
+      } else if (reg.test(value)) {
         callback()
-      }else {
-        callback(new Error('不正确的邮箱'));
+      } else {
+        callback(new Error('不正确的邮箱'))
       }
-    };
+    }
 
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'));
+        callback(new Error('请输入密码'))
       } else {
         if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass');
+          this.$refs.ruleForm.validateField('checkPass')
         }
-        callback();
+        callback()
       }
-    };
+    }
     const validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请再次输入密码'));
+        callback(new Error('请再次输入密码'))
       } else if (value !== this.ruleForm.pass) {
-        callback(new Error('两次输入密码不一致!'));
+        callback(new Error('两次输入密码不一致!'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       ruleForm: {
         pass: '',
         checkPass: '',
-        email:'',
-        type:[]
+        email: '',
+        type: []
       },
       rules: {
         pass: [
@@ -93,28 +92,28 @@ export default {
           { validator: validatePass2, trigger: 'blur' }
         ],
         email: [
-          {validator:checkMail,trigger:'blur'}
+          {validator: checkMail, trigger: 'blur'}
         ],
         type: [
           { type: 'array', required: true, message: '请至少选择一个兴趣爱好', trigger: 'change' }
-        ],
+        ]
       }
-    };
+    }
   },
   methods: {
-    submitForm(formName) {
+    submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
-          this.$router.push('/index');
+          alert('submit!')
+          this.$router.push('/')
         } else {
-          console.log('error submit!!');
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }

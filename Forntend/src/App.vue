@@ -1,26 +1,30 @@
 <template>
-
-<!--  <div>
-    <nav>
-      <router-link to="/">HelloWorld</router-link>
-      <router-link to="/login">login</router-link>
-    </nav>-->
-<!--  <h1>hello</h1>-->
+  <div id="app">
     <router-view/>
-<!--  </div>-->
+    <div class="main-content">
+      <router-view name="content"/>
+      <router-view name="aside"/>
+    </div>
+  </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import WebLogin from "@/views/WebLogin.vue";
-/*export default {
-  name: 'App',
-  components: {
-    WebLogin
-  }
-}*/
+export default {
+  name: 'App'
+}
 </script>
 
 <style>
-
+@import './css/style.css';
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  font-size: 13px;
+}
+.main-content{
+  width: 936px;
+  margin: 0 auto;
+}
 </style>
