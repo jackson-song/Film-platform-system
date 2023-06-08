@@ -1,4 +1,4 @@
-package com.read.read_book.mapper;
+package com.read.read_book.Mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.read.read_book.pojo.Comment;

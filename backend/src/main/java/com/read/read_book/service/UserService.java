@@ -1,8 +1,10 @@
 package com.read.read_book.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+
 import java.util.Map;
 
-public interface UserService {
+public interface UserService  {
 
     // 注册
     public Map<String, String> register(String username, String password, String confirmedPassword);

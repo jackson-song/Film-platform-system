@@ -1,0 +1,8 @@
+Index: src/main/resources/application.properties
+===================================================================
+diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
+deleted file mode 100644
+--- a/src/main/resources/application.properties	
++++ /dev/null	
+@@ -1,1 +0,0 @@
+-

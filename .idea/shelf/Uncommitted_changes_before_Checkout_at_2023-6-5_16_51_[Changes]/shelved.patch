@@ -1,0 +1,13 @@
+Index: backend/pom.xml
+===================================================================
+diff --git a/backend/pom.xml b/backend/pom.xml
+--- a/backend/pom.xml	
++++ b/backend/pom.xml	
+@@ -52,6 +52,7 @@
+             <artifactId>spring-boot-starter-test</artifactId>
+             <scope>test</scope>
+         </dependency>
++
+     </dependencies>
+ 
+     <build>

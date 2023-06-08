@@ -1,0 +1,25 @@
+Index: src/main/resources/application.yml
+===================================================================
+diff --git a/src/main/resources/application.yml b/src/main/resources/application.yml
+--- a/src/main/resources/application.yml	
++++ b/src/main/resources/application.yml	
+@@ -1,13 +1,11 @@
+ #数据库连接的驱动、url、用户名、密码，修改自己的数据库名称 用户名 密码 部分
+ spring:
+-datasource:
+-driver-class-name: com.mysql.cj.jdbc.Driver #mysql8以上使用
+-url: jdbc:mysql://127.0.0.1:3306/db_01?useUnicode=true &
+-  characterEncoding=utf-8 &
+-  useSSL=true & serverTimezone=Asia/Shanghai #mysql8以上必须添加serverTimezone
+-  时区设置
+-username: root
+-password: 123
++  datasource:
++#    type: com.alibaba.druid.pool.DruidDataSource
++    driver-class-name: com.mysql.cj.jdbc.Driver
++    url: jdbc:mysql://localhost:3306/userdb
++    username: root
++    password: abc
+ #配置mybatis的xml路径、自动扫描实体类所在的包
+ mybatis:
+ mapper-locations: classpath:/mapper/*.xml

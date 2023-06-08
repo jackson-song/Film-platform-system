@@ -1,0 +1,177 @@
+Index: backend/src/main/java/com/read/read_book/ReadBookApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/src/main/java/com/read/read_book/ReadBookApplication.java b/backend/src/main/java/com/read/read_book/ReadApplication.java
+rename from backend/src/main/java/com/read/read_book/ReadBookApplication.java
+rename to backend/src/main/java/com/read/read_book/ReadApplication.java
+--- a/backend/src/main/java/com/read/read_book/ReadBookApplication.java	(revision 3f2645500aa37e3fc10e6cd7a2f587eec6d0ef41)
++++ b/backend/src/main/java/com/read/read_book/ReadApplication.java	(date 1686019555431)
+@@ -1,13 +1,14 @@
+ package com.read.read_book;
+ 
++import org.mybatis.spring.annotation.MapperScan;
+ import org.springframework.boot.SpringApplication;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+ 
+ @SpringBootApplication
+-public class ReadBookApplication {
+-
++//@MapperScan("com/read/read_book/Mapper/UserMapper")
++public class ReadApplication {
+     public static void main(String[] args) {
+-        SpringApplication.run(ReadBookApplication.class, args);
++        SpringApplication.run(ReadApplication.class, args);
+     }
+ 
+ }
+Index: backend/src/main/resources/application.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#数据库连接的驱动、url、用户名、密码，修改自己的数据库名称 用户名 密码 部分\r\nspring:\r\n#  mvc:\r\n#    view:\r\n#      prefix: /\r\n#      suffix: .html\r\n  datasource:\r\n    driver-class-name: com.mysql.cj.jdbc.Driver #mysql8以上使用\r\n    url: jdbc:mysql://127.0.0.1:3306/read?useUnicode=true &characterEncoding=utf-8 &useSSL=true & serverTimezone=Asia/Shanghai #mysql8以上必须添加serverTimezone时区设置\r\n    username: root\r\n    password: 52530\r\n  #配置mybatis的xml路径、自动扫描实体类所在的包\r\n  mybatis:\r\n    mapper-locations: classpath:/mapper/*.xml\r\n    type-aliases-package: com/read/read_book/entity\r\n    configuration:\r\n    map-underscore-to-camel-case: true #数据库字段下划线对应对象属性的驼峰命名转换 开启\r\n    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置log4j\r\n  #服务器端口号\r\n#  server:\r\n#    port: 3000\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/src/main/resources/application.yml b/backend/src/main/resources/application.yml
+--- a/backend/src/main/resources/application.yml	(revision 3f2645500aa37e3fc10e6cd7a2f587eec6d0ef41)
++++ b/backend/src/main/resources/application.yml	(date 1686017439038)
+@@ -8,14 +8,18 @@
+     driver-class-name: com.mysql.cj.jdbc.Driver #mysql8以上使用
+     url: jdbc:mysql://127.0.0.1:3306/read?useUnicode=true &characterEncoding=utf-8 &useSSL=true & serverTimezone=Asia/Shanghai #mysql8以上必须添加serverTimezone时区设置
+     username: root
+-    password: 52530
++    password: abc
+   #配置mybatis的xml路径、自动扫描实体类所在的包
+-  mybatis:
+-    mapper-locations: classpath:/mapper/*.xml
+-    type-aliases-package: com/read/read_book/entity
+-    configuration:
+-    map-underscore-to-camel-case: true #数据库字段下划线对应对象属性的驼峰命名转换 开启
+-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置log4j
+-  #服务器端口号
+-#  server:
+-#    port: 3000
++
++#    mapper-locations: classpath:/mapper/*.xml
++#    type-aliases-package: com/read/read_book/entity
++#    configuration:
++#    map-underscore-to-camel-case: true #数据库字段下划线对应对象属性的驼峰命名转换 开启
++#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置log4j
++#  #服务器端口号
++##  server:
++##    port: 3000
++mybatis-plus:
++  configuration:
++    map-underscore-to-camel-case: true
++    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+Index: backend/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n    <parent>\r\n        <groupId>org.springframework.boot</groupId>\r\n        <artifactId>spring-boot-starter-parent</artifactId>\r\n        <version>3.1.0</version>\r\n        <relativePath/> <!-- lookup parent from repository -->\r\n    </parent>\r\n    <groupId>com.read</groupId>\r\n    <artifactId>Read_book</artifactId>\r\n    <version>0.0.1-SNAPSHOT</version>\r\n    <name>Read_book</name>\r\n    <description>Read_book</description>\r\n    <properties>\r\n        <java.version>17</java.version>\r\n    </properties>\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-web</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.mybatis.spring.boot</groupId>\r\n            <artifactId>mybatis-spring-boot-starter</artifactId>\r\n            <version>3.0.2</version>\r\n            <exclusions>\r\n                <exclusion>\r\n                    <groupId>org.springframework.boot</groupId>\r\n                    <artifactId>spring-boot-starter-logging</artifactId>\r\n                </exclusion>\r\n            </exclusions>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-log4j</artifactId>\r\n            <version>1.3.8.RELEASE</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>com.mysql</groupId>\r\n            <artifactId>mysql-connector-j</artifactId>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.projectlombok</groupId>\r\n            <artifactId>lombok</artifactId>\r\n            <optional>true</optional>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-test</artifactId>\r\n            <scope>test</scope>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.springframework.boot</groupId>\r\n                <artifactId>spring-boot-maven-plugin</artifactId>\r\n                <version>3.1.0</version>\r\n                <configuration>\r\n                    <excludes>\r\n                        <exclude>\r\n                            <groupId>org.projectlombok</groupId>\r\n                            <artifactId>lombok</artifactId>\r\n                        </exclude>\r\n                    </excludes>\r\n                </configuration>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/pom.xml b/backend/pom.xml
+--- a/backend/pom.xml	(revision 3f2645500aa37e3fc10e6cd7a2f587eec6d0ef41)
++++ b/backend/pom.xml	(date 1686019668513)
+@@ -37,7 +37,14 @@
+             <artifactId>spring-boot-starter-log4j</artifactId>
+             <version>1.3.8.RELEASE</version>
+         </dependency>
++
+         <dependency>
++        <groupId>com.baomidou</groupId>
++        <artifactId>mybatis-plus-boot-starter</artifactId>
++        <version>3.4.0</version>
++    </dependency>
++
++    <dependency>
+             <groupId>com.mysql</groupId>
+             <artifactId>mysql-connector-j</artifactId>
+             <scope>runtime</scope>
+@@ -60,14 +67,14 @@
+                 <groupId>org.springframework.boot</groupId>
+                 <artifactId>spring-boot-maven-plugin</artifactId>
+                 <version>3.1.0</version>
+-                <configuration>
+-                    <excludes>
+-                        <exclude>
+-                            <groupId>org.projectlombok</groupId>
+-                            <artifactId>lombok</artifactId>
+-                        </exclude>
+-                    </excludes>
+-                </configuration>
++<!--                <configuration>-->
++<!--                    <excludes>-->
++<!--                        <exclude>-->
++<!--                            <groupId>org.projectlombok</groupId>-->
++<!--                            <artifactId>lombok</artifactId>-->
++<!--                        </exclude>-->
++<!--                    </excludes>-->
++<!--                </configuration>-->
+             </plugin>
+         </plugins>
+     </build>
+Index: backend/src/test/java/com/read/read_book/ReadBookApplicationTests.java
+===================================================================
+diff --git a/backend/src/test/java/com/read/read_book/ReadBookApplicationTests.java b/backend/src/test/java/com/read/read_book/ReadBookApplicationTests.java
+deleted file mode 100644
+--- a/backend/src/test/java/com/read/read_book/ReadBookApplicationTests.java	(revision 3f2645500aa37e3fc10e6cd7a2f587eec6d0ef41)
++++ /dev/null	(revision 3f2645500aa37e3fc10e6cd7a2f587eec6d0ef41)
+@@ -1,13 +0,0 @@
+-package com.read.read_book;
+-
+-import org.junit.jupiter.api.Test;
+-import org.springframework.boot.test.context.SpringBootTest;
+-
+-@SpringBootTest
+-class ReadBookApplicationTests {
+-
+-    @Test
+-    void contextLoads() {
+-    }
+-
+-}
+Index: backend/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#server port:3000, vue port:8080\r\nserver.port=3000
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/backend/src/main/resources/application.properties b/backend/src/main/resources/application.properties
+--- a/backend/src/main/resources/application.properties	(revision 3f2645500aa37e3fc10e6cd7a2f587eec6d0ef41)
++++ b/backend/src/main/resources/application.properties	(date 1686017439027)
+@@ -1,2 +1,2 @@
+ #server port:3000, vue port:8080
+-server.port=3000
+\ No newline at end of file
++#server.port=3000
+Index: Forntend/public/index.ejs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Forntend/public/index.ejs b/Forntend/public/index.ejs
+new file mode 100644
+--- /dev/null	(date 1685955115439)
++++ b/Forntend/public/index.ejs	(date 1685955115439)
+@@ -0,0 +1,17 @@
++<!DOCTYPE html>
++<html lang="">
++  <head>
++    <meta charset="utf-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width,initial-scale=1.0">
++    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
++    <title><%= htmlWebpackPlugin.options.title %></title>
++  </head>
++  <body>
++    <noscript>
++      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
++    </noscript>
++    <div id="app"></div>
++    <!-- built files will be auto injected -->
++  </body>
++</html>

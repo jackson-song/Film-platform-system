@@ -2,7 +2,7 @@ package com.read.read_book.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
-import com.read.read_book.mapper.CommentMapper;
+import com.read.read_book.Mapper.CommentMapper;
 import com.read.read_book.pojo.Comment;
 import com.read.read_book.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
