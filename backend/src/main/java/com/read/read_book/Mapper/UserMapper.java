@@ -1,7 +1,6 @@
 package com.read.read_book.Mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.read.read_book.pojo.Comment;
 import com.read.read_book.pojo.User;
 import org.apache.ibatis.annotations.*;
 
@@ -10,6 +9,10 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
+
+
+    @Select("select *from user")
+    List<User> getall();
     // @select的测试
     @Select("select comment from comment where uid = #{id}")
     List<String> findallcomment(@Param("id") int uid);
@@ -28,5 +31,12 @@ public interface UserMapper extends BaseMapper<User> {
     int updateuser(User user);
 //    @Update("update user set username= #{username},gender= #{gender},age=#{age},email=#{email},introduction= #{introduction} where email =#{email}")
 //    int updateuser(@Param("username") String username,@Param("gender") String gender,@Param("age") int age,@Param("email") String email,@Param("introduction") String introduction);
+    @Select("select Upower from user where email = #{email} ")
+    int checkadmin(@Param("email") String email);
+
+    List<User> selectuser (User user);
+
+    @Update("update user set state = #{state} where userid=#{userid}")
+    int freezeuser(@Param("state") int state,@Param("userid") int userid);
 }
 

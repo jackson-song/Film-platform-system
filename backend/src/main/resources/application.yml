@@ -24,10 +24,14 @@
 #    port: 3000
 
 # springsSession过期时间
+#server:
+#  servlet:
+#    session:
+#      timeout: 30m
+
+#mybatis-plus:
+#  mapper-locations: /mapper/*.xml
+
 server:
   servlet:
-    session:
-      timeout: 30m
-
-mybatis-plus:
-  mapper-locations: /mapper/*.xml
+    container: Tomcat

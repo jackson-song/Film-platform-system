@@ -31,4 +31,11 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = commentMapper.selectList(queryWrapper);
         return comments;
     }
+
+    @Override
+    public List<Comment> seluserment(String emial) {
+        String email2 =emial;
+        List<Comment> comments=commentMapper.seluserment(email2);
+        return comments;
+    }
 }

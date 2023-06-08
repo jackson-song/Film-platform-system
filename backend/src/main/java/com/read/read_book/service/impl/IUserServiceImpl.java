@@ -4,15 +4,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.read.read_book.Mapper.UserMapper;
 import com.read.read_book.pojo.User;
 import com.read.read_book.service.IUserService;
-import com.read.read_book.session.GetSession;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -66,6 +64,7 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
     }
 
 //    @Autowired
+//    ServletWebServerFactory servletWebServerFactory;
 //    HttpServletRequest request;
     @Override
     public Map<String, String> login(String email, String pwd,HttpServletRequest request) {
@@ -85,8 +84,8 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
 //             HttpSession httpSession= GetSession.getSession();
 //             httpSession.setAttribute("email",email);
 //             httpSession.setAttribute("pwd",pwd);
-//             request.getSession().setAttribute("email",email);
-//             request.getSession().setAttribute("pwd",pwd);
+             request.getSession().setAttribute("email",email);
+             request.getSession().setAttribute("pwd",pwd);
              map.put("error_message", "success");
              return map;
          }else {
@@ -99,7 +98,7 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
 //        System.out.println(u);
     }
 
-    @Override
+    @Override//修改个人信息
     public Map<String, String> updateuser(User user) {
         Map<String, String> map = new HashMap<>();
         int i=userMapper.updateuser(user);
@@ -112,6 +111,28 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
             System.out.println(map);
             return map;
         }
+    }
+
+    @Override//确认是否是管理员
+    public int checkadmin(String email) {
+        int i=userMapper.checkadmin(email);
+        return i;
+    }
+
+    @Override
+    public List<User> seleuser(User user) {
+        System.out.println(user);
+        return userMapper.selectuser(user);
+    }
+
+    @Override
+    public int freezeuser(int userid) {
+        return userMapper.freezeuser(0,userid);//冻结
+    }
+
+    @Override
+    public int thaw(int userid) {
+        return userMapper.freezeuser(1,userid);//解冻
     }
 }
 
