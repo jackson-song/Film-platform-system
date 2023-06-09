@@ -28,4 +28,7 @@ public interface CommentService {
     //删除评论,后台功能
 
 
+    //查询个人书评
+    public List<Comment> seluserment(String emial);
+
 }

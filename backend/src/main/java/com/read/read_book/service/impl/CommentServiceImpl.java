@@ -88,4 +88,12 @@ public class CommentServiceImpl implements CommentService {
         result.put("message","success");
         return result;
     }
+
+    @Override
+    public List<Comment> seluserment(String emial) {
+        String email2 =emial;
+        List<Comment> comments=commentMapper.seluserment(email2);
+        return comments;
+
+    }
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Book {
 
-    Long isbn;
+    Integer isbn;
     String bookname;
     String author;
     String press;
