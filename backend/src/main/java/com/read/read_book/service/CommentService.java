@@ -3,6 +3,7 @@ package com.read.read_book.service;
 import com.read.read_book.pojo.Comment;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CommentService {
 
@@ -19,7 +20,7 @@ public interface CommentService {
 
 
     //发表评论
-
+    public Map<String,String> postComment(Integer user_id, Long ISBN, Integer rate, String content);
 
     //修改评论
 

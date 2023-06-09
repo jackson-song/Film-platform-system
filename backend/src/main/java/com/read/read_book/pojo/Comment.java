@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 // Table comment
 @Data
 @AllArgsConstructor
@@ -13,4 +15,5 @@ public class Comment {
     Long isbn;
     Integer rate;
     String comment;
+    Date commenttime;
 }
