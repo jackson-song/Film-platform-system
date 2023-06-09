@@ -12,8 +12,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class Comment {
     String email;
-    Integer isbn;
-    Double rate;
+    Integer userid;
+    Long isbn;
+    Integer rate;
     String comment;
     Date commenttime;
 }
