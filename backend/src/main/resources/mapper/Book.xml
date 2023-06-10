@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.read.read_book.Mapper.BookMapper">
+
+    <select id="adminselbook" resultType="com.read.read_book.pojo.Book">
+        select *from book where 1=1
+            <if test="isbn !=null">
+                and isbn like concat('%',#{isbn},'%')
+            </if>
+            <if test="Bookname !=null">
+                and Bookname like concat('%',#{Bookname},'%')
+            </if>
+            <if test="author !=null">
+                and author like concat('%',#{author},'%')
+            </if>
+    </select>
+
+<select id="total" resultType="Integer">
+    select count(*) from (
+    select *from book
+    <where>
+        <if test="ISBN !=null">isbn= #{isbn}
+        </if>
+    <if test="Bookname !=null">
+        Bookname =#{Bookname}
+    </if>
+    <if test="author !=null">
+        author =#{author}
+    </if>
+</where>
+)
+</select>
+
+    <update id="Udbook">
+        update book
+        <set>
+            <if test="Bookname !=null">
+                Bookname= #{Bookname},
+            </if>
+
+            <if test="author!=null">
+                author= #{author},
+            </if>
+
+            <if test="press !=null">
+                press= #{press},
+            </if>
+            <if test="Bookgrading !=null">
+                Bookgrading= #{Bookgrading},
+            </if>
+            <if test="Publicationtime !=null">
+                Publicationtime= #{Publicationtime},
+            </if>
+            <if test="synopsis !=null">
+                synopsis= #{synopsis}
+            </if>
+        </set>
+        <where>
+            isbn =#{isbn}
+        </where>
+    </update>
+
+</mapper>

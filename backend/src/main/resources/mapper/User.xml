@@ -31,15 +31,18 @@
     </update>
 
 
+
+
+
     <select id="selectuser" resultType="com.read.read_book.pojo.User">
         select *from user
         <where>
-         <if test="username !=null">
-             username= #{username}
-         </if>
-        <if test="email !=null">
-            email =#{email}
-        </if>
+            <if test="username !=null">
+                username= #{username}
+            </if>
+            <if test="email !=null">
+                email =#{email}
+            </if>
         </where>
     </select>
 

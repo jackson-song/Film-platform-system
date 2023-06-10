@@ -8,6 +8,8 @@ public class Userpass {
     String password;
     String newpassword;
     String confirmedPassword;
+    String email;
+    String pwd;
 
     public String getPassword() {
         return password;

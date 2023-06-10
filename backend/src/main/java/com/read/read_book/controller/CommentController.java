@@ -51,7 +51,7 @@ public class CommentController {
 //        return commentService.register(email, password, confirmedPassword);
     }
     //用户自己的评论评分
-    @PostMapping ("user/myComment")
+    @GetMapping ("user/myComment")
     public List<Comment> seluserment( @RequestBody logindto logindto){
         String email =logindto.getEmail();
         System.out.println(email);
