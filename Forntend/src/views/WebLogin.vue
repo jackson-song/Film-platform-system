@@ -33,6 +33,7 @@
 </template>
 <script>
 import axios from 'axios'
+import {Message} from 'element-ui'
 
 export default {
   data () {
@@ -117,9 +118,15 @@ export default {
               pwd: this.ruleForm.password
               // password_confirm: this.ruleForm.password_confirm
             })
+          // axios.get({
+          //   url:'/users/get',
+          //
+          // })
           alert('submit!')
+          Message.success('成功登录')
           this.$router.push('/')
         } else {
+          Message.error('失败登录')
           console.log('error submit!!')
           return false
         }

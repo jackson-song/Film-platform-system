@@ -134,18 +134,21 @@ export default {
               password: this.ruleForm.password,
               password_confirm: this.ruleForm.password_confirm
             }
-          //   {
-          //     headers: {
-          //       'Content-Type': 'application/x-www-form-urlencoded'
-          //     },
-          //     withCredentials: true
-          //   }).then(response => {
-          //   console.log(response.data)
-          // }
+            //   {
+            //     headers: {
+            //       'Content-Type': 'application/x-www-form-urlencoded'
+            //     },
+            //     withCredentials: true
+            //   }).then(response => {
+            //   console.log(response.data)
+            // }
           )
+
           alert('submit!')
+          Message.success('成功注册')
           this.$router.push('/')
         } else {
+          Message.error('失败注册')
           console.log('error submit!!')
           return false
         }
