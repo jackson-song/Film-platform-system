@@ -19,7 +19,7 @@ public interface BookService {
 //    public List<BookBooktype> adminselbooktype(String booktypename);//管理员根据类型查询
 
     //热门书籍
-
+    List<Book> hotbook();
 
     //最新书籍,只取前50本
    List<Book> newestbook();

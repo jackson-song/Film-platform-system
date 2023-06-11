@@ -15,13 +15,14 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName("book")
 public class Book {
-
-    Integer isbn;
+    Long isbn;
     String Bookname;
     String author;
     String press;
     Double Bookgrading;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    Date Publicationtime;
+    int ratnum;
+    String imgurl;
+//    @DateTimeFormat(pattern="yyyy-MM-dd")
+    String Publicationtime;
     String synopsis;
 }

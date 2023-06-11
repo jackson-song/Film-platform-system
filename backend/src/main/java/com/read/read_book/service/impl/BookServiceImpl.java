@@ -30,6 +30,12 @@ public class BookServiceImpl implements BookService {
 //    }
 
     @Override
+    public List<Book> hotbook() {
+        List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("ratnum").last("limit 50"));
+        return books;
+    }
+
+    @Override
     public List<Book> newestbook() {
         List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50"));
         return books;

@@ -98,12 +98,12 @@ public class BookController {
     }
     @PutMapping()//
     public Map<String, Object> Udbook(@RequestBody Book book)
-    //前端传入修改的信息,isbn不能少,因为要根据isbn来进行修改,isbn不能修改
+    //前端的请求方法为put,前端传入修改的信息,isbn不能少,因为要根据isbn来进行修改,isbn不能修改
     {
         Map<String, Object> map = new HashMap<>();
         System.out.println(book);
         int i= bookService.Udbook(book);
-        if(i==1){
+        if(i!=0){
             map.put("message","success");
             return map;
         }else{
@@ -129,7 +129,7 @@ public class BookController {
 
     @DeleteMapping
     public Map<String, Object> delbook(@RequestBody Book book)
-    //删除书籍信息,前端传入需要删除的书籍的isbn
+    //前端的请求方式为delete,删除书籍信息,前端传入需要删除的书籍的isbn
     {
         Map<String, Object> map = new HashMap<>();
         System.out.println(book);
@@ -159,5 +159,11 @@ public class BookController {
     //不用传数据
     public List<Book> selectnewest(){
         return bookService.newestbook();
+    }
+
+    @GetMapping("/hotbook")
+    //不用传数据
+    public List<Book> selecthot(){
+        return bookService.hotbook();
     }
 }

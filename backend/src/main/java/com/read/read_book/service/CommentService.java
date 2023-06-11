@@ -29,7 +29,7 @@ public interface CommentService {
     //删除评论,后台功能
 
 
-    //查询个人书评，这个还需要一个分页
+    //查询个人书评
     public Page<Comment> seluserment(int pagenum,int size,int userid);
 
 }
