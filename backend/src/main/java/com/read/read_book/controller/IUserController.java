@@ -13,6 +13,10 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+//import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +32,10 @@ public class IUserController {
     //前端需要传用户邮箱email,查看个人信息,根据邮箱查看个人信息，
     // 用户只能查询到username, gender ,age ,email ,introduction, state(是否冻结)
     public User getbyemail(String email){
+
+
         return iUserService.getbyemail(email);
+
     }
 
     @GetMapping()
@@ -38,11 +45,14 @@ public class IUserController {
         int pagenum=(page-1)*size;
         Page<User> page1=new Page<>(pagenum,size);
         QueryWrapper<Book> wrapper = new QueryWrapper<>();
+        Calendar calendar= Calendar.getInstance();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(dateFormat.format(calendar.getTime()));
         return userMapper.selectPage(page1,null);
     }
 
     @PostMapping("/up")
-    //修改密码,前端需要传用户邮箱email,密码pwd,原密码password,新密码newpassword,再次确认密码confirmedPassword
+    //修改密码,前端需要传用户邮箱email,密码pwd,用户输入的原密码password,新密码newpassword,再次确认密码confirmedPassword
     public Map<String, String> updatepwd(@RequestBody Userpass userpass){
         String password=userpass.getPassword();
         String newpassword=userpass.getNewpassword();
@@ -55,12 +65,11 @@ public class IUserController {
     }
 
     @PostMapping("/login")
-    //登录,前端传的数据为email和pwd
-    public Map<String, String> login(@RequestBody logindto logindto) {
+    //登录,前端传的数据为email和pwd,后端会将此用户的信息传回前端，请注意接受保存
+    public Map<String, Object> login(@RequestBody logindto logindto) {
     String email=logindto.getEmail();
     String pwd=logindto.getPwd();
     System.out.println(email+pwd);
-//        System.out.println();
         return iUserService.login(email,pwd);
     }
 

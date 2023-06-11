@@ -12,7 +12,7 @@ public interface BookService {
 
     //书名模糊查询
     //select * from book where bookname like '%bookname%';
-    public List<Book> SearchBookByTitle(String title);
+//    public List<Book> SearchBookByTitle(String title);
     //后台有一个功能是可以按书名，isbn,作者进行模糊查询分页可以使用
 
     //书籍分类查询 (?连表查询),后台已经做完这一部分功能
@@ -54,5 +54,5 @@ public interface BookService {
 
 
 
-//    public Page<Book> admintype(bookpage bookpage);//管理员查询分类分页
+    public Page<Book> admintype(bookpage bookpage);//管理员查询分类分页
 }

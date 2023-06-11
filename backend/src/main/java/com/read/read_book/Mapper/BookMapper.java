@@ -44,4 +44,6 @@ public interface BookMapper extends BaseMapper<Book> {
 
     @Select("select *from book where isbn= #{isbn}")
     Book selectbyisbn(@Param("isbn") long isbn);
+
+
 }

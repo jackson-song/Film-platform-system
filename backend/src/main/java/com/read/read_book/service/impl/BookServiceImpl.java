@@ -21,13 +21,13 @@ public class BookServiceImpl implements BookService {
     @Autowired
     BookMapper bookMapper;
 
-    @Override
-    public List<Book> SearchBookByTitle(String title) {
-        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("Bookname",title);
-        List<Book> books = bookMapper.selectList(queryWrapper);
-        return books;
-    }
+//    @Override
+//    public List<Book> SearchBookByTitle(String title) {
+//        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.like("Bookname",title);
+//        List<Book> books = bookMapper.selectList(queryWrapper);
+//        return books;
+//    }
 
     @Override
     public List<Book> newestbook() {
@@ -115,19 +115,19 @@ public class BookServiceImpl implements BookService {
         return bookMapper.selectPage(page1,wrapper);
     }//按书籍，作者，isbn模糊查询分页最终版
 
-//    @Override
-//    public Page<Book> admintype(bookpage bookpage) {
-//            int m=bookMapper.selectbytypename(bookpage.getBooktypename());
-//            System.out.println(m);
-//            int isbn=bookMapper.seletypeid(m);
-//            System.out.println(isbn);
-//            Page<Book> page = new Page(bookpage.getPagenum(), bookpage.getPagesize());
-//            QueryWrapper<Book> wrapper = new QueryWrapper<>();
-//            wrapper.eq(" booktypename;", bookpage.getBooktypename());
-////        wrapper.like("name", t.getName());
-//            return bookMapper.selectPage(page,wrapper);
-////        return bookMapper.selectbookbytype(m);
-//        }
+    @Override
+    public Page<Book> admintype(bookpage bookpage) {
+            int m=bookMapper.selectbytypename(bookpage.getBooktypename());
+            System.out.println(m);
+            int isbn=bookMapper.seletypeid(m);
+            System.out.println(isbn);
+            Page<Book> page = new Page(bookpage.getPagenum(), bookpage.getPagesize());
+            QueryWrapper<Book> wrapper = new QueryWrapper<>();
+            wrapper.eq(" booktypename;", bookpage.getBooktypename());
+//        wrapper.like("name", t.getName());
+            return bookMapper.selectPage(page,wrapper);
+//        return bookMapper.selectbookbytype(m);
+        }
     }
 
 

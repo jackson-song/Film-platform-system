@@ -31,16 +31,16 @@ public class BookController {
 //        return bookService.SearchBookByTitle(title);
 //    }
 
-    @PostMapping("/api/book/searchbookbytitle/")
-    public List<Book> getBookByTitle(@RequestParam Map<String, String> map) {
-//        System.out.println("接收到map" + map);
-//        String username = map.get("username");
-//        String password = map.get("password");
-//        String confirmedPassword = map.get("password_confirm");
-        String title = map.get("title");
-        System.out.println("收到的title:" + title);
-        return bookService.SearchBookByTitle(title);
-    }
+//    @PostMapping("/api/book/searchbookbytitle/")
+//    public List<Book> getBookByTitle(@RequestParam Map<String, String> map) {
+////        System.out.println("接收到map" + map);
+////        String username = map.get("username");
+////        String password = map.get("password");
+////        String confirmedPassword = map.get("password_confirm");
+//        String title = map.get("title");
+//        System.out.println("收到的title:" + title);
+//        return bookService.SearchBookByTitle(title);
+//    }
 
 
 //    @GetMapping("/admin")//按书名,isbn,作者查询,还没有进行分页
@@ -82,7 +82,9 @@ public class BookController {
 //        System.out.println(bookpage);
 //        return bookService.bookpagebyBookall(bookpage);
 //    }//根据书名，作者，isbn进行模糊查询,用这一个方法可以对这三个信息都进行模糊查询，前端需要传pagenum,pagesize,书名，isbn,作者
-    @GetMapping("/pageByBookalltest")//用这个
+
+
+    @GetMapping("/pageByBookalltest")//查找书籍用这个
     //对进行查询的书据进行分页，使用路径的方式（与豆瓣官网一致，推荐使用此方法进行查找分页）
     // 需要传入的数据为页号page，页的大小size,搜索的关键字text
     public Page<Book> pageByBookall( @RequestParam(defaultValue = "0") int page,

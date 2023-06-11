@@ -13,7 +13,7 @@ public interface IUserService extends IService<User> {
     public User  getbyemail(String email);//用户查看个人信息
     public Map<String, String> updatepwd(String password, String newpassword, String confirmedPassword,String email,String pwd);//修改密码
 
-    public Map<String, String> login(String email, String password);//登录
+    public Map<String, Object> login(String email, String password);//登录
 
     public Map<String, String> updateuser(User user);//修改用户信息
 

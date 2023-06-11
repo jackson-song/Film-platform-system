@@ -70,8 +70,8 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
 //    ServletWebServerFactory servletWebServerFactory;
 //    HttpServletRequest request;
     @Override
-    public Map<String, String> login(String email, String pwd) {
-        Map<String, String> map = new HashMap<>();
+    public Map<String, Object> login(String email, String pwd) {
+        Map<String, Object> map = new HashMap<>();
         if (StringUtils.isBlank(email)) {
             map.put("error_message", "邮箱不能为空");
             System.out.println(map);
@@ -84,16 +84,20 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         }else{
 //         userMapper.check(email,pwd);
          if(userMapper.check(email,pwd)!=null){
-             map.put("error_message", "success");
-             return map;
+             int state=userMapper.check(email, pwd).getState();
+             if(state!=0){
+             map.put("User",userMapper.check(email,pwd));
+             map.put("message", "success");
+             return map;}
+             else {map.put("error_message", "你的账号已经被冻结");
+                 return map;
+             }
          }else {
              map.put("error_message", "输入信息有误");
              System.out.println(map);
              return map;
          }
         }
-        //    String u = (String) request.getSession().getAttribute("email");
-//        System.out.println(u);
     }
 
     @Override//修改个人信息
