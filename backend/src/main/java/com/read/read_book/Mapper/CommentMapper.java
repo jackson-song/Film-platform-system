@@ -12,7 +12,7 @@ import java.util.List;
 public interface CommentMapper extends BaseMapper<Comment> {
 
 
-    @Select("select * from comment where email = #{email}")
-    List<Comment> seluserment(@Param("email") String email);
+    @Select("select * from comment where userid = #{userid}")
+    List<Comment> seluserment(@Param("userid") int userid);
 }
 

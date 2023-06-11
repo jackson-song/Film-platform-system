@@ -1,7 +1,10 @@
 package com.read.read_book.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.read.read_book.Mapper.UserMapper;
+import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.User;
 import com.read.read_book.service.IUserService;
 import io.micrometer.common.util.StringUtils;
@@ -28,12 +31,12 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
     }
 
     @Override
-    public Map<String, String> updatepwd(String password, String newpassword, String confirmedPassword) {
+    public Map<String, String> updatepwd(String password, String newpassword, String confirmedPassword,String email,String pwd) {
 //        HttpSession session=request.getSession();
 //        String sessionValue=(String)session.getAttribute("pwd");//登录后使用session存储数据
         Map<String, String> map = new HashMap<>();
-        String pwd = "123";
-        String email = "2971387095@qq.com";
+//        String pwd = "123";
+//        String email = "2971387095@qq.com";
         if (StringUtils.isBlank(password)||StringUtils.isBlank(newpassword)||StringUtils.isBlank(confirmedPassword)) {
             map.put("error_message", "密码或新密码或再次确认密码" +
                     "输入为空");
@@ -67,8 +70,8 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
 //    ServletWebServerFactory servletWebServerFactory;
 //    HttpServletRequest request;
     @Override
-    public Map<String, String> login(String email, String pwd,HttpServletRequest request) {
-        Map<String, String> map = new HashMap<>();
+    public Map<String, Object> login(String email, String pwd) {
+        Map<String, Object> map = new HashMap<>();
         if (StringUtils.isBlank(email)) {
             map.put("error_message", "邮箱不能为空");
             System.out.println(map);
@@ -79,23 +82,22 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
             System.out.println(map);
             return map;
         }else{
-         int i=userMapper.check(email,pwd);
-         if(i!=0){
-//             HttpSession httpSession= GetSession.getSession();
-//             httpSession.setAttribute("email",email);
-//             httpSession.setAttribute("pwd",pwd);
-             request.getSession().setAttribute("email",email);
-             request.getSession().setAttribute("pwd",pwd);
-             map.put("error_message", "success");
-             return map;
+//         userMapper.check(email,pwd);
+         if(userMapper.check(email,pwd)!=null){
+             int state=userMapper.check(email, pwd).getState();
+             if(state!=0){
+             map.put("User",userMapper.check(email,pwd));
+             map.put("message", "success");
+             return map;}
+             else {map.put("error_message", "你的账号已经被冻结");
+                 return map;
+             }
          }else {
              map.put("error_message", "输入信息有误");
              System.out.println(map);
              return map;
          }
         }
-        //    String u = (String) request.getSession().getAttribute("email");
-//        System.out.println(u);
     }
 
     @Override//修改个人信息
@@ -114,15 +116,18 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
     }
 
     @Override//确认是否是管理员
-    public int checkadmin(String email) {
-        int i=userMapper.checkadmin(email);
-        return i;
+    public User checkadmin(String email) {
+        User user=userMapper.checkadmin(email);
+        return user;
     }
 
     @Override
-    public List<User> seleuser(User user) {
-        System.out.println(user);
-        return userMapper.selectuser(user);
+    public Page<User> seleuser(int page, int size, Object text) {
+        int pagenum=(page-1)*size;
+        Page<User> page1=new Page<>(pagenum,size);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.like("username",text).or().like("email", text);
+        return userMapper.selectPage(page1,wrapper);
     }
 
     @Override
@@ -134,5 +139,6 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
     public int thaw(int userid) {
         return userMapper.freezeuser(1,userid);//解冻
     }
+
 }
 

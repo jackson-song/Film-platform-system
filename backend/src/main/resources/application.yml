@@ -29,9 +29,10 @@
 #    session:
 #      timeout: 30m
 
-#mybatis-plus:
-#  mapper-locations: /mapper/*.xml
 
-server:
-  servlet:
-    container: Tomcat
+#server:
+#  servlet:
+#    container: Tomcat
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.log4j2.Log4j2AbstractLoggerImpl
