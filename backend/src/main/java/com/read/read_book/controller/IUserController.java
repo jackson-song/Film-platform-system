@@ -84,7 +84,7 @@ public class IUserController {
     //前端传入email验证用户是否是管理员,使用email对权限进行一个判定
     public Map<String, String> checkadmin(String email){
         Map<String, String> map = new HashMap<>();
-        email="2971387095@qq.com";
+//        email="2971387095@qq.com";
         User user= iUserService.checkadmin(email);
         if(user!=null){
             map.put("message","success");
