@@ -115,7 +115,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Page<Book> bookpagebyall(int page, int size, Object text) {
         int pagenum=(page-1)*size;
-        Page<Book> page1=new Page<>(pagenum,size);
+        Page<Book> page1=new Page<>(page,size);
         QueryWrapper<Book> wrapper = new QueryWrapper<>();
         wrapper.like("Bookname",text).or().like("author", text).or().like("isbn",text);
         return bookMapper.selectPage(page1,wrapper);

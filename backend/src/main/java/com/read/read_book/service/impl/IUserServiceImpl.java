@@ -25,8 +25,7 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
 
     @Override//查看个人信息
     public User getbyemail(String email) {
-        String em;
-//        em=userMapper.getemail(id);
+
         return userMapper.getbyemail(email);
     }
 
@@ -123,8 +122,8 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
 
     @Override
     public Page<User> seleuser(int page, int size, Object text) {
-        int pagenum=(page-1)*size;
-        Page<User> page1=new Page<>(pagenum,size);
+//        int pagenum=(page-1)*size;
+        Page<User> page1=new Page<>(page,size);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.like("username",text).or().like("email", text);
         return userMapper.selectPage(page1,wrapper);

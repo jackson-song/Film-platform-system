@@ -21,7 +21,7 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select email from user where id = #{id}")
     String getemail(@Param("id") int userid);//根据userid查询email
 
-    @Select("select username, gender ,age ,email ,introduction from user where email = #{email}")
+    @Select("select * from user where email = #{email}")
     User getbyemail(@Param("email") String email);//用户查看自己信息
 
     @Update("update user set pwd=#{pwd} where email =#{email}")

@@ -1,7 +1,9 @@
 package com.read.read_book.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.read.read_book.Mapper.UserMapper;
+import com.read.read_book.common.Result;
 import com.read.read_book.dto.logindto;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.User;
@@ -31,11 +33,12 @@ public class IUserController {
     @GetMapping("/get")
     //前端需要传用户邮箱email,查看个人信息,根据邮箱查看个人信息，
     // 用户只能查询到username, gender ,age ,email ,introduction, state(是否冻结)
-    public User getbyemail(String email){
-
-
-        return iUserService.getbyemail(email);
-
+    public Result getbyemail(String email){
+        Result result=new Result();
+        User user1=iUserService.getbyemail(email);
+        System.out.println(user1);
+        return result.success(user1);
+//        return iUserService.getbyemail(email)
     }
 
     @GetMapping()
@@ -43,8 +46,11 @@ public class IUserController {
     public Page<User> getbyid(@RequestParam(defaultValue = "0") int page,
                               @RequestParam(defaultValue = "10") int size){
         int pagenum=(page-1)*size;
-        Page<User> page1=new Page<>(pagenum,size);
-        QueryWrapper<Book> wrapper = new QueryWrapper<>();
+        System.out.println(pagenum);
+        System.out.println(page);
+        Page<User> page1=new Page<>(page,size);
+//        IPage page2 = new Page(page,size);
+        System.out.println(page1);
         Calendar calendar= Calendar.getInstance();
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
         System.out.println(dateFormat.format(calendar.getTime()));
