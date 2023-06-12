@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ef76f59b-ecf6-4144-baeb-b3db2d6eef1d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/IUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/IUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/IUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/IUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/IUserServiceImpl.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../Maven/apache-maven-3.8.6" />
+        <option name="useMavenConfig" value="true" />
+        <option name="userSettingsFile" value="D:\Maven\apache-maven-3.8.6\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="2QGPc5JBvSlr3A6a3VbVwvENKf5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GitProject(internship)/Film-platform-system&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;09a414cdc0835bdff7f63f02769784b3&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="mapper" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ReadBookApplication (1)">
+    <configuration name="ReadBookApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.read.read_book.ReadBookApplication" />
+      <module name="Read_book" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.read.read_book.session.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookDaoTestCase.selectbyid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Read_book" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.read.read_book.Mapper.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.read.read_book.Mapper" />
+      <option name="MAIN_CLASS_NAME" value="com.read.read_book.Mapper.BookDaoTestCase" />
+      <option name="METHOD_NAME" value="selectbyid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadBookApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Read_book" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.read.read_book.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.read.read_book" />
+      <option name="MAIN_CLASS_NAME" value="com.read.read_book.ReadBookApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadBookApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Read_book" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.read.read_book.session.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.read.read_book" />
+      <option name="MAIN_CLASS_NAME" value="com.read.read_book.ReadBookApplicationTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadBookApplicationTests.selectbyid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Read_book" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.read.read_book.session.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.read.read_book" />
+      <option name="MAIN_CLASS_NAME" value="com.read.read_book.ReadBookApplicationTests" />
+      <option name="METHOD_NAME" value="selectbyid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Film-platform-system" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Film-platform-system" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadBookApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <module name="bootdemo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.read.read_book.ReadBookApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadBookApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <module name="bootdemo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.read.read_book.ReadBookApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadBookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <module name="bootdemo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.read.read_book.ReadBookApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ReadBookApplication" />
+      <item itemvalue="JUnit.BookDaoTestCase.selectbyid" />
+      <item itemvalue="JUnit.ReadBookApplicationTests" />
+      <item itemvalue="JUnit.ReadBookApplicationTests.contextLoads" />
+      <item itemvalue="JUnit.ReadBookApplicationTests.selectbyid" />
+      <item itemvalue="Spring Boot.ReadBookApplication (2)" />
+      <item itemvalue="Spring Boot.ReadBookApplication" />
+      <item itemvalue="Spring Boot.ReadBookApplication (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ReadBookApplicationTests" />
+        <item itemvalue="Application.ReadBookApplication" />
+        <item itemvalue="JUnit.BookDaoTestCase.selectbyid" />
+        <item itemvalue="JUnit.ReadBookApplicationTests.selectbyid" />
+        <item itemvalue="JUnit.ReadBookApplicationTests.contextLoads" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ef76f59b-ecf6-4144-baeb-b3db2d6eef1d" name="Changes" comment="" />
+      <created>1684977020974</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684977020974</updated>
+      <workItem from="1684977022606" duration="476000" />
+      <workItem from="1684977566795" duration="286000" />
+      <workItem from="1684977862279" duration="2232000" />
+      <workItem from="1684997123168" duration="1202000" />
+      <workItem from="1685349355835" duration="682000" />
+      <workItem from="1685406599472" duration="1224000" />
+      <workItem from="1685504193316" duration="2340000" />
+      <workItem from="1685670701437" duration="2320000" />
+      <workItem from="1685673037177" duration="2851000" />
+      <workItem from="1685955091523" duration="889000" />
+      <workItem from="1685957832399" duration="1673000" />
+      <workItem from="1686011135056" duration="18172000" />
+      <workItem from="1686043647089" duration="7775000" />
+      <workItem from="1686098239028" duration="19344000" />
+      <workItem from="1686130141370" duration="7242000" />
+      <workItem from="1686144300709" duration="154000" />
+      <workItem from="1686147029506" duration="4686000" />
+      <workItem from="1686183051599" duration="11107000" />
+      <workItem from="1686195560273" duration="13716000" />
+      <workItem from="1686226293635" duration="130000" />
+      <workItem from="1686226455673" duration="176000" />
+      <workItem from="1686226645058" duration="232000" />
+      <workItem from="1686226918817" duration="4460000" />
+      <workItem from="1686233962416" duration="7983000" />
+      <workItem from="1686268598650" duration="13152000" />
+      <workItem from="1686291533979" duration="9708000" />
+      <workItem from="1686303207116" duration="4371000" />
+      <workItem from="1686316406816" duration="29000" />
+      <workItem from="1686370332987" duration="8241000" />
+      <workItem from="1686391896969" duration="606000" />
+      <workItem from="1686406590774" duration="5078000" />
+      <workItem from="1686411684200" duration="2287000" />
+      <workItem from="1686416290745" duration="1372000" />
+      <workItem from="1686453946661" duration="2379000" />
+      <workItem from="1686464766739" duration="3260000" />
+      <workItem from="1686481300405" duration="2123000" />
+      <workItem from="1686483521382" duration="392000" />
+      <workItem from="1686484290032" duration="1478000" />
+      <workItem from="1686492723560" duration="3553000" />
+      <workItem from="1686497262372" duration="1879000" />
+      <workItem from="1686528126882" duration="2381000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="upstream/dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

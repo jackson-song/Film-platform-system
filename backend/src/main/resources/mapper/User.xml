@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.read.read_book.Mapper.UserMapper">
+
+    <update id="updateuser">
+        update user
+        <set>
+            <if test="username !=null">
+                username= #{username},
+            </if>
+
+            <if test="gender !=null">
+                gender= #{gender},
+            </if>
+
+            <if test="age !=null">
+                age= #{age},
+            </if>
+
+            <if test="email !=null">
+                email= #{email},
+            </if>
+            <if test="introduction !=null">
+                introduction= #{introduction}
+            </if>
+        </set>
+        <where>
+            email =#{email}
+        </where>
+    </update>
+
+
+
+
+
+    <select id="selectuser" resultType="com.read.read_book.pojo.User">
+        select *from user
+        <where>
+            <if test="username !=null">
+                username= #{username}
+            </if>
+            <if test="email !=null">
+                email =#{email}
+            </if>
+        </where>
+    </select>
+
+</mapper>
