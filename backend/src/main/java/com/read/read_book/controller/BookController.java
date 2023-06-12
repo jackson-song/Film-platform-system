@@ -133,24 +133,53 @@ public class BookController {
         }
     }
 
-    @DeleteMapping
-    public Result delbook(@RequestBody Book book)
-    //前端的请求方式为delete,删除书籍信息,前端传入需要删除的书籍的isbn
-    {
-        Map<String, Object> map = new HashMap<>();
-        System.out.println(book);
-        long n=book.getIsbn();
-        int i=bookService.delbook(n);
+//    @DeleteMapping
+//    public Result delbook(@RequestBody Book book)
+//    //前端的请求方式为delete,删除书籍信息,前端传入需要删除的书籍的isbn
+//    {
+//        Map<String, Object> map = new HashMap<>();
+//        System.out.println(book);
+//        long n=book.getIsbn();
+//        int i=bookService.delbook(n);
+//        Result result=new Result();
+//        if(i==1){
+////            map.put("message","success");
+//            return result.success();
+//        }else{
+////            map.put("error","failed");
+//            return result.success();
+//        }
+//    }
+
+    //    @DeleteMapping
+//    public Result delbook(@RequestBody Book book)
+//    //前端的请求方式为delete,删除书籍信息,前端传入需要删除的书籍的isbn
+//    {
+//        Map<String, Object> map = new HashMap<>();
+//        System.out.println(book);
+//        long n=book.getIsbn();
+//        int i=bookService.delbook(n);
+//        Result result=new Result();
+//        if(i==1){
+////            map.put("message","success");
+//            return result.success();
+//        }else{
+////            map.put("error","failed");
+//            return result.success();
+//        }
+//    }
+    @DeleteMapping("/{isbn}")
+    //前端的请求方式为delete,删除书籍信息,前端传入需要删除的书籍的isbn,
+    //路径为http://localhost:3000/books/1，1是isbn,传哪个isbn
+    public Result delbook(@PathVariable Long isbn){
+        int i=bookService.delbook(isbn);
         Result result=new Result();
-        if(i==1){
-//            map.put("message","success");
+        if(i!=0){
             return result.success();
         }else{
-//            map.put("error","failed");
-            return result.success();
+            return result.error("400","failed");
         }
     }
-    @GetMapping("/isbn")
     //书籍详情，前端需要传查询书籍的isbn
     public Result detail(@RequestBody Book book){
         long n=book.getIsbn();

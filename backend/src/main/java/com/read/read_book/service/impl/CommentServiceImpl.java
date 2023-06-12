@@ -107,7 +107,7 @@ public class CommentServiceImpl implements CommentService {
        comment.setComment(content);
        comment.setCommenttime(commentdate);
        comment.setRate(rate);
-       comment.setLikeing(0L);
+//       comment.setLikeing(0L);
         //插入数据库
         commentMapper.insert(comment);
 
@@ -137,4 +137,13 @@ public class CommentServiceImpl implements CommentService {
         System.out.println(wrapper);
         return commentMapper.selectPage(page1,wrapper);
     }
+
+    @Override//点赞
+    public Integer likeing(Integer commentid) {
+        Comment comment= commentMapper.secomment(commentid);
+        Long likeing=comment.getLikeing();
+        Long newlikeing=likeing+1;
+        return commentMapper.addlike(newlikeing,commentid);
+    }
+
 }

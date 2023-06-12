@@ -51,7 +51,6 @@ public class CommentController {
         Date commentdate = new Date();
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 //        System.out.println(formatter.format(date));
-
 //        System.out.println(username + " " + password + confirmedPassword);
 //        user_id,ISBN,rate,comment,comment_time
 //        Comment comment = new Comment(,commentdate);
@@ -105,6 +104,18 @@ public class CommentController {
     public Result decomment(@PathVariable Integer commentid){
         int r=commentService.decomment(commentid);
         Result result=new Result();
+        if(r!=0){
+            return result.success();
+        }else {
+            return result.error("400","failed");
+        }
+    }
+    @PutMapping("/{commentid}")
+    //请求路径为 http://localhost:3000/comments/2，2就是commentid，
+    // 进行点赞前端要传给我后端点赞的commentid是多少
+    public Result likeing(@PathVariable Integer commentid){
+        Result result=new Result();
+        int r=commentService.likeing(commentid);
         if(r!=0){
             return result.success();
         }else {

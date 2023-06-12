@@ -31,7 +31,7 @@ public interface CommentService {
     public Integer decomment(Integer commentid);
 
     //评论点赞
-
+    public Integer likeing(Integer commentid);
 
     //查询个人书评
     public Page<Comment> seluserment(int pagenum,int size,int userid);

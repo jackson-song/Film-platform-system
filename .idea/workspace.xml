@@ -7,7 +7,9 @@
     <list default="true" id="ef76f59b-ecf6-4144-baeb-b3db2d6eef1d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/CommentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/UserController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/CommentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/CommentServiceImpl.java" afterDir="false" />
     </list>
