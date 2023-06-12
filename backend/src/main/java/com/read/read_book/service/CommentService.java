@@ -9,10 +9,10 @@ import java.util.Map;
 public interface CommentService {
 //
 //    //书籍评论(未实现分页)
-//    public List<Comment> getCommentByISBN(Long isbn);
+    public List<Comment> getCommentByISBN(Long isbn);
 //
 //    //用户评论(未实现分页)
-//    public List<Comment> getCommentByUserid(Integer userid);
+    public List<Comment> getCommentByUserid(Integer userid);
 //
 //    //热门评论
 //
@@ -22,7 +22,7 @@ public interface CommentService {
 //
 //    //发表评论
 //    public Map<String,String> postComment(Integer user_id, Long ISBN, Integer rate, String content);
-
+    public Map<String, String> postComment(Integer user_id, Long ISBN, Integer rate, String content);
     //修改评论
 
 
@@ -31,5 +31,6 @@ public interface CommentService {
 
     //查询个人书评，这个还需要一个分页
     public Page<Comment> seluserment(int pagenum,int size,int userid);
+
 
 }

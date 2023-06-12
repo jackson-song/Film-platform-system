@@ -11,7 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
-    int commentid;
+//    String email;
+    Integer commentid;
     Integer userid;
     Long isbn;
     Integer rate;

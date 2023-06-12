@@ -15,9 +15,8 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName("book")
 public class Book {
-
-    Integer isbn;
-    String Bookname;
+    Long isbn;
+    String bookname;
     String author;
     String press;
     Double Bookgrading;
