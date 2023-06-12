@@ -14,5 +14,9 @@ public interface CommentMapper extends BaseMapper<Comment> {
 
     @Select("select * from comment where userid = #{userid}")
     List<Comment> seluserment(@Param("userid") int userid);
+
+
+//    @Select("select *from comment where userid= #{userid} limit #{page},#{size}" )
+//    List selectpage(int userid,int page,int size);
 }
 

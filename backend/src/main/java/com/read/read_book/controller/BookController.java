@@ -164,17 +164,19 @@ public class BookController {
 //        return 1;
 //    }
     @GetMapping("/newest")
-    //不用传数据，最新书籍
-    public Result selectnewest(){
+    //需要传入页数，页的大小，最新书籍
+    public Result selectnewest(@RequestParam(defaultValue = "0") int page,
+                               @RequestParam(defaultValue = "10") int size){
         Result result=new Result();
-        return result.success(bookService.newestbook());
+        return result.success(bookService.newestbook(page,size));
 //        return bookService.newestbook();
     }
 
     @GetMapping("/hotbook")
-    //不用传数据，热门书籍
-    public Result selecthot(){
+    //传入页号和页的大小，热门书籍
+    public Result selecthot(@RequestParam(defaultValue = "0") int page,
+                            @RequestParam(defaultValue = "10") int size){
         Result result=new Result();
-        return result.success(bookService.hotbook());
+        return result.success(bookService.hotbook(page,size));
     }
 }

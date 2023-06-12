@@ -21,38 +21,44 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 //
-//    // 书的所有评论
-//    @RequestMapping("/BookComment/")
-//    public List<Comment> getBookByBookname(@RequestParam Long isbn) {
-//        return commentService.getCommentByISBN(isbn);
-//    }
+    // 书的所有评论,已经实现分页，前端主要传的数据为页数Page和页的大小size,还有isbn
+    @GetMapping("BookComment")
+    public Result getBookByBookname(@RequestParam(defaultValue = "0") int page,
+                                           @RequestParam(defaultValue = "10") int size,
+                                           @RequestParam Long isbn) {
+        Result result=new Result();
+        return result.success(commentService.getCommentByISBN(page, size, isbn));
+    }
+
+    // 用户的所有评论
+    @GetMapping("/allComment")
+    public Result getCommentByUserid(@RequestParam int page,
+                                     @RequestParam int size,
+                                     @RequestParam int userid) {
+        Result result=new Result();
+        return result.success(commentService.getCommentByUserid(page,size,userid));
+    }
 //
-//    // 用户的所有评论
-//    @RequestMapping("/allComment/")
-//    public List<Comment> getCommentByUserid(@RequestParam Integer userid) {
-//        return commentService.getCommentByUserid(userid);
-//    }
 //
-//
-//    // 发表评论
-//    @RequestMapping("/postacomment/")
-//    public Map<String, String> postComment(@RequestParam Map<String, String> map) {
-//        Integer user_id = Integer.valueOf(map.get("user_id"));
-//        Long ISBN = Long.valueOf(map.get("ISBN"));
-//        Integer rate = Integer.valueOf(map.get("rate"));
-//        String content = map.get("content");
-//
-//        Date commentdate = new Date();
-////        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-////        System.out.println(formatter.format(date));
-//
-////        System.out.println(username + " " + password + confirmedPassword);
-////        user_id,ISBN,rate,comment,comment_time
-////        Comment comment = new Comment(,commentdate);
-////        System.out.println(comment);
-//        return commentService.postComment(user_id,ISBN,rate,content);
-////        return commentService.register(email, password, confirmedPassword);
-//    }
+    // 发表评论
+    @PostMapping   ("/post")
+    public Result postComment(@RequestBody Comment comment) {
+        System.out.println(comment);
+        Integer userid = comment.getUserid();
+        Long ISBN = comment.getIsbn();
+        Integer rate = comment.getRate();
+        String content = comment.getComment();
+        Date commentdate = new Date();
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        System.out.println(formatter.format(date));
+
+//        System.out.println(username + " " + password + confirmedPassword);
+//        user_id,ISBN,rate,comment,comment_time
+//        Comment comment = new Comment(,commentdate);
+//        System.out.println(comment);
+        return commentService.postComment(userid,ISBN,rate,content);
+//        return commentService.register(email, password, confirmedPassword);
+    }
     //用户自己的评论评分
     @GetMapping("/mycomment")//get路径为http://localhost:3000/comments?page=?&size=?&email=???前端传入的数据为页面page，页的大小，emial
     public Result seluserment(@RequestParam int page,
@@ -63,5 +69,14 @@ public class CommentController {
         System.out.println(size);
         Result result=new Result();
         return result.success(commentService.seluserment(page, size, userid));
+    }
+    @GetMapping("/newest")//最新书籍，前端传入页面号和页面大小
+    public Result newestcomment(@RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "10") int size)
+    {
+        System.out.println(page);
+        System.out.println(size);
+        Result result=new Result();
+        return result.success(commentService.newestbook(page,size));
     }
 }
