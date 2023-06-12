@@ -16,7 +16,7 @@ import java.util.Date;
 @TableName("book")
 public class Book {
     Long isbn;
-    String Bookname;
+    String bookname;
     String author;
     String press;
     Double Bookgrading;
