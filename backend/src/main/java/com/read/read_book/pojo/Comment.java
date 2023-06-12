@@ -13,8 +13,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
-//    String email;
-    Integer commentid;
+    @TableId(type = IdType.AUTO)
+    int commentid;
     Integer userid;
     Long isbn;
     Integer rate;
