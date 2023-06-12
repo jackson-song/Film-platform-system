@@ -28,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     BookMapper bookMapper;
-//
+
     // 书籍所有评论
     @Override
     public Page<Comment> getCommentByISBN(int page,int size,Long isbn) {
@@ -38,7 +38,7 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = commentMapper.selectList(queryWrapper);
         return commentMapper.selectPage(page1,queryWrapper);
     }
-//
+
     // 用户所有评论
     @Override
     public Page<Comment> getCommentByUserid(int page,int size,Integer userid) {
@@ -49,12 +49,15 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.selectPage(page1,queryWrapper);
     }
 
-    @Override
+    @Override//热门评论
     public Page<Comment> hotcomment(int page, int size) {
-        return null;
+        Page<Comment> page1=new Page<>(page,size);
+        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("likeing");
+        return commentMapper.selectPage(page1,wrapper);
     }
 
-    @Override
+    @Override//最新书评
     public Page<Comment> newestbook(int page, int size) {
         Page<Comment> page1=new Page<>(page,size);
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
@@ -65,7 +68,7 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.selectPage(page1,wrapper);
     }
 
-    //
+
     // 发表评论
     @Override
     public Result postComment(Integer userid, Long ISBN, Integer rate, String content) {
@@ -95,7 +98,6 @@ public class CommentServiceImpl implements CommentService {
             result.put("message","评论不能为空!");
             return result1.error("400","评论不能为空!");
         }
-
         // 评论时间处理
         Date commentdate = new Date();
 //        Comment comment = new Comment(null,userid,ISBN,rate,content,commentdate);
@@ -105,7 +107,7 @@ public class CommentServiceImpl implements CommentService {
        comment.setComment(content);
        comment.setCommenttime(commentdate);
        comment.setRate(rate);
-       comment.setLikeing(0);
+       comment.setLikeing(0L);
         //插入数据库
         commentMapper.insert(comment);
 
@@ -113,12 +115,12 @@ public class CommentServiceImpl implements CommentService {
         return result1.success();
     }
 
-    @Override
+    @Override//修改书评
     public Integer udcomment(Comment comment) {
         return commentMapper.updatecomment(comment);
     }
 
-    @Override
+    @Override//删除书评
     public Integer decomment(Integer commentid) {
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
         wrapper.eq("commentid",commentid);
@@ -126,77 +128,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     //
-    @Override
+    @Override//用户自己的评论评分
     public Page<Comment> seluserment(int page,int size,int userid) {
         Page<Comment> page1 = new Page(page, size);
         System.out.println(page1);
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
-        wrapper.eq("userid", userid);
-        return commentMapper.selectPage(page, wrapper);
-    }
-
-    public List<Comment> getCommentByISBN(Long isbn) {
-        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("isbn",isbn);
-        List<Comment> comments = commentMapper.selectList(queryWrapper);
-        return comments;
-    }
-
-    // 用户所有评论
-    @Override
-    public List<Comment> getCommentByUserid(Integer userid) {
-        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("userid",userid);
-        List<Comment> comments = commentMapper.selectList(queryWrapper);
-        return comments;
-    }
-
-    // 发表评论
-    @Override
-    public Map<String, String> postComment(Integer user_id, Long ISBN, Integer rate, String content) {
-        Map<String,String> result = new HashMap<>();
-
-        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-        userQueryWrapper.eq("userid", user_id);
-        List<User> users = userMapper.selectList(userQueryWrapper);
-        if (users.isEmpty()) {
-            result.put("message", "用户不存在");
-            return result;
-        }
-
-        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
-        bookQueryWrapper.eq("isbn",ISBN);
-        Book book = bookMapper.selectOne(bookQueryWrapper);
-        if(book == null) {
-            result.put("message", "错误的ISBN或该书不在数据库中");
-            return result;
-        }
-
-        if(!(rate >=0 && rate <=5)) {
-            result.put("message", "评分超出范围");
-            return result;
-        }
-
-        if(content == null || content.length() == 0) {
-            result.put("message","评论不能为空!");
-            return result;
-        }
-
-        // 评论时间处理
-        Date commentdate = new Date();
-        Comment comment = new Comment(null, user_id, ISBN, rate, content, commentdate);
-
-        //插入数据库
-        commentMapper.insert(comment);
-
-        result.put("message","success");
-        return result;
-    }
-
-    @Override
-    public List<Comment> seluserment(String emial) {
-        String email2 = emial;
-        List<Comment> comments=commentMapper.seluserment(email2);
-        return comments;
+        wrapper.eq("userid",userid);
+        System.out.println(wrapper);
+        return commentMapper.selectPage(page1,wrapper);
     }
 }

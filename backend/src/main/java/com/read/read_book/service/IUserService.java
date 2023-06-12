@@ -12,12 +12,14 @@ import java.util.Map;
 
 public interface IUserService extends IService<User> {
     public User  getbyemail(String email);//用户查看个人信息
+
     public Result updatepwd(String password, String newpassword, String confirmedPassword, String email, String pwd);//修改密码
 
     public Result login(String email, String password);//登录
 
-    public Result updateuser(User user);//修改用户信息
+    public Map<String, String> register(String username, String password, String confirmedPassword);
 
+    public Result updateuser(User user);//修改用户信息
 
     public User checkadmin(String email);//验证用户是否是管理员
 

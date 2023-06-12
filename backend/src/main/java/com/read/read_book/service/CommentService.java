@@ -9,11 +9,11 @@ import java.util.Map;
 
 public interface CommentService {
 //
-//    //书籍评论(未实现分页)
-    public List<Comment> getCommentByISBN(Long isbn);
+    //书籍评论(实现分页)
+    public Page<Comment> getCommentByISBN(int page,int size,Long isbn);
 //
-//    //用户评论(未实现分页)
-    public List<Comment> getCommentByUserid(Integer userid);
+    //用户评论(实现分页)
+    public Page<Comment> getCommentByUserid(int page,int size,Integer userid);
 //
 //    //热门书评
     Page<Comment> hotcomment(int page,int size);
@@ -22,8 +22,8 @@ public interface CommentService {
     Page<Comment> newestbook(int page,int size);
 //
 //    //发表评论
-//    public Map<String,String> postComment(Integer user_id, Long ISBN, Integer rate, String content);
-    public Map<String, String> postComment(Integer user_id, Long ISBN, Integer rate, String content);
+    public Result postComment(Integer userid, Long ISBN, Integer rate, String content);
+
     //修改评论
     public Integer udcomment(Comment comment);
 
@@ -35,6 +35,5 @@ public interface CommentService {
 
     //查询个人书评
     public Page<Comment> seluserment(int pagenum,int size,int userid);
-
 
 }
