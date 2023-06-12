@@ -33,7 +33,7 @@ public interface BookMapper extends BaseMapper<Book> {
     @Select("SELECT isbn FROM `book_booktype` where booktypeid = #{booktypeid}")
     int seletypeid(@Param("booktypeid") int booktypeid);//根据typeid查找isbn
     @Select("select *from book where isbn= #{isbn}")
-    List<Book> selectbyISBN(@Param("isbn") int isbn);//根据isbn查找书籍
+    List<Book> selectbyISBN(@Param("isbn") long isbn);//根据isbn查找书籍
 
 
     Integer Udbook(Book book);//管理员修改书籍信息

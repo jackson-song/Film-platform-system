@@ -30,14 +30,33 @@ public class BookServiceImpl implements BookService {
 //    }
 
     @Override
-    public List<Book> newestbook() {
-        List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50"));
-        return books;
+    public Page<Book> hotbook(int page,int size) {
+        Page<Book> page1=new Page<>(page,size);
+        QueryWrapper<Book> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("ratnum");
+//        Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50")
+//        wrapper.like("Bookname",text).or().like("author", text).or().like("isbn",text);
+//        List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50"));
+        return bookMapper.selectPage(page1,wrapper);
+//        List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("ratnum").last("limit 50"));
+//        return books;
+    }
+
+    @Override
+    public Page<Book> newestbook(int page,int size) {
+        Page<Book> page1=new Page<>(page,size);
+        QueryWrapper<Book> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("Publicationtime");
+//        Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50")
+//        wrapper.like("Bookname",text).or().like("author", text).or().like("isbn",text);
+//        List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50"));
+        return bookMapper.selectPage(page1,wrapper);
     }//最新书籍
 
     @Override
-    public Book detailbook(Long isbn) {
-        return bookMapper.selectbyisbn(isbn);
+    public List<Book> detailbook(Long isbn) {
+
+        return bookMapper.selectbyISBN(isbn);
     }
 
     @Override
@@ -109,7 +128,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Page<Book> bookpagebyall(int page, int size, Object text) {
         int pagenum=(page-1)*size;
-        Page<Book> page1=new Page<>(pagenum,size);
+        Page<Book> page1=new Page<>(page,size);
         QueryWrapper<Book> wrapper = new QueryWrapper<>();
         wrapper.like("Bookname",text).or().like("author", text).or().like("isbn",text);
         return bookMapper.selectPage(page1,wrapper);

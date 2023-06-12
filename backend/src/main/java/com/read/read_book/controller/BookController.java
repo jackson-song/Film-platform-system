@@ -1,5 +1,6 @@
 package com.read.read_book.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.read.read_book.common.Result;
 import com.read.read_book.dto.bookpage;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.BookBooktype;
@@ -87,67 +88,74 @@ public class BookController {
     @GetMapping("/pageByBookalltest")//查找书籍用这个
     //对进行查询的书据进行分页，使用路径的方式（与豆瓣官网一致，推荐使用此方法进行查找分页）
     // 需要传入的数据为页号page，页的大小size,搜索的关键字text
-    public Page<Book> pageByBookall( @RequestParam(defaultValue = "0") int page,
-                                     @RequestParam(defaultValue = "10") int size,
-                                     @RequestParam Object text) {
+    public Result pageByBookall(@RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "10") int size,
+                                      @RequestParam Object text) {
         System.out.println(page);
 //        Object text1=text;
         System.out.println(size);
         System.out.println(text);
-        return bookService.bookpagebyall(page,size,text);
+        Result result=new Result();
+        return result.success(bookService.bookpagebyall(page,size,text));
+//        return bookService.bookpagebyall(page,size,text);
     }
     @PutMapping()//
-    public Map<String, Object> Udbook(@RequestBody Book book)
-    //前端传入修改的信息,isbn不能少,因为要根据isbn来进行修改,isbn不能修改
+    public Result Udbook(@RequestBody Book book)
+    //修改书籍信息，前端的请求方法为put,前端传入修改的信息,isbn不能少,因为要根据isbn来进行修改,isbn不能修改
     {
         Map<String, Object> map = new HashMap<>();
         System.out.println(book);
         int i= bookService.Udbook(book);
-        if(i==1){
-            map.put("message","success");
-            return map;
+        Result result=new Result();
+        if(i!=0){
+//            map.put("message","success");
+            return result.success();
         }else{
-            map.put("error","failed");
-            return map;
+//            map.put("error","failed");
+//            return map;
+            return result.error("400","failed");
         }
     }
    @PostMapping
-    public Map<String, Object> addbook(@RequestBody Book book)
+    public Result addbook(@RequestBody Book book)
    //添加书籍信息,前端传入书籍的所有信息
    {
         Map<String, Object> map = new HashMap<>();
         System.out.println(book);
         int i=bookService.addbook(book);
-        if(i==1){
-            map.put("message","success");
-            return map;
+        Result result=new Result();
+        if(i!=0){
+//            map.put("message","success");
+            return result.success();
         }else{
-            map.put("error","failed");
-            return map;
+//            map.put("error","failed");
+            return result.error("400","failed");
         }
     }
 
     @DeleteMapping
-    public Map<String, Object> delbook(@RequestBody Book book)
-    //删除书籍信息,前端传入需要删除的书籍的isbn
+    public Result delbook(@RequestBody Book book)
+    //前端的请求方式为delete,删除书籍信息,前端传入需要删除的书籍的isbn
     {
         Map<String, Object> map = new HashMap<>();
         System.out.println(book);
         long n=book.getIsbn();
         int i=bookService.delbook(n);
+        Result result=new Result();
         if(i==1){
-            map.put("message","success");
-            return map;
+//            map.put("message","success");
+            return result.success();
         }else{
-            map.put("error","failed");
-            return map;
+//            map.put("error","failed");
+            return result.success();
         }
     }
     @GetMapping("/isbn")
-    //前端需要传查询书籍的isbn
-    public Book detail(@RequestBody Book book){
+    //书籍详情，前端需要传查询书籍的isbn
+    public Result detail(@RequestBody Book book){
         long n=book.getIsbn();
-        return bookService.detailbook(n);
+        Result result=new Result();
+        return result.success(bookService.detailbook(n));
     }//查询书籍详情
 //    @GetMapping ("/test")//按类型查询，没有进行分页
 //    public int selectbooknewest(@RequestBody Book book){
@@ -156,8 +164,19 @@ public class BookController {
 //        return 1;
 //    }
     @GetMapping("/newest")
-    //不用传数据
-    public List<Book> selectnewest(){
-        return bookService.newestbook();
+    //需要传入页数，页的大小，最新书籍
+    public Result selectnewest(@RequestParam(defaultValue = "0") int page,
+                               @RequestParam(defaultValue = "10") int size){
+        Result result=new Result();
+        return result.success(bookService.newestbook(page,size));
+//        return bookService.newestbook();
+    }
+
+    @GetMapping("/hotbook")
+    //传入页号和页的大小，热门书籍
+    public Result selecthot(@RequestParam(defaultValue = "0") int page,
+                            @RequestParam(defaultValue = "10") int size){
+        Result result=new Result();
+        return result.success(bookService.hotbook(page,size));
     }
 }

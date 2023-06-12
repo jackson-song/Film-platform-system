@@ -1,6 +1,7 @@
 package com.read.read_book.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.read.read_book.common.Result;
 import com.read.read_book.pojo.Comment;
 
 import java.util.List;
@@ -14,11 +15,11 @@ public interface CommentService {
 //    //用户评论(未实现分页)
     public List<Comment> getCommentByUserid(Integer userid);
 //
-//    //热门评论
+//    //热门书评
 //
 //
-//    //最新评论
-//
+//    //最新书评
+    Page<Comment> newestbook(int page,int size);
 //
 //    //发表评论
 //    public Map<String,String> postComment(Integer user_id, Long ISBN, Integer rate, String content);
@@ -29,7 +30,7 @@ public interface CommentService {
     //删除评论,后台功能
 
 
-    //查询个人书评，这个还需要一个分页
+    //查询个人书评
     public Page<Comment> seluserment(int pagenum,int size,int userid);
 
 

@@ -20,7 +20,9 @@ public class Book {
     String author;
     String press;
     Double Bookgrading;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    Date Publicationtime;
+    int ratnum;
+    String imgurl;
+//    @DateTimeFormat(pattern="yyyy-MM-dd")
+    String Publicationtime;
     String synopsis;
 }

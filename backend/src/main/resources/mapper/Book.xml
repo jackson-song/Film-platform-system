@@ -38,7 +38,9 @@
             <if test="Bookname !=null">
                 Bookname= #{Bookname},
             </if>
-
+            <if test="imgurl!=null">
+                imgurl= #{imgurl},
+            </if>
             <if test="author!=null">
                 author= #{author},
             </if>
@@ -51,6 +53,9 @@
             </if>
             <if test="Publicationtime !=null">
                 Publicationtime= #{Publicationtime},
+            </if>
+            <if test="ratnum !=null">
+                ratnum= #{ratnum},
             </if>
             <if test="synopsis !=null">
                 synopsis= #{synopsis}

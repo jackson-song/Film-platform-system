@@ -1,12 +1,13 @@
+
 import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-/*
+
 // import WebLogin from "@/views/WebLogin.vue";
-import WebIndex from "@/views/WebIndex.vue";
-import WebRegister from "@/views/WebRegister.vue";
-*/
+// import WebIndex from "@/views/WebIndex.vue";
+// import WebRegister from "@/views/WebRegister.vue";
+
 // const WebLoginTest = () => import('../views/WebLoginTest.vue')
 const WebLogin = () => import('../views/WebLogin.vue')
 const WebIndex = () => import('../views/WebIndex.vue')
@@ -25,12 +26,11 @@ const CityActivityContent = () => import('../components/city/CityActivityContent
 
 export default new Router({
   routes: [
-    /*    {
+    {
       path: '/',
       name: 'home',
       component: WebIndex
     },
-     */
     {
       path: '/login',
       name: 'login',
@@ -107,5 +107,9 @@ export default new Router({
         content: CityActivityContent
       }
     }
+    /*     {
+      path: '/wbtest',
+      name: 'wbtest',
+      components: '' */
   ]
 })

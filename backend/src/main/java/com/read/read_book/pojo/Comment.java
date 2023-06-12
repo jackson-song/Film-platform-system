@@ -1,5 +1,7 @@
 package com.read.read_book.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +20,5 @@ public class Comment {
     Integer rate;
     String comment;
     Date commenttime;
+    long likeing;
 }

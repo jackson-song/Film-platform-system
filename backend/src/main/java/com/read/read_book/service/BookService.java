@@ -19,16 +19,16 @@ public interface BookService {
 //    public List<BookBooktype> adminselbooktype(String booktypename);//管理员根据类型查询
 
     //热门书籍
-
+    Page<Book> hotbook(int page,int size);
 
     //最新书籍,只取前50本
-   List<Book> newestbook();
+   Page<Book> newestbook(int page,int size);
 
     //个性推荐书籍 (?推荐)
 
 
     //书籍详情 select * from book where isbn = isbn,也是后台查询书籍功能
-     Book detailbook(Long isbn);
+     List<Book> detailbook(Long isbn);
 
     //修改书籍信息,后台功能
     Integer Udbook(Book book);
