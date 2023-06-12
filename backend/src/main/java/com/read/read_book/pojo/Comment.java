@@ -14,11 +14,11 @@ import java.util.Date;
 @NoArgsConstructor
 public class Comment {
     @TableId(type = IdType.AUTO)
-    int commentid;
+    Integer commentid;
     Integer userid;
     Long isbn;
     Integer rate;
     String comment;
     Date commenttime;
-    long likeing;
+    Long likeing;
 }

@@ -30,7 +30,7 @@ public class CommentController {
         return result.success(commentService.getCommentByISBN(page, size, isbn));
     }
 
-    // 用户的所有评论
+    // 用户的所有评论，已经实现分页，前端需要上传的数据为页号，
     @GetMapping("/allComment")
     public Result getCommentByUserid(@RequestParam int page,
                                      @RequestParam int size,
@@ -40,7 +40,7 @@ public class CommentController {
     }
 //
 //
-    // 发表评论
+    // 用户发表评论，发表评论，前端需要传的参数为用户号userid,书籍ISBN,评分rate,评语content
     @PostMapping   ("/post")
     public Result postComment(@RequestBody Comment comment) {
         System.out.println(comment);
@@ -80,6 +80,15 @@ public class CommentController {
         return result.success(commentService.newestbook(page,size));
     }
 
+
+    @GetMapping("/hotcomment")
+    //热门书评,前端传入页面号和页面大小,后端返回分页点赞数高的评论在前
+    public Result hotcomment(@RequestParam(defaultValue = "0") int page,
+                             @RequestParam(defaultValue = "10") int size){
+        Result result=new Result();
+        return result.success(commentService.hotcomment(page,size));
+    }
+
     @PutMapping//修改评论，前端必须要传修改的书籍的isbn和用户的userid，然后传修改的评分或评语
     public Result UDcomment(@RequestBody Comment comment){
         System.out.println(comment);
@@ -92,7 +101,7 @@ public class CommentController {
         }
     }
     @DeleteMapping("/{commentid}")
-    //前端的请求方式为Delete
+    //前端的请求方式为Delete前端的请求路径为http://localhost:3000/comments/1,这个1就是代表commentid为1的书评
     public Result decomment(@PathVariable Integer commentid){
         int r=commentService.decomment(commentid);
         Result result=new Result();

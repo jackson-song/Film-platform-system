@@ -30,6 +30,7 @@ public class IUserController {
     private IUserService iUserService;
     @Autowired
     private UserMapper userMapper;
+
     @GetMapping("/get")
     //前端需要传用户邮箱email,查看个人信息,根据邮箱查看个人信息，
     // 用户只能查询到username, gender ,age ,email ,introduction, state(是否冻结)
@@ -80,12 +81,22 @@ public class IUserController {
         return iUserService.login(email,pwd);
     }
 
+    //注册
+    @PostMapping("/register")
+    public Map<String, String> register(@RequestParam Map<String, String> map) {
+//        System.out.println("接收到map" + map);
+        String email = map.get("email");
+        String password = map.get("password");
+        String confirmedPassword = map.get("password_confirm");
+//        System.out.println(username + " " + password + confirmedPassword);
+        return iUserService.register(email, password, confirmedPassword);
+    }
+
     @PostMapping("/upuser")
     //修改个人信息,修改什么数据传什么数据,必须传的数据为用户的email,这是修改的条件
     public Result updateuser(@RequestBody User user) {
             return iUserService.updateuser(user);
     }
-
 
     @GetMapping("/check")
     //前端传入email验证用户是否是管理员,使用email对权限进行一个判定
@@ -95,7 +106,6 @@ public class IUserController {
 //        email="2971387095@qq.com";
         User user= iUserService.checkadmin(email);
         if(user!=null){
-
             map.put("message","success");
             return result.success(user);
         }else{
@@ -115,8 +125,9 @@ public class IUserController {
         System.out.println(text);
         return iUserService.seleuser(page,size,text);
     }
+
     @PostMapping("/{userid}")//冻结
-    //解冻,前端传入的数据为路径数据,userid为用户id,传入/users/1就是对userid对1的用户进行冻结
+    //冻结,前端传入的数据为路径数据,userid为用户id,传入/users/1就是对userid对1的用户进行冻结
     public Result freezeuser(@PathVariable int userid) {
         Map<String, String> map = new HashMap<>();
         Result result=new Result();
@@ -147,7 +158,6 @@ public class IUserController {
             return result.error("400","failed");
         }
     }
-
 }
 
 

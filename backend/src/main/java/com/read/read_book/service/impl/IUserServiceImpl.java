@@ -16,17 +16,16 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Random;
 
 @Service
 public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-//查看个人信息
-@Autowired
+
+    @Autowired
     UserMapper userMapper;
 
     @Override//查看个人信息
     public User getbyemail(String email) {
-
         return userMapper.getbyemail(email);
     }
 
@@ -39,44 +38,26 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
 //        String pwd = "123";
 //        String email = "2971387095@qq.com";
         if (StringUtils.isBlank(password)||StringUtils.isBlank(newpassword)||StringUtils.isBlank(confirmedPassword)) {
-//            map.put("error_message", "密码或新密码或再次确认密码" +
-//                    "输入为空");
-//            System.out.println(map);
             return result.error("400","密码或新密码或再次确认密码输入为空");
-//            return map;
         } else {
             if (pwd.equals(password)) {
                 if (newpassword.equals(password)) {
                    return result.error("400","新密码与原密码相同");
-//                    map.put("error_message", "新密码与原密码相同");
-//                    System.out.println(map);
-//                    return map;
                 }
                 if (newpassword.equals(confirmedPassword)) {
                     if(userMapper.updatepwd(confirmedPassword, email)!=0){
                     return result.success();
                     }else {return result.error("500","系统错误");}
-//                    map.put("error_message", "success");
-//                    return map;
                 } else {
                    return result.error("400","两次输入的新密码不一致");
-//                    map.put("error_message", "两次输入的新密码不一致");
-//                    System.out.println(map);
-//                    return map;
                 }
             } else if(!pwd.equals(password)) {
                return result.error("400","原密码输入有误");
-//                map.put("error_message", "原密码输入有误");
-//                System.out.println(map);
-//                return map;
             }
         }
         return result.error("500","参数错误");
     }
 
-//    @Autowired
-//    ServletWebServerFactory servletWebServerFactory;
-//    HttpServletRequest request;
     @Override
     public Result login(String email, String pwd) {
         Map<String, Object> map = new HashMap<>();
@@ -85,15 +66,11 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
             map.put("error_message", "邮箱不能为空");
             System.out.println(map);
             return result.error("400","邮箱为空");
-//            return map;
         }
         else if (StringUtils.isBlank(pwd)) {
             map.put("error_message", "密码不能为空");
             return  result.error("400","密码为空");
-//            System.out.println(map);
-//            return map;
         }else{
-//         userMapper.check(email,pwd);
          if(userMapper.check(email,pwd)!=null){
              int state=userMapper.check(email, pwd).getState();
              if(state!=0){
@@ -111,6 +88,79 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
 //             return map;
          }
         }
+    }
+
+    @Override//注册
+    public Map<String, String> register(String email, String password, String confirmedPassword) {
+        Map<String, String> map = new HashMap<>();
+        if (email == null) {
+            map.put("error_message", "邮箱不能为空");
+            System.out.println(map);
+            System.out.println("来过SeriviceImpl");
+            return map;
+        }
+        if (password == null || confirmedPassword == null) {
+            System.out.println("密码为null");
+            System.out.println(email + password + confirmedPassword);
+            map.put("error_message", "密码不能为空");
+            System.out.println("来过SeriviceImpl");
+            return map;
+        }
+
+        //trim 删除头尾空白符
+        email = email.trim();
+        if (email.length() == 0) {
+            System.out.println("去掉头尾空白后 email:" + email);
+            map.put("error_message", "邮箱不能为空");
+            return map;
+        }
+
+        //后端-邮箱合法性判断(未完成)
+
+
+        if (password.length() == 0 || confirmedPassword.length() == 0) {
+            System.out.println("密码length = 0");
+            map.put("error_message", "密码不能为空");
+            return map;
+        }
+
+        if (email.length() > 100) {
+            map.put("error_message", "邮箱长度不能大于100");
+            return map;
+        }
+
+        if (password.length() > 100 || confirmedPassword.length() > 100) {
+            map.put("error_message", "密码长度不能大于100");
+            return map;
+        }
+
+        if (!password.equals(confirmedPassword)) {
+            map.put("error_message", "两次输入的密码不一致");
+            return map;
+        }
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email", email);
+        List<User> users = userMapper.selectList(queryWrapper);
+        if (!users.isEmpty()) {
+            map.put("error_message", "邮箱已被使用");
+            return map;
+        }
+
+//        System.out.println("一切正常,准备插入数据");
+
+        //生成随机数用于用户名
+        Random r = new Random();
+        int rnum = r.nextInt(99999) + 100000;
+        String username = "游客" + rnum;
+
+        // 用户注册,username随机生成(可能重复),upower非管理员为0, state:0正常,1冻结;
+        User user = new User(null,username,password,null,null,email,null,0,0);
+        userMapper.insert(user);
+
+        map.put("error_message", "success");
+        return map;
+
     }
 
     @Override//修改个人信息
@@ -136,25 +186,23 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         return user;
     }
 
-    @Override
+    @Override//根据userid或email查询user
     public Result seleuser(int page, int size, Object text) {
-//        int pagenum=(page-1)*size;
         Page<User> page1=new Page<>(page,size);
         Result result=new Result();
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.like("username",text).or().like("email", text);
         return result.success(userMapper.selectPage(page1,wrapper));
-//        return userMapper.selectPage(page1,wrapper);
     }
 
-    @Override
+    @Override//冻结
     public int freezeuser(int userid) {
-        return userMapper.freezeuser(0,userid);//冻结
+        return userMapper.freezeuser(0,userid);
     }
 
-    @Override
+    @Override//解冻
     public int thaw(int userid) {
-        return userMapper.freezeuser(1,userid);//解冻
+        return userMapper.freezeuser(1,userid);
     }
 
 }
