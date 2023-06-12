@@ -16,7 +16,7 @@ public interface CommentService {
     public Page<Comment> getCommentByUserid(int page,int size,Integer userid);
 //
 //    //热门书评
-//
+    Page<Comment> hotcomment(int page,int size);
 //
 //    //最新书评
     Page<Comment> newestbook(int page,int size);
@@ -25,9 +25,12 @@ public interface CommentService {
     public Result postComment(Integer userid, Long ISBN, Integer rate, String content);
 
     //修改评论
-
+    public Integer udcomment(Comment comment);
 
     //删除评论,后台功能
+    public Integer decomment(Integer commentid);
+
+    //评论点赞
 
 
     //查询个人书评

@@ -79,4 +79,27 @@ public class CommentController {
         Result result=new Result();
         return result.success(commentService.newestbook(page,size));
     }
+
+    @PutMapping//修改评论，前端必须要传修改的书籍的isbn和用户的userid，然后传修改的评分或评语
+    public Result UDcomment(@RequestBody Comment comment){
+        System.out.println(comment);
+        Result result=new Result();
+        int m=commentService.udcomment(comment);
+        if(m!=0){
+            return result.success();
+        }else{
+            return result.error("400","failed");
+        }
+    }
+    @DeleteMapping("/{commentid}")
+    //前端的请求方式为Delete
+    public Result decomment(@PathVariable Integer commentid){
+        int r=commentService.decomment(commentid);
+        Result result=new Result();
+        if(r!=0){
+            return result.success();
+        }else {
+            return result.error("400","failed");
+        }
+    }
 }

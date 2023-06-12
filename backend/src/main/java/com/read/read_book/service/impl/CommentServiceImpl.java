@@ -50,6 +50,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public Page<Comment> hotcomment(int page, int size) {
+        return null;
+    }
+
+    @Override
     public Page<Comment> newestbook(int page, int size) {
         Page<Comment> page1=new Page<>(page,size);
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
@@ -107,7 +112,20 @@ public class CommentServiceImpl implements CommentService {
         result.put("message","success");
         return result1.success();
     }
-//
+
+    @Override
+    public Integer udcomment(Comment comment) {
+        return commentMapper.updatecomment(comment);
+    }
+
+    @Override
+    public Integer decomment(Integer commentid) {
+        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+        wrapper.eq("commentid",commentid);
+        return commentMapper.delete(wrapper);
+    }
+
+    //
     @Override
     public Page<Comment> seluserment(int page,int size,int userid) {
         Page<Comment> page1 = new Page(page, size);
