@@ -1,6 +1,7 @@
 package com.read.read_book.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.read.read_book.common.Result;
 import com.read.read_book.dto.logindto;
 import com.read.read_book.pojo.Comment;
 import com.read.read_book.service.CommentService;
@@ -54,12 +55,13 @@ public class CommentController {
 //    }
     //用户自己的评论评分
     @GetMapping("/mycomment")//get路径为http://localhost:3000/comments?page=?&size=?&email=???前端传入的数据为页面page，页的大小，emial
-    public Page<Comment> seluserment(@RequestParam int page,
-                                     @RequestParam int size,
-                                     @RequestParam int userid){
+    public Result seluserment(@RequestParam int page,
+                              @RequestParam int size,
+                              @RequestParam int userid){
         System.out.println(userid);
         System.out.println(page);
         System.out.println(size);
-        return commentService.seluserment(page, size, userid);
+        Result result=new Result();
+        return result.success(commentService.seluserment(page, size, userid));
     }
 }

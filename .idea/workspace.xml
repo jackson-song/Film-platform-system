@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef76f59b-ecf6-4144-baeb-b3db2d6eef1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/IUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/IUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/BookServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/IUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/IUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/IUserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -273,6 +271,7 @@
       <workItem from="1686484290032" duration="1478000" />
       <workItem from="1686492723560" duration="3553000" />
       <workItem from="1686497262372" duration="1879000" />
+      <workItem from="1686528126882" duration="2381000" />
     </task>
     <servers />
   </component>
