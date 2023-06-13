@@ -3,10 +3,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.read.read_book.Mapper.BookMapper;
+import com.read.read_book.Mapper.BooktypeMapper;
 import com.read.read_book.dto.bookpage;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.BookBooktype;
+import com.read.read_book.pojo.Booktype;
 import com.read.read_book.service.BookService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,8 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     BookMapper bookMapper;
+    @Autowired
+    BooktypeMapper booktypeMapper;
 
 //    @Override
 //    public List<Book> SearchBookByTitle(String title) {
@@ -62,18 +67,29 @@ public class BookServiceImpl implements BookService {
     @Override
     public Integer Udbook(Book book)//修改书籍信息
     {
-        return bookMapper.Udbook(book);
+        int m=bookMapper.Udbook(book);
+        Booktype booktype=new Booktype();
+        BeanUtils.copyProperties(book, booktype);
+        System.out.println(booktype);
+        int n=booktypeMapper.Udbook(booktype);
+        if(m!=0&&n!=0){
+        return bookMapper.Udbook(book);}else return 0;
     }
 
     @Override
-    public Integer addbook(Book book) {
-        int n=bookMapper.insert(book);
-        return n;
+    public Integer addbook(Booktype book) {
+        Book book1=new Book();
+        BeanUtils.copyProperties(book, book1);
+        int m=booktypeMapper.insert(book);
+        int n=bookMapper.insert(book1);
+        if(m!=0&&n!=0){
+            return bookMapper.Udbook(book1);}else return 0;
     }
 
     @Override
     public Integer delbook(Long isbn) {
        int rs= bookMapper.delbook(isbn);
+       int rs1=booktypeMapper.delbook(isbn);
        return rs;
     }//删除书籍信息
 
@@ -135,16 +151,12 @@ public class BookServiceImpl implements BookService {
     }//按书籍，作者，isbn模糊查询分页最终版
 
     @Override
-    public Page<Book> admintype(bookpage bookpage) {
-            int m=bookMapper.selectbytypename(bookpage.getBooktypename());
-            System.out.println(m);
-            int isbn=bookMapper.seletypeid(m);
-            System.out.println(isbn);
-            Page<Book> page = new Page(bookpage.getPagenum(), bookpage.getPagesize());
-            QueryWrapper<Book> wrapper = new QueryWrapper<>();
-            wrapper.eq(" booktypename;", bookpage.getBooktypename());
+    public Page<Booktype> pagebytype(int page,int size,String type) {
+            Page<Booktype> page1 = new Page(page, size);
+            QueryWrapper<Booktype> wrapper = new QueryWrapper<>();
+            wrapper.eq("type",type );
 //        wrapper.like("name", t.getName());
-            return bookMapper.selectPage(page,wrapper);
+            return booktypeMapper.selectPage(page1,wrapper);
 //        return bookMapper.selectbookbytype(m);
         }
     }

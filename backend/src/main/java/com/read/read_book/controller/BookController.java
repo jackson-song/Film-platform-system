@@ -99,6 +99,15 @@ public class BookController {
         return result.success(bookService.bookpagebyall(page,size,text));
 //        return bookService.bookpagebyall(page,size,text);
     }
+    @GetMapping("/pagebytype")
+    //根据类别查询，对进行查询的书据进行分页，使用路径的方式（与豆瓣官网一致，推荐使用此方法进行查找分页）
+    // 需要传入的数据为页号page，页的大小size,类别type
+    public Result pagebytype(@RequestParam(defaultValue = "0") int page,
+                             @RequestParam(defaultValue = "10") int size,
+                             @RequestParam String type){
+        Result result=new Result();
+        return result.success(bookService.pagebytype(page,size,type));
+    }
     @PutMapping()//
     public Result Udbook(@RequestBody Book book)
     //修改书籍信息，前端的请求方法为put,前端传入修改的信息,isbn不能少,因为要根据isbn来进行修改,isbn不能修改
@@ -117,8 +126,8 @@ public class BookController {
         }
     }
    @PostMapping
-    public Result addbook(@RequestBody Book book)
-   //添加书籍信息,前端传入书籍的所有信息
+    public Result addbook(@RequestBody Booktype book)
+   //添加书籍信息,前端传入书籍的所有信息,传入的书籍信息要包括类别type
    {
         Map<String, Object> map = new HashMap<>();
         System.out.println(book);

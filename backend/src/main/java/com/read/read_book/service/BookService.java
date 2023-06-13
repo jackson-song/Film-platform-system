@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.read.read_book.dto.bookpage;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.BookBooktype;
+import com.read.read_book.pojo.Booktype;
 
 import java.io.Serializable;
 import java.util.List;
@@ -34,7 +35,7 @@ public interface BookService {
     Integer Udbook(Book book);
 
     //增加书籍信息 后台
-    Integer addbook(Book book);
+    Integer addbook(Booktype book);
 
     //删除书籍信息
    Integer delbook(Long isbn);
@@ -54,5 +55,5 @@ public interface BookService {
 
 
 
-    public Page<Book> admintype(bookpage bookpage);//管理员查询分类分页
+    public Page<Booktype> pagebytype(int page,int size,String type);//管理员查询分类分页
 }
