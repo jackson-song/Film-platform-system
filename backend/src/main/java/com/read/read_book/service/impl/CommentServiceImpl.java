@@ -50,22 +50,37 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override//热门评论
-    public Page<Comment> hotcomment(int page, int size) {
-        Page<Comment> page1=new Page<>(page,size);
-        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("likeing");
-        return commentMapper.selectPage(page1,wrapper);
+    public Result hotcomment(int page, int size) {
+//        Page<Comment> page1=new Page<>(page,size);
+//        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+//        wrapper.orderByDesc("likeing");
+//        return commentMapper.selectPage(page1,wrapper);
+        Result result=new Result();
+        page=(page-1)*size;
+        int total=commentMapper.total();
+        if(total>50){
+            return result.success(commentMapper.commenthot(page,size),50);}
+        else {
+            return result.success(commentMapper.commenthot(page,size),total);
+        }
     }
 
     @Override//最新书评
-    public Page<Comment> newestbook(int page, int size) {
-        Page<Comment> page1=new Page<>(page,size);
-        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("commenttime");
+    public Result newestbook(int page, int size) {
+//        Page<Comment> page1=new Page<>(page,size);
+//        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+//        wrapper.orderByDesc("commenttime");
 //        Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50")
 //        wrapper.like("Bookname",text).or().like("author", text).or().like("isbn",text);
 //        List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50"));
-        return commentMapper.selectPage(page1,wrapper);
+        Result result=new Result();
+        page=(page-1)*size;
+        int total=commentMapper.total();
+        if(total>50){
+        return result.success(commentMapper.commentnewest(page,size),50);}
+        else {
+            return result.success(commentMapper.commentnewest(page,size),total);
+        }
     }
 
 

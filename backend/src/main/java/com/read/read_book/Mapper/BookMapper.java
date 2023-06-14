@@ -32,8 +32,8 @@ public interface BookMapper extends BaseMapper<Book> {
     List<BookBooktype> selectbookbytype(@Param("booktypeid") int booktypeid);
     @Select("SELECT isbn FROM `book_booktype` where booktypeid = #{booktypeid}")
     int seletypeid(@Param("booktypeid") int booktypeid);//根据typeid查找isbn
-    @Select("select *from book where isbn= #{isbn}")
-    List<Book> selectbyISBN(@Param("isbn") long isbn);//根据isbn查找书籍
+    @Select("select *from book where isbn= #{isbn},limit #{page},limit #{size}")
+    List<Book> selectbyISBN(@Param("isbn") long isbn,int page,int size);//根据isbn查找书籍
 
 
     Integer Udbook(Book book);//管理员修改书籍信息
@@ -43,7 +43,12 @@ public interface BookMapper extends BaseMapper<Book> {
 
 
     @Select("select *from book where isbn= #{isbn}")
-    Book selectbyisbn(@Param("isbn") long isbn);
+    List<Book> selectbyisbn(@Param("isbn") long isbn);
 
+    @Select("select *from (select *from book order by ratnum desc limit 50)a limit #{page},#{size}")
+    List<Book> selectpagebyhot(Integer page,Integer size);
+
+    @Select("select *from (select *from book ORDER BY STR_TO_DATE(Publicationtime, '%Y-%m-%d') DESC limit 50)a limit #{page},#{size}")
+    List<Book> selectpagebynewest(Integer page,Integer size);
 
 }

@@ -69,23 +69,23 @@ public class CommentController {
         Result result=new Result();
         return result.success(commentService.seluserment(page, size, userid));
     }
-    @GetMapping("/newest")//最新书籍，前端传入页面号和页面大小
+    @GetMapping("/newest")//最新书籍，前端传入页面号和页面大小，前50条
     public Result newestcomment(@RequestParam(defaultValue = "0") int page,
                                 @RequestParam(defaultValue = "10") int size)
     {
         System.out.println(page);
         System.out.println(size);
         Result result=new Result();
-        return result.success(commentService.newestbook(page,size));
+        return commentService.newestbook(page,size);
     }
 
 
     @GetMapping("/hotcomment")
-    //热门书评,前端传入页面号和页面大小,后端返回分页点赞数高的评论在前
+    //热门书评,前端传入页面号和页面大小,后端返回分页点赞数高的评论在前,前50条
     public Result hotcomment(@RequestParam(defaultValue = "0") int page,
                              @RequestParam(defaultValue = "10") int size){
         Result result=new Result();
-        return result.success(commentService.hotcomment(page,size));
+        return commentService.hotcomment(page,size);
     }
 
     @PutMapping//修改评论，前端必须要传修改的书籍的isbn和用户的userid，然后传修改的评分或评语

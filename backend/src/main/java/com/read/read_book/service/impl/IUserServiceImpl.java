@@ -4,25 +4,26 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.read.read_book.Mapper.UserMapper;
+import com.read.read_book.Mapper.UserstaticMapper;
 import com.read.read_book.common.Result;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.User;
+import com.read.read_book.pojo.Userstatistic;
 import com.read.read_book.service.IUserService;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    UserstaticMapper userstaticMapper;
 
     @Override//查看个人信息
     public User getbyemail(String email) {
@@ -74,9 +75,20 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
          if(userMapper.check(email,pwd)!=null){
              int state=userMapper.check(email, pwd).getState();
              if(state!=0){
-             map.put("User",userMapper.check(email,pwd));
-             map.put("message", "success");
-             return result.success();}
+//             map.put("User",userMapper.check(email,pwd));
+//             map.put("message", "success");
+//             return result.success();
+                 User user=userMapper.check(email,pwd);
+                 Date logintime = new Date();
+                 int userid=user.getUserid();
+                 String username= user.getUsername();
+                 Userstatistic userstatistic=new Userstatistic();
+                 userstatistic.setUserid(userid);
+                 userstatistic.setUsername(username);
+                 userstatistic.setLogintime(logintime);
+                 userstaticMapper.insert(userstatistic);
+                 return result.success(user);
+             }
 //             return map;}
              else {map.put("error_message", "你的账号已经被冻结");
                  return result.error("400","你的账号已经被冻结");
@@ -91,20 +103,23 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
     }
 
     @Override//注册
-    public Map<String, String> register(String email, String password, String confirmedPassword) {
+    public Result register(String email, String password, String confirmedPassword) {
         Map<String, String> map = new HashMap<>();
+        Result result=new Result();
         if (email == null) {
-            map.put("error_message", "邮箱不能为空");
-            System.out.println(map);
-            System.out.println("来过SeriviceImpl");
-            return map;
+           return result.error("400","邮箱不能为空");
+//            map.put("error_message", "邮箱不能为空");
+//            System.out.println(map);
+//            System.out.println("来过SeriviceImpl");
+//            return map;
         }
         if (password == null || confirmedPassword == null) {
-            System.out.println("密码为null");
-            System.out.println(email + password + confirmedPassword);
-            map.put("error_message", "密码不能为空");
-            System.out.println("来过SeriviceImpl");
-            return map;
+//            System.out.println("密码为null");
+//            System.out.println(email + password + confirmedPassword);
+//            map.put("error_message", "密码不能为空");
+//            System.out.println("来过SeriviceImpl");
+           return result.error("400","密码不能为空");
+//            return map;
         }
 
         //trim 删除头尾空白符
@@ -112,7 +127,7 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         if (email.length() == 0) {
             System.out.println("去掉头尾空白后 email:" + email);
             map.put("error_message", "邮箱不能为空");
-            return map;
+            return result.error("400", "邮箱不能为空");
         }
 
         //后端-邮箱合法性判断(未完成)
@@ -121,22 +136,22 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         if (password.length() == 0 || confirmedPassword.length() == 0) {
             System.out.println("密码length = 0");
             map.put("error_message", "密码不能为空");
-            return map;
+            return result.error("400","密码不能为空");
         }
 
         if (email.length() > 100) {
             map.put("error_message", "邮箱长度不能大于100");
-            return map;
+            return result.error("400","邮箱长度不能大于100");
         }
 
         if (password.length() > 100 || confirmedPassword.length() > 100) {
             map.put("error_message", "密码长度不能大于100");
-            return map;
+            return result.error("400","密码长度不能大于100");
         }
 
         if (!password.equals(confirmedPassword)) {
             map.put("error_message", "两次输入的密码不一致");
-            return map;
+            return result.error("400","两次输入的密码不一致");
         }
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -144,7 +159,7 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         List<User> users = userMapper.selectList(queryWrapper);
         if (!users.isEmpty()) {
             map.put("error_message", "邮箱已被使用");
-            return map;
+            return result.error("400","邮箱已被使用");
         }
 
 //        System.out.println("一切正常,准备插入数据");
@@ -155,11 +170,11 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         String username = "游客" + rnum;
 
         // 用户注册,username随机生成(可能重复),upower非管理员为0, state:0正常,1冻结;
-        User user = new User(null,username,password,null,null,email,null,0,0);
+        User user = new User(null,username,password,null,null,email,null,0,1);
         userMapper.insert(user);
 
         map.put("error_message", "success");
-        return map;
+        return result.success();
 
     }
 

@@ -108,6 +108,18 @@ public class BookController {
         Result result=new Result();
         return result.success(bookService.pagebytype(page,size,type));
     }
+
+
+    @GetMapping("/pagebytypedetail")
+    //根据类别详细查询，对进行查询的书据进行分页，使用路径的方式（与豆瓣官网一致，推荐使用此方法进行查找分页）
+    // 在类型中的搜索框中搜索这一类型相对应搜索内容的书籍，前端必须传的数据为类型，页面，页面大小，搜索内容
+    public Result sepagebytype(@RequestParam(defaultValue = "0") int page,
+                             @RequestParam(defaultValue = "10") int size,
+                             @RequestParam String type,
+                               @RequestParam Object text){
+        Result result=new Result();
+        return result.success(bookService.sepagebytype(page, size, type, text));
+    }
     @PutMapping()//
     public Result Udbook(@RequestBody Book book)
     //修改书籍信息，前端的请求方法为put,前端传入修改的信息,isbn不能少,因为要根据isbn来进行修改,isbn不能修改
@@ -189,11 +201,12 @@ public class BookController {
             return result.error("400","failed");
         }
     }
-    //书籍详情，前端需要传查询书籍的isbn
-    public Result detail(@RequestBody Book book){
-        long n=book.getIsbn();
+    //书籍详情，前端需要传查询书籍的isbn,
+    // 前端路径为http://localhost:3000/books/9787532183562，9787532183562为isbn
+    @GetMapping("/{isbn}")
+    public Result detail(@PathVariable Long isbn){
         Result result=new Result();
-        return result.success(bookService.detailbook(n));
+        return result.success(bookService.detailbook(isbn));
     }//查询书籍详情
 //    @GetMapping ("/test")//按类型查询，没有进行分页
 //    public int selectbooknewest(@RequestBody Book book){
@@ -202,19 +215,21 @@ public class BookController {
 //        return 1;
 //    }
     @GetMapping("/newest")
-    //需要传入页数，页的大小，最新书籍
+    //需要传入页数，页的大小，向前端传回前50最新书籍
     public Result selectnewest(@RequestParam(defaultValue = "0") int page,
                                @RequestParam(defaultValue = "10") int size){
         Result result=new Result();
-        return result.success(bookService.newestbook(page,size));
+        return bookService.newestbook(page,size);
 //        return bookService.newestbook();
     }
 
     @GetMapping("/hotbook")
-    //传入页号和页的大小，热门书籍
+    //传入页号和页的大小，返回前50本热门书籍
     public Result selecthot(@RequestParam(defaultValue = "0") int page,
                             @RequestParam(defaultValue = "10") int size){
         Result result=new Result();
-        return result.success(bookService.hotbook(page,size));
+        return bookService.hotbook(page,size);
     }
+
+//
 }

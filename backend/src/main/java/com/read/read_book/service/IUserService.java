@@ -17,7 +17,7 @@ public interface IUserService extends IService<User> {
 
     public Result login(String email, String password);//登录
 
-    public Map<String, String> register(String username, String password, String confirmedPassword);
+    public Result register(String username, String password, String confirmedPassword);
 
     public Result updateuser(User user);//修改用户信息
 

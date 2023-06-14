@@ -1,6 +1,6 @@
 package com.read.read_book.service;
-
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.read.read_book.common.Result;
 import com.read.read_book.dto.bookpage;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.BookBooktype;
@@ -20,10 +20,10 @@ public interface BookService {
 //    public List<BookBooktype> adminselbooktype(String booktypename);//管理员根据类型查询
 
     //热门书籍
-    Page<Book> hotbook(int page,int size);
+    Result hotbook(int page, int size);
 
     //最新书籍,只取前50本
-   Page<Book> newestbook(int page,int size);
+   Result newestbook(int page,int size);
 
     //个性推荐书籍 (?推荐)
 
@@ -49,11 +49,17 @@ public interface BookService {
 //    public Page<Book> bookpagebyisbn(bookpage bookpage);//按isbn查询，分页
 
 //    public Page<Book> bookpagebyBookall(bookpage bookpage);//按三者结合查询，分页
-    public List<BookBooktype> adminselbooktype(String booktypename);//管理员根据类型查询
+//    public List<BookBooktype> adminselbooktype(String booktypename);//管理员根据类型查询
 
     public Page<Book> bookpagebyall(int page,int size,Object text);//分页最终版，按三者查询分页
 
 
 
     public Page<Booktype> pagebytype(int page,int size,String type);//管理员查询分类分页
+
+
+    public Page<Booktype> sepagebytype(int page,int size,String type,Object text);
+
+//    public Page<BookBooktype> pagetest(int page,int size, String type);
+
 }

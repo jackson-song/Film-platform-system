@@ -8,6 +8,7 @@ import com.read.read_book.dto.logindto;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.User;
 import com.read.read_book.dto.Userpass;
+import com.read.read_book.pojo.register;
 import com.read.read_book.service.IUserService;
 import com.read.read_book.session.GetSession;
 import jakarta.servlet.http.HttpServletRequest;
@@ -83,13 +84,14 @@ public class IUserController {
 
     //注册
     @PostMapping("/register")
-    public Map<String, String> register(@RequestParam Map<String, String> map) {
+    public Result register(@RequestBody register register) {
 //        System.out.println("接收到map" + map);
-        String email = map.get("email");
-        String password = map.get("password");
-        String confirmedPassword = map.get("password_confirm");
+        String email = register.getEmail();
+        String password = register.getPwd();
+        String confirmedPassword = register.getConfirmedPassword();
+        Result result=new Result();
 //        System.out.println(username + " " + password + confirmedPassword);
-        return iUserService.register(email, password, confirmedPassword);
+        return result.success(iUserService.register(email, password, confirmedPassword));
     }
 
     @PostMapping("/upuser")

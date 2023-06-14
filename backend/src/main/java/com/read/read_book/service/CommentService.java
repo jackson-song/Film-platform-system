@@ -16,10 +16,11 @@ public interface CommentService {
     public Page<Comment> getCommentByUserid(int page,int size,Integer userid);
 //
 //    //热门书评
-    Page<Comment> hotcomment(int page,int size);
+    Result hotcomment(int page,int size);
 //
 //    //最新书评
-    Page<Comment> newestbook(int page,int size);
+    Result newestbook(int page,int size);
+
 //
 //    //发表评论
     public Result postComment(Integer userid, Long ISBN, Integer rate, String content);
