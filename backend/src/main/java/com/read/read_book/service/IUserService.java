@@ -1,14 +1,11 @@
 package com.read.read_book.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.read.read_book.common.Result;
-import com.read.read_book.pojo.Book;
+import com.read.read_book.dto.Checkcodedto;
+import com.read.read_book.dto.Recoverpwddto;
+import com.read.read_book.dto.Userdto;
 import com.read.read_book.pojo.User;
-import jakarta.servlet.http.HttpServletRequest;
-
-import java.util.List;
-import java.util.Map;
 
 public interface IUserService extends IService<User> {
     public User  getbyemail(String email);//用户查看个人信息
@@ -29,7 +26,15 @@ public interface IUserService extends IService<User> {
 
     public int thaw(int userid);//解冻
 
+    Result sendmail(String email);
+    Result checkcode(Checkcodedto checkcodedto);
 
+    Result recoverpwd(Recoverpwddto recoverpwddto);
+
+    //注册
+    Result registertest(String email);
+
+    Result register3(String email, String password, String confirmedPassword);
 //    int thaw(int userid);
 }
 

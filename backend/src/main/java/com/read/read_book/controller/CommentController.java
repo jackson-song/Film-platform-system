@@ -60,8 +60,8 @@ public class CommentController {
     }
     //用户自己的评论评分
     @GetMapping("/mycomment")//get路径为http://localhost:3000/comments?page=?&size=?&email=???前端传入的数据为页面page，页的大小，emial
-    public Result seluserment(@RequestParam int page,
-                              @RequestParam int size,
+    public Result seluserment(@RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "10") int size,
                               @RequestParam int userid){
         System.out.println(userid);
         System.out.println(page);

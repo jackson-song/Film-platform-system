@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.read.read_book.Mapper.UserMapper;
 import com.read.read_book.common.Result;
+import com.read.read_book.config.AuthAccess;
+import com.read.read_book.dto.Checkcodedto;
+import com.read.read_book.dto.Recoverpwddto;
 import com.read.read_book.dto.logindto;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.User;
@@ -11,6 +14,8 @@ import com.read.read_book.dto.Userpass;
 import com.read.read_book.pojo.register;
 import com.read.read_book.service.IUserService;
 import com.read.read_book.session.GetSession;
+import io.micrometer.common.util.StringUtils;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,11 +89,12 @@ public class IUserController {
 
     //注册
     @PostMapping("/register")
+    //这个注册是没有使用邮箱验证的，下面有一个使用邮箱验证的注册
     public Result register(@RequestBody register register) {
 //        System.out.println("接收到map" + map);
         String email = register.getEmail();
         String password = register.getPwd();
-        String confirmedPassword = register.getConfirmedPassword();
+        String confirmedPassword = register.getConfirmedPwd();
         Result result=new Result();
 //        System.out.println(username + " " + password + confirmedPassword);
         return result.success(iUserService.register(email, password, confirmedPassword));
@@ -160,6 +166,60 @@ public class IUserController {
             return result.error("400","failed");
         }
     }
+
+
+    @AuthAccess
+    @GetMapping("/getemail")
+    //找回密码第一步，先让用户按下获取验证码，发送验证码，前端需要传用户的email
+    public  Result endemail(@RequestBody Checkcodedto checkcodedto){
+        Result result=new Result();
+        if(StringUtils.isBlank(checkcodedto.getEmail())) {
+            result.error("400","参数错误");
+        }
+        return iUserService.sendmail(checkcodedto.getEmail());
+    }
+    @AuthAccess
+    @PostMapping("/checkcode")
+    //找回密码第二步，用户输入验证码，核实验证码是否正确，前端需要传的数据为邮箱email和验证码code
+    public Result sendEmailCode(@RequestBody Checkcodedto checkcodedto) throws MessagingException {
+       Result result=new Result();
+        if(StringUtils.isBlank(checkcodedto.getEmail())) {
+            result.error("500","系统错误");
+        }
+      return iUserService.checkcode(checkcodedto);
+    }
+
+    @PostMapping("/confirmpwd")
+    //找回密码第三步，重新设置密码，相当于修改密码，前端需要传邮箱email，新密码pwd，再次确认密码confirmpwd
+    public Result confirmpwd(@RequestBody Recoverpwddto recoverpwddto){
+        return iUserService.recoverpwd(recoverpwddto);
+    }
+
+
+    @GetMapping ("/register1")
+    public Result register1(@RequestBody register register)
+    //注册第一步，首先需要输入自己的邮箱号然后点击获取验证码，
+    // 第二步然后输入验证码，利用上面核实的方法进行验证码的核验
+    {
+//        System.out.println("接收到map" + map);
+        String email = register.getEmail();
+        String password = register.getPwd();
+        String confirmedPassword = register.getConfirmedPwd();
+        Result result=new Result();
+        return iUserService.registertest(email);
+    }
+
+
+    @PostMapping("/register3")
+    //注册第三步，输入注册密码Pwd和确认密码ConfirmedPwd
+    public Result register3(@RequestBody register register) {
+        String email = register.getEmail();
+        String password = register.getPwd();
+        String confirmedPassword = register.getConfirmedPwd();
+        Result result=new Result();
+        return iUserService.register3(email, password, confirmedPassword);
+    }
+
 }
 
 

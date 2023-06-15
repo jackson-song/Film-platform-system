@@ -12,9 +12,10 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class loginstastic {
-    Integer times;
+public class loginstastic  //近一周内每一天的登录人数（活跃人数）
+{
+    Integer times;//次数
 //    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
-    Date logintime;
+    Date logintime;//近一周时间
 }

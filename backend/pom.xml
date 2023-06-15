@@ -78,6 +78,18 @@
             <version>6.0.9</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.3.5</version>
+        </dependency>
+
+
         <!-- 强制登陆,先别配置,最后再配置 -->
         <!-- 默认用户名 user 密码每次启动会重新生成 在控制台自动输出可以查看 -->
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
