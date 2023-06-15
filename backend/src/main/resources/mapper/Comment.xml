@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.read.read_book.Mapper.CommentMapper">
+    <update id="updatecomment">
+        update comment
+        <set>
+            <if test="rate !=null">
+                rate= #{rate},
+            </if>
+
+            <if test="comment !=null">
+                comment= #{comment},
+            </if>
+        </set>
+        <where>
+            userid =#{userid} and ISBN =#{isbn}
+        </where>
+    </update>
+</mapper>

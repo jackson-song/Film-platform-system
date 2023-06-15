@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Film-platform-system">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/backend/src/main/java" />
+      <root url="file://$PROJECT_DIR$/backend/src/test/java" />
+    </SOURCES>
+  </library>
+</component>
