@@ -89,9 +89,9 @@ export default {
     }
     return {
       ruleForm: {
+        email: '',
         password: '',
         password_confirm: '',
-        email: '',
         type: []
       },
       rules: {
@@ -110,6 +110,20 @@ export default {
       }
     }
   },
+  // created () {
+  //   axios.post(
+  //     '/users/register',
+  //     {
+  //       email: '123',
+  //       password: this.ruleForm.password,
+  //       password_confirm: 12323
+  //     }).then(response => {
+  //     console.log(response.data)
+  //     return response.data
+  //   }, error => {
+  //     console.log(error)
+  //   })
+  // },
   methods: {
     // submit () {
     //   axios({
@@ -128,22 +142,26 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           axios.post(
-            '/api/user/account/register/',
+            '/users/register',
             {
               email: this.ruleForm.email,
-              password: this.ruleForm.password,
-              password_confirm: this.ruleForm.password_confirm
+              pwd: this.ruleForm.password,
+              confirmedPassword: this.ruleForm.password_confirm
             }
-            //   {
-            //     headers: {
-            //       'Content-Type': 'application/x-www-form-urlencoded'
-            //     },
-            //     withCredentials: true
-            //   }).then(response => {
-            //   console.log(response.data)
-            // }
-          )
-
+          //   {
+          //     headers: {
+          //       'Content-Type': 'application/x-www-form-urlencoded'
+          //     },
+          //     withCredentials: true
+          //   }).then(response => {
+          //   console.log(response.data)
+          // }
+          ).then(response => {
+            console.log(response.data)
+            return response.data
+          }, error => {
+            console.log(error)
+          })
           alert('submit!')
           Message.success('成功注册')
           this.$router.push('/')

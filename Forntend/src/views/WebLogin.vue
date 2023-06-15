@@ -117,23 +117,30 @@ export default {
               email: this.ruleForm.email,
               pwd: this.ruleForm.password
               // password_confirm: this.ruleForm.password_confirm
-            })
-          // axios.get({
-          //   url:'/users/get',
-          //
-          // })
-          alert('submit!')
-          Message.success('成功登录')
-          this.$router.push('/')
+            }).then(res => res.data).then(res => {
+            console.log(res)
+            if (res.code === '200') {
+              // 存储
+              sessionStorage.setItem('CurUser', JSON.stringify(res.data))
+              // // console.log(res.data.menu)
+              // this.$store.commit('setMenu', res.data.menu)
+              // 跳转到主页
+              // window.sessionStorage.setItem('isLogin', 'true')
+              // this.$store.dispatch('asyncUpdateUser', {email: this.ruleForm.email})
+              Message.success('登录成功')
+              this.$router.replace('/book-final-update')
+            } else {
+              this.confirm_disabled = false
+              Message.error('校验失败，邮箱或密码错误！')
+              return false
+            }
+          })
         } else {
-          Message.error('失败登录')
-          console.log('error submit!!')
+          this.confirm_disabled = false
+          console.log('校验失败')
           return false
         }
       })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   }
 }

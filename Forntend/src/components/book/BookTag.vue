@@ -21,8 +21,9 @@
         :key="index"
         class="aside-item"
         :class="{'book-active-subtag-item': subTag === currentBookTag}"
-        @click="changeCurrentBookTag(subTag)"
+        @click="updateSearch(subTag)"
       >
+<!--        @click="changeCurrentBookTag(subTag)"-->
         {{subTag}}
       </li>
     </ul>
@@ -30,8 +31,25 @@
 </template>
 
 <script>
+// import BookTest from './BookTest.vue'
 export default {
   name: 'BookTag',
+  data () {
+    return {
+      currentPage: 0,
+      slideDirection: 'right',
+      contentPosition: null,
+      loadPrompt: false,
+      showPrompt: false,
+      promptStyle: null,
+      currentBookPrompt: null,
+      tableData: [],
+      total: 0,
+      page: 1,
+      size: 2,
+      input: ''
+    }
+  },
   computed: {
     bookTags () {
       return this.$store.state.book.bookTags
@@ -48,6 +66,26 @@ export default {
   },
 
   methods: {
+    updateSearch (subTag) {
+      // BookTest.search()
+      this.changeCurrentBookTag(subTag)
+      // doSearch()
+      // // BookTest.methods.search(this.page, this.size, this.currentBookTag)
+      // function doSearch () {
+      console.log(this.currentBookTag)
+      fetch('http://localhost:3000/books/pagebytype?page=1&size=10&type=' + this.currentBookTag)
+        .then(res => res.json()).then(res => {
+          console.log(res)
+          this.tableData = res.data.records
+          this.total = res.data.total
+          // return res.data().records
+        })
+    },
+
+    // BookTest.methods.search(this.currentBookTag)
+    // doSearch(){
+    // }
+
     changeCurrentBookTags (tags) {
       this.$store.commit('SET_CURRENT_BOOK_TAGS', tags)
       this.$store.commit('SET_CURRENT_BOOK_TAG', tags.subTags[0])

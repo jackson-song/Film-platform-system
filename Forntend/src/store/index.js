@@ -22,10 +22,10 @@ const moduleTypes = [
     backgroundColor: '#f6f6f1',
     subTypes: [{
       text: '按标签分类',
-      path: 'book-tag'
+      path: 'book-final'
     }, {
-      text: '按类型分类',
-      path: 'book-type'
+      text: '热门书籍',
+      path: 'book-hot'
     }]
   }
   /*

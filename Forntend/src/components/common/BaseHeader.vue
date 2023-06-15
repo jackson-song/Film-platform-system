@@ -13,7 +13,9 @@
 
       <div class="search-target">
         <form class="search-form">
-          <input
+<!--          <el-input style="width: 200px" v-model="input"  suffix-icon="el-icon-search" placeholder="书名、作者、ISBN"></el-input>-->
+<!--          <el-button class="ml-5" type="primary" @click="Test.load">搜索</el-button>-->
+<!--          <input
             type="text"
             class="search-input"
             :placeholder="currentModuleType.placeholder"
@@ -21,12 +23,15 @@
             @blur="onInputBlur()"
             @focus="onInputFocus()"
           />
+
           <input
             type="submit"
             value="搜索"
             class="search-submit"
             :class="currentModuleType.searchIcon"
-          />
+          />-->
+<!--          <p>{{ user.username }}</p>-->
+<!--          <p>{{ user.username }}</p>-->
         </form>
 
         <ul
@@ -70,16 +75,18 @@
               >
                 {{item.genres.join()}}
               </p>
+
             </a>
           </li>
         </ul>
       </div>
-
+<!--      <span>{{$store.getters.getUser.email}}</span>-->
       <ul class="module-list">
         <li v-for="type in moduleTypes"
             :key="type.value">
           <span>{{type.text}}</span>
           <div class="outer-more-module">
+
             <div class="inner-more-module">
               <router-link v-for="subType in type.subTypes"
                            class="more-module-link"
@@ -91,30 +98,52 @@
           </div>
         </li>
       </ul>
-    </div>
-    <div class="element-button">
-      <el-button  icon="el-icon-user-solid" circle @click="login">登录</el-button>
-      <el-button  icon="el-icon-user-solid" circle @click="register">注册</el-button>
-      <el-button  icon="el-icon-s-home" circle @click="handle">用户信息</el-button>
+
     </div>
 
+    <div class="element-button">
+      <div>
+        <el-dropdown>
+      <span>游客访问</span><i class="el-icon-arrow-down" style="margin-left: 5px"></i>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item @click.native="login">登录</el-dropdown-item>
+        <el-dropdown-item @click.native="register">注册</el-dropdown-item>
+<!--        <el-dropdown-item >个人中心</el-dropdown-item>-->
+<!--        <el-dropdown-item>退出登录</el-dropdown-item>-->
+      </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+<!--      <span>{{ user.username }}</span>-->
+
+<!--      <el-button  icon="el-icon-user-solid" circle @click="login">登录</el-button>-->
+<!--      <el-button  icon="el-icon-user-solid" circle @click="register">注册</el-button>-->
+<!--      <el-button  icon="el-icon-s-home" circle @click="handle">用户信息</el-button>-->
+    </div>
+
+<!--    <span>{{ user.username }}</span>-->
   </div>
 
 </template>
 
 <script>
+import Test from '../book/Test.vue'
 export default {
   name: 'BaseHeader',
   data () {
     return {
+      user: JSON.parse(sessionStorage.getItem('CurUser')),
       keyword: '',
       isFocusOnInput: false,
       isFocusOnList: false,
-      timer: 0
+      timer: 0,
+      input: ''
     }
   },
 
   computed: {
+    Test () {
+      return Test
+    },
     moduleTypes () {
       return this.$store.state.moduleTypes
     },
