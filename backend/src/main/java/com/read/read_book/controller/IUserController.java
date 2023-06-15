@@ -94,7 +94,7 @@ public class IUserController {
 //        System.out.println("接收到map" + map);
         String email = register.getEmail();
         String password = register.getPwd();
-        String confirmedPassword = register.getConfirmedPwd();
+        String confirmedPassword = register.getConfirmedpwd();
         Result result=new Result();
 //        System.out.println(username + " " + password + confirmedPassword);
         return result.success(iUserService.register(email, password, confirmedPassword));
@@ -192,6 +192,7 @@ public class IUserController {
     @PostMapping("/confirmpwd")
     //找回密码第三步，重新设置密码，相当于修改密码，前端需要传邮箱email，新密码pwd，再次确认密码confirmpwd
     public Result confirmpwd(@RequestBody Recoverpwddto recoverpwddto){
+
         return iUserService.recoverpwd(recoverpwddto);
     }
 
@@ -199,25 +200,37 @@ public class IUserController {
     @GetMapping ("/register1")
     public Result register1(@RequestBody register register)
     //注册第一步，首先需要输入自己的邮箱号然后点击获取验证码，
-    // 第二步然后输入验证码，利用上面核实的方法进行验证码的核验
     {
 //        System.out.println("接收到map" + map);
         String email = register.getEmail();
         String password = register.getPwd();
-        String confirmedPassword = register.getConfirmedPwd();
+        String confirmedPassword = register.getConfirmedpwd();
         Result result=new Result();
         return iUserService.registertest(email);
     }
 
 
     @PostMapping("/register3")
-    //注册第三步，输入注册密码Pwd和确认密码ConfirmedPwd
+    //注册第二步，输入注册密码Pwd和确认密码ConfirmedPwd，验证码code,email
     public Result register3(@RequestBody register register) {
+        Checkcodedto checkcodedto=new Checkcodedto();
         String email = register.getEmail();
         String password = register.getPwd();
-        String confirmedPassword = register.getConfirmedPwd();
-        Result result=new Result();
-        return iUserService.register3(email, password, confirmedPassword);
+        String confirmedPassword = register.getConfirmedpwd();
+        System.out.println(password);
+        System.out.println(confirmedPassword);
+        checkcodedto.setCode(register.getCode());
+        checkcodedto.setEmail(email);
+        System.out.println(checkcodedto);
+        Result result=iUserService.checkcode(checkcodedto);
+        System.out.println(iUserService.checkcode(checkcodedto));
+        System.out.println(result.getCode());
+        System.out.println(result.getCode().equals("200"));
+         if (result.getCode().equals("200")){
+        return iUserService.register3(email, password, confirmedPassword);}
+         else {
+             return result.error("400","验证码出错");
+         }
     }
 
 }

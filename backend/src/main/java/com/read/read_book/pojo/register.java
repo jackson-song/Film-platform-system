@@ -14,5 +14,6 @@ public class register {
 //    @Pattern(regexp="^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$",message = "密码必须是6~18位之间的数字或字母")
 
     String pwd;
-    String confirmedPwd;
+    String confirmedpwd;
+    String code;
 }

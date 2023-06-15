@@ -373,7 +373,7 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
                 calendar.add(Calendar.MINUTE, 5);
                 Date newDate = calendar.getTime();
                 validationService.saveCode(email, code, ValidationEnum.register.getCode(), newDate);
-                if (validationService.saveCode(email, code, ValidationEnum.Forget.getCode(), newDate) != 0) {
+                if (validationService.saveCode(email, code, ValidationEnum.register.getCode(), newDate) != 0) {
                     return result.success();
                 } else {
                     return result.error("500", "发送验证码失败");
@@ -390,7 +390,7 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         if (email == null) {
             return result.error("400", "邮箱不能为空");
         }
-        if (password == null || confirmedPassword == null) {
+        if (StringUtils.isBlank(password)||StringUtils.isBlank(confirmedPassword)) {
             return result.error("400", "密码不能为空");
 //            return map;
         }
