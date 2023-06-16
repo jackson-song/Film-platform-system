@@ -280,6 +280,10 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
     public Result checkcode(Checkcodedto checkcodedto) //核实验证码
     {
         Result result=new Result();
+        if(StringUtils.isBlank(checkcodedto.getCode())){
+            return result.error("400","请输入验证码，如未获取验证码请先获取验证码");
+        }
+        else{
         String email=checkcodedto.getEmail();
         QueryWrapper<Validation> wrapper = new QueryWrapper<>();
         wrapper.eq("email",email).and(w -> w.eq("code",checkcodedto.getCode()));
@@ -297,7 +301,7 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         }else {
             return  result.error("400","faild");
                 }
-            }
+            }}
 
     @Override
     public Result recoverpwd(Recoverpwddto recoverpwddto) {
