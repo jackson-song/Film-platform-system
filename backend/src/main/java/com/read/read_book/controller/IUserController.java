@@ -97,7 +97,7 @@ public class IUserController {
         String confirmedPassword = register.getConfirmedpwd();
         Result result=new Result();
 //        System.out.println(username + " " + password + confirmedPassword);
-        return result.success(iUserService.register(email, password, confirmedPassword));
+    return iUserService.register(email, password, confirmedPassword);
     }
 
     @PostMapping("/upuser")
@@ -169,7 +169,7 @@ public class IUserController {
 
 
     @AuthAccess
-    @GetMapping("/getemail")
+    @PostMapping("/getemail")
     //找回密码第一步，先让用户按下获取验证码，发送验证码，前端需要传用户的email
     public  Result endemail(@RequestBody Checkcodedto checkcodedto){
         Result result=new Result();
@@ -197,7 +197,7 @@ public class IUserController {
     }
 
 
-    @GetMapping ("/register1")
+    @PostMapping ("/register1")
     public Result register1(@RequestBody register register)
     //注册第一步，首先需要输入自己的邮箱号然后点击获取验证码，
     {

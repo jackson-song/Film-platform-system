@@ -22,7 +22,7 @@ public class CommentController {
     CommentService commentService;
 //
     // 书的所有评论,已经实现分页，前端主要传的数据为页数Page和页的大小size,还有isbn
-    @GetMapping("BookComment")
+    @GetMapping("/BookComment")
     public Result getBookByBookname(@RequestParam(defaultValue = "0") int page,
                                            @RequestParam(defaultValue = "10") int size,
                                            @RequestParam Long isbn) {
@@ -30,6 +30,13 @@ public class CommentController {
         return result.success(commentService.getCommentByISBN(page, size, isbn));
     }
 
+
+    @GetMapping("/usercomment")
+    //根据用户和书名查询用户的评论，用户对应这一本书的评论，前端需要传的数据为userid和isbn
+    public  Result getcommentbyidandisbn(@RequestBody  Comment comment){
+        Result result=new Result();
+       return result.success(commentService.commentbyuseridandisbn(comment)) ;
+    }
     // 用户的所有评论，已经实现分页，前端需要上传的数据为页号，
     @GetMapping("/allComment")
     public Result getCommentByUserid(@RequestParam int page,
@@ -40,8 +47,8 @@ public class CommentController {
     }
 //
 //
-    // 用户发表评论，发表评论，前端需要传的参数为用户号userid,书籍ISBN,评分rate,评语content
-    @PostMapping   ("/post")
+    // 用户发表评论，发表评论，前端需要传的参数为用户号userid,用户名username，书籍ISBN,评分rate,评语content
+    @PostMapping   ("/posts")
     public Result postComment(@RequestBody Comment comment) {
         System.out.println(comment);
         Integer userid = comment.getUserid();
@@ -49,13 +56,14 @@ public class CommentController {
         Integer rate = comment.getRate();
         String content = comment.getComment();
         Date commentdate = new Date();
+        String username= comment.getUsername();
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 //        System.out.println(formatter.format(date));
 //        System.out.println(username + " " + password + confirmedPassword);
 //        user_id,ISBN,rate,comment,comment_time
 //        Comment comment = new Comment(,commentdate);
 //        System.out.println(comment);
-        return commentService.postComment(userid,ISBN,rate,content);
+        return commentService.postComment(userid,ISBN,rate,content,username);
 //        return commentService.register(email, password, confirmedPassword);
     }
     //用户自己的评论评分

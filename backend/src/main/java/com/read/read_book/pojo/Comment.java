@@ -23,4 +23,5 @@ public class Comment {
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
     Date commenttime;
     Long likeing;
+    String username;
 }

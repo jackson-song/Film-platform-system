@@ -23,7 +23,7 @@ public interface CommentService {
 
 //
 //    //发表评论
-    public Result postComment(Integer userid, Long ISBN, Integer rate, String content);
+    public Result postComment(Integer userid, Long ISBN, Integer rate, String content,String username);
 
     //修改评论
     public Integer udcomment(Comment comment);
@@ -37,4 +37,5 @@ public interface CommentService {
     //查询个人书评
     public Page<Comment> seluserment(int pagenum,int size,int userid);
 
+    public Comment commentbyuseridandisbn(Comment comment);
 }
