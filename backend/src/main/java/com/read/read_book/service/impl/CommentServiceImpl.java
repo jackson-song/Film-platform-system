@@ -86,7 +86,7 @@ public class CommentServiceImpl implements CommentService {
 
     // 发表评论
     @Override
-    public Result postComment(Integer userid, Long ISBN, Integer rate, String content) {
+    public Result postComment(Integer userid, Long ISBN, Integer rate, String content,String username) {
         Map<String,String> result = new HashMap<>();
         Result result1=new Result();
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
@@ -119,9 +119,11 @@ public class CommentServiceImpl implements CommentService {
        Comment comment=new Comment();
        comment.setIsbn(ISBN);
        comment.setUserid(userid);
+       comment.setUsername(username);
        comment.setComment(content);
        comment.setCommenttime(commentdate);
        comment.setRate(rate);
+       comment.setLikeing(0L);
 //       comment.setLikeing(0L);
         //插入数据库
         commentMapper.insert(comment);
@@ -152,6 +154,18 @@ public class CommentServiceImpl implements CommentService {
         System.out.println(wrapper);
         return commentMapper.selectPage(page1,wrapper);
     }
+
+    @Override
+    public Comment commentbyuseridandisbn(Comment comment) {
+        int userid=comment.getUserid();
+        long isbn=comment.getIsbn();
+        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+        wrapper.eq("userid",userid);
+        wrapper.eq("isbn",isbn);
+        System.out.println(userid+isbn);
+        return commentMapper.selectOne(wrapper);
+    }
+
 
     @Override//点赞
     public Integer likeing(Integer commentid) {

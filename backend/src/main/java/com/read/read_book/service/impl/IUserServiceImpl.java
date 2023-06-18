@@ -367,10 +367,9 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
                 message.setSentDate(now);
                 String code = RandomUtil.randomNumbers(4);
                 message.setSubject("用户注册验证");
-                message.setText("<b>尊敬的用户：</b><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您好，您本次注册的验证码是：\"\n" +
-                        "\"<b color=\\\"'red'\\\">\" " + code + "\"</b><br>\"\n" +
-                        "\"，有效期5分钟。请妥善保管，切勿泄露\"\n" +
-                        "————————————————\n");
+                message.setText("尊敬的用户：您好!您本次注册的验证码是："+
+                         code
+                        +"，有效期5分钟。请妥善保管，切勿泄露");
                 javaMailSender.send(message);
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(now);
