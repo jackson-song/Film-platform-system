@@ -37,5 +37,5 @@ public interface CommentService {
     //查询个人书评
     public Page<Comment> seluserment(int pagenum,int size,int userid);
 
-    public Comment commentbyuseridandisbn(Comment comment);
+    public Comment commentbyuseridandisbn(Integer userid,Long isbn);
 }

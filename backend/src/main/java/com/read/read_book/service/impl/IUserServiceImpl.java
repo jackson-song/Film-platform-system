@@ -319,8 +319,12 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         String email=recoverpwddto.getEmail();
         String confirmpwd=recoverpwddto.getConfirmpwd();
         if(pwd.equals(confirmpwd)){
-            userMapper.updatepwd(pwd,email);
-            return result.success();
+//            userMapper.updatepwd(email,pwd);
+            if(userMapper.updatepwd(pwd, email)!=0){
+            return result.success();}
+            else {
+                return result.error("400","密码修改失败");
+            }
         }else{
             return result.error("400","密码和确认密码输入不一致");
         }

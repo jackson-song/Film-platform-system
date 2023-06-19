@@ -156,9 +156,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment commentbyuseridandisbn(Comment comment) {
-        int userid=comment.getUserid();
-        long isbn=comment.getIsbn();
+    public Comment commentbyuseridandisbn(Integer userid,Long isbn) {
+//        int userid=comment.getUserid();
+//        long isbn=comment.getIsbn();
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
         wrapper.eq("userid",userid);
         wrapper.eq("isbn",isbn);

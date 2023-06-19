@@ -31,11 +31,12 @@ public class CommentController {
     }
 
 
-    @GetMapping("/usercomment")
+    @GetMapping("/usercomment/{userid}/{isbn}")
     //根据用户和书名查询用户的评论，用户对应这一本书的评论，前端需要传的数据为userid和isbn
-    public  Result getcommentbyidandisbn(@RequestBody  Comment comment){
+    //通过路径传参数，http://localhost:3000/comments/usercomment/1/9787506365437，这就是userid为1，isbn为9787506365437的书评
+    public  Result getcommentbyidandisbn(@PathVariable  Integer userid,@PathVariable Long isbn){
         Result result=new Result();
-       return result.success(commentService.commentbyuseridandisbn(comment)) ;
+       return result.success(commentService.commentbyuseridandisbn(userid, isbn)) ;
     }
     // 用户的所有评论，已经实现分页，前端需要上传的数据为页号，
     @GetMapping("/allComment")
