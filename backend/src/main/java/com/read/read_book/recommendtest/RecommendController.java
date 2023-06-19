@@ -38,8 +38,8 @@ public class RecommendController {
         for(Long t: userBasedRecommendBookIsbn) {
 //            QueryWrapper<Book> wrapper = new QueryWrapper<>();
 //            wrapper.eq(t);
-            Book tbook = bookMapper.selectbyisbn(t);
-            userBasedRecommendBook.add(tbook);
+//            Book tbook = bookMapper.selectbyisbn(t);//报错了
+//            userBasedRecommendBook.add(tbook);
         }
         // 查询热门书籍
         QueryWrapper<Book> wrapper = new QueryWrapper<>();

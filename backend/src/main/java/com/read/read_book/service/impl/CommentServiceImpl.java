@@ -83,6 +83,28 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    @Override
+    public Result commentbooknewest(Long isbn, int page, int size) {
+        Result result=new Result();
+        page=(page-1)*size;
+        int total=commentMapper.totalbook(isbn);
+        if(total>50){
+            return result.success(commentMapper.commentbooknewest(isbn,page,size),50);}
+        else {
+            return result.success(commentMapper.commentbooknewest(isbn,page,size),total);
+    }}
+
+    @Override
+    public Result commentbookhot(Long isbn, int page, int size) {
+        Result result=new Result();
+        page=(page-1)*size;
+        int total=commentMapper.totalbook(isbn);
+        if(total>50){
+            return result.success(commentMapper.commentbookhot(isbn,page,size),50);}
+        else {
+            return result.success(commentMapper.commentbookhot(isbn,page,size),total);}
+    }
+
 
     // 发表评论
     @Override

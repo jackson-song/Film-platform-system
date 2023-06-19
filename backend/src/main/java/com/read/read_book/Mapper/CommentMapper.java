@@ -24,12 +24,21 @@ public interface CommentMapper extends BaseMapper<Comment> {
 //    @Select("select *from comment where userid= #{userid} limit #{page},#{size}" )
 //    List selectpage(int userid,int page,int size);
     @Select("select *from (select *from comment order by commenttime desc limit 50)a limit #{page},#{size}")
-    List<Comment> commentnewest(Integer page,Integer size);
+    List<Comment> commentnewest(Integer page,Integer size);//全部评论的最新
 
     @Select("select *from (select *from comment order by likeing desc limit 50)a limit #{page},#{size}")
-    List<Comment> commenthot(Integer page,Integer size);
+    List<Comment> commenthot(Integer page,Integer size);//全部评论的热门
 
+
+    @Select("select *from (select *from comment where isbn=#{isbn} order by commenttime desc limit 50)a limit #{page},#{size}")
+    List<Comment> commentbooknewest(@Param("isbn") Long isbn,Integer page,Integer size);//全部评论的最新
+
+
+    @Select("select *from (select *from comment where isbn=#{isbn} order by likeing desc limit 50)a limit #{page},#{size}")
+    List<Comment> commentbookhot(@Param("isbn") Long isbn,Integer page,Integer size);//全部评论的最新
     @Select("select count(*) from comment ")
     Integer total();
+    @Select("select count(*) from comment where isbn =#{isbn}")
+    Integer totalbook(Long isbn);
 }
 

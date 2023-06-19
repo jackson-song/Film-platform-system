@@ -21,6 +21,11 @@ public interface CommentService {
 //    //最新书评
     Result newestbook(int page,int size);
 
+
+    Result commentbooknewest(Long isbn,int page,int size);//一本书籍内评论的最新
+
+    Result commentbookhot(Long isbn,int page,int size);//一本书籍内的热门评论
+
 //
 //    //发表评论
     public Result postComment(Integer userid, Long ISBN, Integer rate, String content,String username);

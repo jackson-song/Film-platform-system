@@ -97,6 +97,20 @@ public class CommentController {
         return commentService.hotcomment(page,size);
     }
 
+    @GetMapping("/bookhotcomment/{isbn}")//一本书籍中评论的最热评论
+    public Result bookhotcomment(@PathVariable Long isbn,@RequestParam(defaultValue = "0") int page,
+                             @RequestParam(defaultValue = "10") int size){
+        Result result=new Result();
+        return commentService.commentbookhot(isbn, page, size);
+    }
+
+    @GetMapping("/booknewest/{isbn}")//一本书籍中评论的最新评论
+    public Result booknewestcomment(@PathVariable Long isbn,@RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "10") int size){
+        Result result=new Result();
+        return commentService.commentbooknewest(isbn, page, size);
+    }
+
     @PutMapping//修改评论，前端必须要传修改的书籍的isbn和用户的userid，然后传修改的评分或评语
     public Result UDcomment(@RequestBody Comment comment){
         System.out.println(comment);
