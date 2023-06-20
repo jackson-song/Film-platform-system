@@ -25,8 +25,8 @@ public interface BookMapper extends BaseMapper<Book> {
     @Results({
             @Result(column = "isbn",property = "isbn"),
             @Result(column = "booktypeid",property = "booktypeid"),
-            @Result(column = "isbn",property = "book",javaType = Book.class,
-                    one=@One(select = "com.read.read_book.Mapper.BookMapper.selectbyISBN")
+            @Result(column = "isbn",property = "book",javaType = List.class,
+                    many=@Many(select = "com.read.read_book.Mapper.BookMapper.selectbyISBN")
             )
     })//根据typeid查找书籍，分类查找
     List<BookBooktype> selectbookbytype(@Param("booktypeid") int booktypeid);
@@ -43,7 +43,7 @@ public interface BookMapper extends BaseMapper<Book> {
 
 
     @Select("select *from book where isbn= #{isbn}")
-    List<Book> selectbyisbn(@Param("isbn") long isbn);
+    Book selectbyisbn(@Param("isbn") long isbn);
 
     @Select("select *from (select *from book order by ratnum desc limit 50)a limit #{page},#{size}")
     List<Book> selectpagebyhot(Integer page,Integer size);

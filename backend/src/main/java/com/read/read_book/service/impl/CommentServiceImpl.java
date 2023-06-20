@@ -5,16 +5,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.read.read_book.Mapper.BookMapper;
 import com.read.read_book.Mapper.CommentMapper;
+import com.read.read_book.Mapper.LikeingsMapper;
 import com.read.read_book.Mapper.UserMapper;
 import com.read.read_book.common.Result;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.Comment;
+import com.read.read_book.pojo.Likeings;
 import com.read.read_book.pojo.User;
 import com.read.read_book.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -28,6 +29,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     BookMapper bookMapper;
+
+    @Autowired
+    LikeingsMapper likeingsMapper;
 
     // 书籍所有评论
     @Override
@@ -197,4 +201,45 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.addlike(newlikeing,commentid);
     }
 
+
+    @Override//点赞
+    public Integer likeings(Integer commentid, Integer userid) {
+        if(likeingsMapper.getlike(userid,commentid)==null){
+            Likeings likeings=new Likeings();
+            likeings.setUserid(userid);
+            likeings.setCommentid(commentid);
+        Comment comment= commentMapper.secomment(commentid);
+        Long likeing=comment.getLikeing();
+        Long newlikeing=likeing+1;
+        likeingsMapper.insert(likeings);
+        return commentMapper.addlike(newlikeing,commentid);
+        }
+        else return 0;
+    }
+
+
+    @Override//解除点赞
+    public Integer Delikeing(Integer commentid,Integer userid) {
+            Comment comment= commentMapper.secomment(commentid);
+            Long likeing=comment.getLikeing();
+            Long newlikeing=likeing-1;
+            QueryWrapper<Likeings> wrapper = new QueryWrapper<>();
+            wrapper.eq("userid",userid);
+            wrapper.eq("commentid",commentid);
+            likeingsMapper.delete(wrapper);
+            return commentMapper.uplikeing(newlikeing,commentid);
+    }
+
+
+    @Override//查看用户是否点赞了
+    public Integer Selcomment(Integer commentid,Integer userid) {
+        int result;
+       if(likeingsMapper.getlike(userid,commentid)==null) {
+       result=0;
+       return result;
+       }else {
+           result=1;
+           return result;
+       }
+       }
 }

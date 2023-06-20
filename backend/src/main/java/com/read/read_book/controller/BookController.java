@@ -231,5 +231,30 @@ public class BookController {
         return bookService.hotbook(page,size);
     }
 
+
+    @PostMapping("/shelf/{userid}/{isbn}")//将书籍添加到书架，加入书架功能
+    public  Result addshelf(@PathVariable Integer userid,@PathVariable Long isbn){
+         return bookService.addshelf(userid, isbn);
+
+    }
+
+
+    @GetMapping("/shelf/{userid}")
+    //查询自己书架中的书籍，返回的data中的books为书籍的信息，这个放在个人信息页面中
+    //如果此用户对这一本书籍已经有书架了，则后端会给前端报500，并msg为这本书已经在您的书架中了，请注意查看书架
+    public Result selshelf(@PathVariable Integer userid){
+        System.out.println(userid);
+        return bookService.selshelf(userid);
+    }
+
+
+
+    @DeleteMapping("/shelf/{userid}/{isbn}")//删除书架中的书籍
+    public Result delshelf(@PathVariable Integer userid,@PathVariable Long isbn)
+    {
+        System.out.println(userid);
+        return bookService.delshelf(userid, isbn);
+    }
+
 //
 }

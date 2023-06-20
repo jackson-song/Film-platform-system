@@ -29,7 +29,7 @@ public interface BookService {
 
 
     //书籍详情 select * from book where isbn = isbn,也是后台查询书籍功能
-     List<Book> detailbook(Long isbn);
+     Book detailbook(Long isbn);
 
     //修改书籍信息,后台功能
     Integer Udbook(Book book);
@@ -59,6 +59,17 @@ public interface BookService {
 
 
     public Page<Booktype> sepagebytype(int page,int size,String type,Object text);
+
+    Result addshelf(Integer userid, Long isbn)
+    //添加这一本书籍到我的书架
+    ;
+
+    Result selshelf(Integer userid)
+    //查看我的书架
+    ;
+
+    Result delshelf(Integer userid, Long isbn)//从书架中移除书籍
+    ;
 
 //    public Page<BookBooktype> pagetest(int page,int size, String type);
 

@@ -40,5 +40,9 @@ public interface CommentMapper extends BaseMapper<Comment> {
     Integer total();
     @Select("select count(*) from comment where isbn =#{isbn}")
     Integer totalbook(Long isbn);
+
+
+    @Update("update comment set likeing =#{likeing} where commentid =#{commentid}")
+    Integer uplikeing(Long likeing,Integer commentid);
 }
 

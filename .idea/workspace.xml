@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ef76f59b-ecf6-4144-baeb-b3db2d6eef1d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/BookMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/BookMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/CommentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/CommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/recommendtest/RecommendController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/recommendtest/RecommendController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/BookService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/BookServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/CommentServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -288,7 +292,11 @@
       <workItem from="1686873769311" duration="870000" />
       <workItem from="1687049402961" duration="10213000" />
       <workItem from="1687100366021" duration="530000" />
-      <workItem from="1687134691699" duration="5569000" />
+      <workItem from="1687134691699" duration="10585000" />
+      <workItem from="1687159745375" duration="5615000" />
+      <workItem from="1687167709142" duration="893000" />
+      <workItem from="1687168631755" duration="102000" />
+      <workItem from="1687219659027" duration="2259000" />
     </task>
     <servers />
   </component>

@@ -2,9 +2,11 @@ package com.read.read_book.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.read.read_book.Mapper.BookMapper;
+import com.read.read_book.Mapper.BookshelfMapper;
 import com.read.read_book.Mapper.BooktypeMapper;
 //import com.read.read_book.Mapper.TypeMapper;
 import com.read.read_book.common.Result;
+import com.read.read_book.dto.Bookshelf;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.Booktype;
 import com.read.read_book.service.BookService;
@@ -21,6 +23,9 @@ public class BookServiceImpl implements BookService {
     BookMapper bookMapper;
     @Autowired
     BooktypeMapper booktypeMapper;
+
+    @Autowired
+    BookshelfMapper bookshelfMapper;
 
 //    @Autowired
 //    BookBooktypeMapper bookBooktypeMapper;
@@ -69,7 +74,7 @@ public class BookServiceImpl implements BookService {
     }//最新书籍
 
     @Override
-    public List<Book> detailbook(Long isbn) {
+    public Book detailbook(Long isbn) {
 
         return bookMapper.selectbyisbn(isbn);
     }
@@ -190,7 +195,53 @@ public class BookServiceImpl implements BookService {
 //        return booktypeMapper.selectPage(page1,wrapper);
 //    }
 
+    @Override
+    public Result addshelf(Integer userid, Long isbn)
+    //添加这一本书籍到我的书架
+    {
+        Result result=new Result();
+        Bookshelf bookshelf1=new Bookshelf();
+        QueryWrapper<Bookshelf> wrapper = new QueryWrapper<>();
+        wrapper.eq("userid",userid);
+        wrapper.eq("isbn",isbn);
+        bookshelfMapper.selectOne(wrapper);
+//        System.out.println(list.get(0));
+        if(bookshelfMapper.selectOne(wrapper)==null){
+        Bookshelf bookshelf=new Bookshelf();
+        bookshelf.setIsbn(isbn);
+        bookshelf.setUserid(userid);
+      if(bookshelfMapper.insert(bookshelf)!=0){
+            return  result.success();
+    }else {
+          return result.error("400","faild");
+      }}else return result.error("500","这本书已经在您的书架中了，请注意查看书架");
+}
 
+
+    @Override
+    public Result selshelf(Integer userid)
+    //查看我的书架
+    {
+        Result result=new Result();
+        if(bookshelfMapper.selbookshelf(userid)!=null){
+            System.out.println(bookshelfMapper.selbookshelf(userid));
+            return  result.success(bookshelfMapper.selbookshelf(userid));
+        }else {
+            return result.error("400","faild");
+        }
+    }
+    @Override
+    public  Result delshelf(Integer userid, Long isbn)//从书架中移除书籍
+    {
+        Result result=new Result();
+        QueryWrapper<Bookshelf> wrapper = new QueryWrapper<>();
+        wrapper.eq("userid",userid);
+        wrapper.eq("isbn",isbn);
+//        bookshelfMapper.delete(wrapper);
+        if(bookshelfMapper.delete(wrapper)!=0){
+            return result.success();
+        }else return result.error("400","faild");
+    }
 }
 
 

@@ -43,4 +43,14 @@ public interface CommentService {
     public Page<Comment> seluserment(int pagenum,int size,int userid);
 
     public Comment commentbyuseridandisbn(Integer userid,Long isbn);
+
+    //点赞
+    Integer likeings(Integer commentid, Integer userid);
+
+
+    //解除点赞
+    Integer Delikeing(Integer commentid, Integer userid);
+
+    //查看用户是否点赞了
+    Integer Selcomment(Integer commentid, Integer userid);
 }
