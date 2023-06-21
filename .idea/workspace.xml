@@ -7,14 +7,14 @@
     <list default="true" id="ef76f59b-ecf6-4144-baeb-b3db2d6eef1d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/BookMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/BookMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/BookshelfMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/BookshelfMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/Mapper/CommentMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/BookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/recommendtest/RecommendController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/recommendtest/RecommendController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/dto/Bookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/dto/Bookshelf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/BookServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/read/read_book/service/impl/CommentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/User.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,7 +296,8 @@
       <workItem from="1687159745375" duration="5615000" />
       <workItem from="1687167709142" duration="893000" />
       <workItem from="1687168631755" duration="102000" />
-      <workItem from="1687219659027" duration="2259000" />
+      <workItem from="1687219659027" duration="12569000" />
+      <workItem from="1687307682804" duration="5907000" />
     </task>
     <servers />
   </component>

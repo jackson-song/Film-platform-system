@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Bookshelf {
     Integer userid;
-    Long isbn;
+    long isbn;
     @TableField(exist = false)
-    private List<Book> books;
+    private Book books;
 }

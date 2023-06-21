@@ -78,8 +78,15 @@ public class CommentController {
         Result result=new Result();
         return result.success(commentService.seluserment(page, size, userid));
     }
-    @GetMapping("/newest")//最新书籍，前端传入页面号和页面大小，前50条
-    public Result newestcomment(@RequestParam(defaultValue = "0") int page,
+    @GetMapping("/newest")
+    //最全部书籍的最新书籍，前端传入页面号和页面大小，前50条,后端给前端传的内容包括		"isbn": 9787506365437,
+    //			"imgurl": "https://img1.doubanio.com/view/subject/s/public/s29053580.jpg",
+    //			"username": null,
+    //			"likeing": 300,
+    //			"comment": "hao",
+    //			"rate": 5,
+    //			"bookname": "活着"
+    public Result newestcomment(@RequestParam(defaultValue = "1") int page,
                                 @RequestParam(defaultValue = "10") int size)
     {
         System.out.println(page);
@@ -90,22 +97,22 @@ public class CommentController {
 
 
     @GetMapping("/hotcomment")
-    //热门书评,前端传入页面号和页面大小,后端返回分页点赞数高的评论在前,前50条
-    public Result hotcomment(@RequestParam(defaultValue = "0") int page,
+    //全部书籍的热门书评,前端传入页面号和页面大小,后端返回分页点赞数高的评论在前,前50条
+    public Result hotcomment(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size){
         Result result=new Result();
         return commentService.hotcomment(page,size);
     }
 
     @GetMapping("/bookhotcomment/{isbn}")//一本书籍中评论的最热评论
-    public Result bookhotcomment(@PathVariable Long isbn,@RequestParam(defaultValue = "0") int page,
+    public Result bookhotcomment(@PathVariable Long isbn,@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size){
         Result result=new Result();
         return commentService.commentbookhot(isbn, page, size);
     }
 
     @GetMapping("/booknewest/{isbn}")//一本书籍中评论的最新评论
-    public Result booknewestcomment(@PathVariable Long isbn,@RequestParam(defaultValue = "0") int page,
+    public Result booknewestcomment(@PathVariable Long isbn,@RequestParam(defaultValue = "1") int page,
                                  @RequestParam(defaultValue = "10") int size){
         Result result=new Result();
         return commentService.commentbooknewest(isbn, page, size);

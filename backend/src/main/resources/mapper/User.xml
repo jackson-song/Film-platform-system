@@ -18,16 +18,12 @@
                 age= #{age},
             </if>
 
-<!--            <if test="email !=null">-->
-<!--                email= #{email},-->
-<!--            </if>-->
             <if test="introduction !=null">
                 introduction= #{introduction}
             </if>
         </set>
         <where>
             email =#{email}
---             userid =#{userid}
         </where>
     </update>
 

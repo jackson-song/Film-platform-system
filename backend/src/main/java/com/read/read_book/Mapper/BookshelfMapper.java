@@ -14,8 +14,8 @@ public interface BookshelfMapper extends BaseMapper<Bookshelf> {
     @Results({
             @Result(column = "isbn",property = "isbn"),
             @Result(column = "userid",property = "userid"),
-            @Result(column = "isbn",property = "books",javaType = List.class,
-                    one=@One(select = "com.read.read_book.Mapper.BookMapper.SerachBookByISBN")
+            @Result(column = "isbn",property = "books",javaType = Book.class,
+                    one=@One(select = "com.read.read_book.Mapper.BookMapper.selectbyisbn")
             )
     })//根据typeid查找书籍，分类查找
     List<Bookshelf> selbookshelf(@Param("userid") int userid);

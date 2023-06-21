@@ -8,10 +8,7 @@ import com.read.read_book.Mapper.CommentMapper;
 import com.read.read_book.Mapper.LikeingsMapper;
 import com.read.read_book.Mapper.UserMapper;
 import com.read.read_book.common.Result;
-import com.read.read_book.pojo.Book;
-import com.read.read_book.pojo.Comment;
-import com.read.read_book.pojo.Likeings;
-import com.read.read_book.pojo.User;
+import com.read.read_book.pojo.*;
 import com.read.read_book.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,15 +77,19 @@ public class CommentServiceImpl implements CommentService {
         Result result=new Result();
         page=(page-1)*size;
         int total=commentMapper.total();
+
+        Commentunionbook commentunionbook=new Commentunionbook();
         if(total>50){
-        return result.success(commentMapper.commentnewest(page,size),50);}
+        return result.success(commentMapper.commentnewest(page,size),50);
+        }
         else {
             return result.success(commentMapper.commentnewest(page,size),total);
         }
     }
 
     @Override
-    public Result commentbooknewest(Long isbn, int page, int size) {
+    public Result commentbooknewest(Long isbn, int page, int size)//一本书的最新书评
+    {
         Result result=new Result();
         page=(page-1)*size;
         int total=commentMapper.totalbook(isbn);
@@ -99,7 +100,8 @@ public class CommentServiceImpl implements CommentService {
     }}
 
     @Override
-    public Result commentbookhot(Long isbn, int page, int size) {
+    public Result commentbookhot(Long isbn, int page, int size)//一本书的最热书评
+    {
         Result result=new Result();
         page=(page-1)*size;
         int total=commentMapper.totalbook(isbn);

@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -224,8 +225,14 @@ public class BookServiceImpl implements BookService {
     {
         Result result=new Result();
         if(bookshelfMapper.selbookshelf(userid)!=null){
-            System.out.println(bookshelfMapper.selbookshelf(userid));
-            return  result.success(bookshelfMapper.selbookshelf(userid));
+            Book booktest=new Book();
+            List<Book> book=new ArrayList<>();
+            List<Bookshelf> a=bookshelfMapper.selbookshelf(userid);
+            for(Bookshelf bookshelf: a){
+                System.out.println(bookshelf.getBooks());
+                book.add(bookshelf.getBooks());
+            }
+            return result.success(book);//书架中的书籍信息
         }else {
             return result.error("400","faild");
         }
