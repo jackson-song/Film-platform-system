@@ -1,7 +1,7 @@
 <template>
   <div>
   <h2>我的书架</h2>
-  <el-button type="primary" size="small" @click="openNestedDialog2">删除书架信息</el-button>
+<!--  <el-button type="primary" size="small" @click="openNestedDialog2">删除书架信息</el-button>
   <el-dialog title="删除书架信息" :visible.sync="dialogFormVisible2">
     <el-form :model="form2">
       <el-form-item label="isbn" :label-width="formLabelWidth" prop="isbn">
@@ -11,9 +11,9 @@
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialogFormVisible2 = false">取 消</el-button>
       <el-button type="primary" @click="dialogFormVisible2 = false;deleteShelf()">确 定</el-button>
-    </div>
-  </el-dialog>
-  <el-table :data="tableDataTest">
+  </el-dialog>-->
+
+  <el-table :data="tableDataTest" @row-click="deleteshelfUpdate">
     <el-table-column prop="imgurl"  label="封面" width="150">
       <template   slot-scope="scope">
         <img referrerpolicy="no-referrer"  :src="scope.row.imgurl"  min-width="170" height="170" :alt=scope.row.imgurl :title=scope.row.imgurl />
@@ -31,6 +31,12 @@
     </el-table-column>
     <el-table-column prop="bookgrading" label="评分" width="80">
     </el-table-column>
+    <el-table-column prop="delete" label="操作" width="80">
+      <template   slot-scope="scope">
+        <el-button type="text">删除</el-button>
+<!--        <img referrerpolicy="no-referrer"  :src="scope.row.imgurl"  min-width="170" height="170" :alt=scope.row.imgurl :title=scope.row.imgurl />-->
+      </template>
+    </el-table-column>
   </el-table>
   </div>
 </template>
@@ -43,6 +49,7 @@ export default {
   name: 'WebIndex',
   data () {
     return {
+      // isbn: this.$route.params.isbn,
       tableDataName: [],
       tableDataTest: [],
       user: JSON.parse(sessionStorage.getItem('CurUser')),
@@ -72,8 +79,19 @@ export default {
     // this.updatePassword()
   },
   methods: {
+    deleteshelfUpdate (row) {
+      const isbn = row.isbn
+      console.log(isbn)
+      axios.delete('http://localhost:3000/books/shelf/' + this.user.userid + '/' + isbn
+
+      ).then(response => {
+        return response.data
+      })
+      this.pushToIndex()
+    },
     deleteShelf () {
-      axios.delete('http://localhost:3000/books/shelf/' + this.user.userid + '/' + this.form2.isbn
+      // + '/' + this.form2.isbn
+      axios.delete('http://localhost:3000/books/shelf/' + this.user.userid + this.form2.isbn
 
       ).then(response => {
         return response.data
@@ -81,6 +99,11 @@ export default {
       this.pushToIndex()
     },
     shelfBook () {
+      /*       axios.get('http://localhost:3000/books/shelf/' + this.user.userid
+      ).then(response => {
+        this.tableDataTest = response.data
+        return response.data
+      }) */
       // console.log(this.user.userid)
       /*       axios.get('http://localhost:3000/books/shelf/' + this.user.userid
       ).then(res => {
