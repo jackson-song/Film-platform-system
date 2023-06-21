@@ -36,7 +36,7 @@
         <el-table-column label="操作">
         <template slot-scope="scope">
             <el-button @click="openEditUI(scope.row.isbn)" type="primary" round icon="el-icon-edit" size="mini">修改</el-button>
-            <el-button @click="deleteBook(scope.row)" type="danger" round icon="el-icon-plus" size="mini">删除</el-button>
+            <el-button @click="deleteBook(scope.row)" type="danger" round icon="el-icon-delete" size="mini">删除</el-button>
         </template>
       </el-table-column>
       </el-table>

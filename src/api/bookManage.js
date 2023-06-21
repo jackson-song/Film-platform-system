@@ -42,9 +42,16 @@ export default{
     },
     deleteBook(book){
         return request({
-            url: '/books',
-            method: 'delete',
-            data: book
+            url: '/books/'+book.isbn,
+            method: 'delete'
+        });
+    },
+    
+    addshelf(userid,isbn){
+        return request({
+            url: '/books/shelf/'+userid+'/'+isbn,
+            method: 'post'
         });
     }
 }
+  

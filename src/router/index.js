@@ -73,7 +73,13 @@ export const constantRoutes = [
         name: 'book',
         component: () => import('@/views/sys/book'),
         meta: { title: '书籍管理', icon: 'bookManage' }
-      }
+      },
+      // {
+      //   path: 'bookinfor',
+      //   name: 'bookinfor',
+      //   component: () => import('@/views/sys/bookinfor'),
+      //   meta: { title: '书籍详情', icon: 'bookManage' }
+      // },
     ]
   },
 
