@@ -53,7 +53,12 @@
               <el-button @click="openEditUI()" type="primary" round icon="el-icon-edit">评论评分</el-button>
             </div>
             <el-table align="center" :data="commentList" stripe style="width: 100%">
-              <el-table-column prop="userid" label="用户id" width="80">
+<!--              <el-table-column prop="userid" label="用户id" width="80">-->
+<!--              </el-table-column>-->
+              <el-table-column prop="username" label="用户姓名 " width="120">
+              </el-table-column>
+              <el-table-column prop="commenttime" label="评论时间" width="120">
+
               </el-table-column>
               <el-table-column prop="comment" label="评论" width="180">
               </el-table-column>
@@ -135,7 +140,9 @@ export default {
       },
       commentList: [],
       commentForm: {
+        commenttime: null,
         userid: null,
+        username: null,
         isbn: this.$route.params.isbn,
         likeing: 0
       },
@@ -152,6 +159,7 @@ export default {
   methods: {
     addshelf () {
       this.commentForm.userid = this.user.userid
+      this.commentForm.username = this.user.username
       bookApi.addshelf(this.commentForm.userid, this.commentForm.isbn).then(response => {
         if (response.code == 200) {
           this.$message.success('添加成功！')
@@ -165,6 +173,7 @@ export default {
 
     addcomment () {
       this.commentForm.userid = this.user.userid
+      this.commentForm.username = this.user.username
       this.$refs.commentFromRef.validate((valid) => {
         if (valid) {
           commentApi.postComment(this.commentForm).then(response => {
@@ -183,6 +192,7 @@ export default {
     },
     upDatacomment () {
       this.commentForm.userid = this.user.userid
+      this.commentForm.username = this.user.username
       this.$refs.commentFromRef.validate((valid) => {
         if (valid) {
           commentApi.UDcomment(this.commentForm).then(response => {
@@ -201,6 +211,7 @@ export default {
     },
     deletecomment () {
       this.commentForm.userid = this.user.userid
+      this.commentForm.username = this.user.username
       commentApi.decomment(this.commentForm.commentid).then(response => {
         if (response.code == 200) {
           this.$message.success('删除成功！')
@@ -257,6 +268,7 @@ export default {
     getcommentbyidandisbn () {
       // this.commentForm.userid
       this.commentForm.userid = this.user.userid
+      this.commentForm.username = this.user.username
       console.log(this.user.userid)
       commentApi.getcommentbyidandisbn(this.user.userid, this.commentForm.isbn).then(response => {
         if (response.data != null) {
