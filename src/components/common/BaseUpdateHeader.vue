@@ -186,7 +186,7 @@ export default {
       this.$router.replace('book-hot')
     },
     click4 () {
-      window.location.href = 'https://www.baidu.com'
+      window.location.href = 'http://localhost:8889/#/dashboard'
     },
     logout () {
       this.$confirm('确定退出吗？', '提示', {
