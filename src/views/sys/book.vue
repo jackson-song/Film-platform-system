@@ -63,6 +63,9 @@
         <el-form-item label="封面链接" :label-width="formLabelWidth" prop="imgurl">
           <el-input v-model="bookForm.imgurl" autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item label="书籍类型" v-if="bookForm.switch==0" :label-width="formLabelWidth" prop="imgurl">
+          <el-input v-model="bookForm.type" autocomplete="off"></el-input>
+        </el-form-item>
         <el-form-item label="作者" :label-width="formLabelWidth" prop="author">
           <el-input v-model="bookForm.author" autocomplete="off"></el-input>
         </el-form-item>
@@ -181,8 +184,8 @@ export default {
       },
       getBookList(){
         bookApi.getBookList(this.searchModel).then(response=>{
-          this.bookList=response.data.records;
-          this.total=response.data.total;
+          this.bookList=response.data;
+          this.total=response.total;
         });
       },
       openEditUI(isbn){
@@ -192,7 +195,7 @@ export default {
         }else{
           this.title='修改书籍信息';
           bookApi.getBookbyisbn(isbn).then(response =>{
-            this.bookForm=response.data.records[0];
+            this.bookForm=response.data[0];
             this.bookForm.switch=1;
           });
         }

@@ -96,7 +96,7 @@ export default {
       },
       getUser(){
         userApi.getUser(this.searchModel).then(response=>{
-          this.userList=response.data.records;
+          this.userList=response.data;
           this.total=response.data.total;
         });
       },

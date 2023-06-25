@@ -154,7 +154,7 @@ export default {
                 axisPointer: {type: 'shadow'}
             },
             title: {
-              text: "近一周内每一天的登录人数（活跃人数）",
+              text: "近一年每月的登录人数",
               top: "0%",
               left: "center"
             },
