@@ -4,12 +4,12 @@ import axios from 'axios'
 
 const bookTags = [
   {tagName: '全部', subTags: ['全部']},
-  {tagName: '文学', subTags: ['小说', '散文', '名著']},
-  {tagName: '流行', subTags: ['青春', '科幻', '言情', '武侠', '奇幻']},
-  {tagName: '文化', subTags: ['历史', '哲学', '电影', '回忆录']},
-  {tagName: '生活', subTags: ['旅行', '职场', '美食', '教育', '健康']},
-  {tagName: '经管', subTags: ['管理', '金融', '理财']},
-  {tagName: '科技', subTags: ['互联网', '编程', '神经网络']}
+  {tagName: '文学', subTags: ['小说', '散文', '名著', '日本文学', '随笔', '名著']},
+  {tagName: '流行', subTags: ['青春', '科幻', '武侠', '奇幻', '艺术', '电影']},
+  {tagName: '文化', subTags: ['历史', '哲学', '建筑', '推理', '电影', '回忆录']},
+  {tagName: '生活', subTags: ['旅行', '美食', '健康', '漫画', '美食', '励志']},
+  {tagName: '经管', subTags: ['管理', '金融', '经济学', '股票']},
+  {tagName: '科技', subTags: ['互联网', '编程', '算法']}
 ]
 
 const bookTypes = ['虚构类', '非虚构类']

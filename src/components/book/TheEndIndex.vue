@@ -181,17 +181,19 @@ export default {
     },
     getBookList () {
       bookApi.getBookList(this.searchbook).then(response => {
-        this.bookList.push({'a0': response.data.records[0]})
-        this.bookList[0]['a1'] = response.data.records[1]
-        this.bookList[0]['a1'] = response.data.records[1]
-        this.bookList[0]['a2'] = response.data.records[2]
-        this.bookList[0]['a3'] = response.data.records[3]
-        this.bookList[0]['a4'] = response.data.records[4]
-        this.bookList.push({'a0': response.data.records[5]})
-        this.bookList[1]['a1'] = response.data.records[6]
-        this.bookList[1]['a2'] = response.data.records[7]
-        this.bookList[1]['a3'] = response.data.records[8]
-        this.bookList[1]['a4'] = response.data.records[9]
+        // this.bookList.push({'a0': response.data.records[0]})
+        this.bookList.push({'a0': response.data[0]})
+        // this.bookList[0]['a1'] = response.data.records[1]
+        this.bookList[0]['a1'] = response.data[1]
+        // this.bookList[0]['a2'] = response.data.records[2]
+        this.bookList[0]['a2'] = response.data[2]
+        this.bookList[0]['a3'] = response.data[3]
+        this.bookList[0]['a4'] = response.data[4]
+        this.bookList.push({'a0': response.data[5]})
+        this.bookList[1]['a1'] = response.data[6]
+        this.bookList[1]['a2'] = response.data[7]
+        this.bookList[1]['a3'] = response.data[8]
+        this.bookList[1]['a4'] = response.data[9]
       })
     },
     cellClick (row) {

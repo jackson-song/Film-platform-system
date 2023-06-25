@@ -243,8 +243,10 @@ export default {
       // this.searchModel.Book = this.isbn
       // console.log(this.isbn)
       bookApi.getBookList(this.searchModel).then(response => {
-        this.bookForm = response.data.records[0]
-        this.total = response.data.total
+        // this.bookForm = response.data.records[0]
+        this.bookForm = response.data[0]
+        // this.total = response.data.total
+        this.total = response.total
       })
     },
     getCommentList () {

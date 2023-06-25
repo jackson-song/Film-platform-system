@@ -218,16 +218,20 @@ export default {
         fetch('http://localhost:3000/books/pageByBookalltest?page=' + this.page + '&size=' + this.size + '&text=' + this.input)
           .then(res => res.json()).then(res => {
           // console.log(res)
-            this.tableData = res.data.records
-            this.total = res.data.total
+          //   this.tableData = res.data.records
+            this.tableData = res.data
+            // this.total = res.data.total
+            this.total = res.total
           })
       } else {
+        // this.updateSearch()
         fetch('http://localhost:3000/books/pagebytype?page=' + this.page + '&size=' + this.size + '&type=' + this.currentBookTag)
-
           .then(res => res.json()).then(res => {
             // console.log(res)
             this.tableData = res.data.records
+            // this.tableData = res.data
             this.total = res.data.total
+          // this.total = res.total
           })
       }
     },
@@ -239,6 +243,8 @@ export default {
         .then(res => res.json()).then(res => {
         // console.log(res)
           this.tableData = res.data.records
+          // this.tableData = res.data
+          // this.total = res.total
           this.total = res.data.total
         })
     },
@@ -286,8 +292,10 @@ export default {
         fetch('http://localhost:3000/books/pageByBookalltest?page=' + this.page + '&size=' + this.size + '&text')
           .then(res => res.json()).then(res => {
           // console.log(res)
-            this.tableData = res.data.records
-            this.total = res.data.total
+          //   this.tableData = res.data.records
+            this.tableData = res.data
+            this.total = res.total
+            // this.total = res.data.total
           })
       } else {
         fetch('http://localhost:3000/books/pagebytype?page=' + this.page + '&size=' + this.size + '&type=' + this.currentBookTag)
