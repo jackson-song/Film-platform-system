@@ -204,7 +204,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
-    @Override//点赞
+    @Override//点赞，每个用户只能点赞一次
     public Integer likeings(Integer commentid, Integer userid) {
         if(likeingsMapper.getlike(userid,commentid)==null){
             Likeings likeings=new Likeings();
@@ -222,6 +222,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override//解除点赞
     public Integer Delikeing(Integer commentid,Integer userid) {
+        if(likeingsMapper.getlike(userid,commentid)!=null){
             Comment comment= commentMapper.secomment(commentid);
             Long likeing=comment.getLikeing();
             Long newlikeing=likeing-1;
@@ -229,7 +230,8 @@ public class CommentServiceImpl implements CommentService {
             wrapper.eq("userid",userid);
             wrapper.eq("commentid",commentid);
             likeingsMapper.delete(wrapper);
-            return commentMapper.uplikeing(newlikeing,commentid);
+            return commentMapper.uplikeing(newlikeing,commentid);}
+        else return 0;
     }
 
 

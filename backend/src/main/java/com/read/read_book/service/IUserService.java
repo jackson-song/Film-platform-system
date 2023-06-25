@@ -36,6 +36,9 @@ public interface IUserService extends IService<User> {
 
     Result register3(String email, String password, String confirmedPassword);
 //    int thaw(int userid);
+
+
+
 }
 
 

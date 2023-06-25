@@ -1,12 +1,9 @@
 package com.read.read_book.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.read.read_book.common.Result;
-import com.read.read_book.dto.bookpage;
 import com.read.read_book.pojo.Book;
-import com.read.read_book.pojo.BookBooktype;
 import com.read.read_book.pojo.Booktype;
 
-import java.io.Serializable;
 import java.util.List;
 
 public interface BookService {
@@ -51,7 +48,7 @@ public interface BookService {
 //    public Page<Book> bookpagebyBookall(bookpage bookpage);//按三者结合查询，分页
 //    public List<BookBooktype> adminselbooktype(String booktypename);//管理员根据类型查询
 
-    public Page<Book> bookpagebyall(int page,int size,Object text);//分页最终版，按三者查询分页
+    public List<Book> bookpagebyall(int page, int size, Object text);//分页最终版，按三者查询分页
 
 
 
@@ -73,4 +70,6 @@ public interface BookService {
 
 //    public Page<BookBooktype> pagetest(int page,int size, String type);
 
+
+    Result Booktypetest(String type ,Integer page,Integer size);//从booktype表中进行类别的查询，连表分页
 }

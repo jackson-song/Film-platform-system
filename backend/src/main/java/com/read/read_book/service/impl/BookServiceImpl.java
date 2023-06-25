@@ -5,11 +5,14 @@ import com.read.read_book.Mapper.BookMapper;
 import com.read.read_book.Mapper.BookshelfMapper;
 import com.read.read_book.Mapper.BooktypeMapper;
 //import com.read.read_book.Mapper.TypeMapper;
+import com.read.read_book.Mapper.TypeMapper;
 import com.read.read_book.common.Result;
 import com.read.read_book.dto.Bookshelf;
 import com.read.read_book.pojo.Book;
 import com.read.read_book.pojo.Booktype;
+import com.read.read_book.pojo.type;
 import com.read.read_book.service.BookService;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,9 @@ public class BookServiceImpl implements BookService {
     @Autowired
     BookshelfMapper bookshelfMapper;
 
+    @Autowired
+    TypeMapper typeMapper;
+
 //    @Autowired
 //    BookBooktypeMapper bookBooktypeMapper;
 
@@ -44,17 +50,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Result hotbook(int page, int size) {
-//        Page<Book> page1=new Page<>(page,size);
-//        QueryWrapper<Book> wrapper = new QueryWrapper<>();
-//        wrapper.orderByDesc("ratnum");
-////        Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50")
-////        wrapper.like("Bookname",text).or().like("author", text).or().like("isbn",text);
-////        List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50"));
-////       return page1.setRecords(bookMapper.selectList(wrapper).subList(0, 20));
-//        wrapper.last("LIMIT " + (10 - 1) + "," + 10); // 修改limit参数为offset参数 // 使用last方法添加自定义的SQL语句，限制输出结果的数量
-//        return bookMapper.selectPage(page1,wrapper);
-////        List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("ratnum").last("limit 50"));
-////        return books;
         Result result=new Result();
         page=(page-1)*size;
         return result.success(bookMapper.selectpagebyhot(page,size),50);
@@ -62,13 +57,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Result newestbook(int page,int size) {
-//        Page<Book> page1=new Page<>(page,size);
-//        QueryWrapper<Book> wrapper = new QueryWrapper<>();
-//        wrapper.orderByDesc("Publicationtime");
-//        Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50")
-//        wrapper.like("Bookname",text).or().like("author", text).or().like("isbn",text);
-//        List<Book> books = bookMapper.selectList(Wrappers.<Book>query().orderByDesc("Publicationtime").last("limit 50"));
-//        return bookMapper.selectPage(page1,wrapper);
         Result result=new Result();
         page=(page-1)*size;
         return result.success(bookMapper.selectpagebynewest(page,size),50);
@@ -89,81 +77,46 @@ public class BookServiceImpl implements BookService {
         System.out.println(booktype);
         int n=booktypeMapper.Udbook(booktype);
         if(m!=0&&n!=0){
-        return bookMapper.Udbook(book);}else return 0;
+        return bookMapper.Udbook(book);
+        }else return 0;
     }
 
     @Override
     public Integer addbook(Booktype book) {
         Book book1=new Book();
+        System.out.println(book);
         BeanUtils.copyProperties(book, book1);
+        System.out.println(book1);
         int m=booktypeMapper.insert(book);
         int n=bookMapper.insert(book1);
+        String type=book.getType();
+        Long isbn=book.getIsbn();
+        type type1=new type();
+        type1.setIsbn(isbn);
+        type1.setType(type);
+        typeMapper.insert(type1);
         if(m!=0&&n!=0){
             return bookMapper.Udbook(book1);}else return 0;
     }
 
     @Override
     public Integer delbook(Long isbn) {
+        int r= typeMapper.delbook(isbn);
        int rs= bookMapper.delbook(isbn);
        int rs1=booktypeMapper.delbook(isbn);
        return rs;
     }//删除书籍信息
 
-//    @Override
-//    public List<Book> adminselbook(Book book) //按作者，书名，isbn查询书籍
-//    {
-//        return bookMapper.adminselbook(book);
-//    }//后面有完善版
-//
-//    @Override
-//    public Page<Book> bookpagebyauthor(bookpage bookpage) {
-//        Page<Book> page = new Page(bookpage.getPagenum(), bookpage.getPagesize());
-//        QueryWrapper<Book> wrapper = new QueryWrapper<>();
-//        wrapper.eq("author", bookpage.getAuthor());
-////        wrapper.like("name", t.getName());
-//          return bookMapper.selectPage(page,wrapper);
-////        return this.(page, wrapper);
-//    }//这个暂时不用，用后面整体最终版本
-//
-//    @Override
-//    public Page<Book> bookpagebyisbn(bookpage bookpage) {
-//        Page<Book> page = new Page(bookpage.getPagenum(), bookpage.getPagesize());
-//        QueryWrapper<Book> wrapper = new QueryWrapper<>();
-//        wrapper.eq("isbn", bookpage.getISBN());
-////        wrapper.like("name", t.getName());
-//        return bookMapper.selectPage(page,wrapper);
-////        return this.(page, wrapper);
-//    }//用最后最终版本
-//
-//    @Override
-//    public Page<Book> bookpagebyBookall(bookpage bookpage) {
-//        Page<Book> page = new Page(bookpage.getPagenum(), bookpage.getPagesize());
-//        QueryWrapper<Book> wrapper = new QueryWrapper<>();
-//        wrapper.like("Bookname", bookpage.getBookname()).or().like("author", bookpage.getAuthor()).or().like("isbn",bookpage.getISBN());
-////        wrapper.like("Bookname", bookpage.getBookname());
-////        wrapper.like("Bookname", bookpage.getBookname());
-////        wrapper.like("name", t.getName());
-////        String bname=bookpage.getBookname();
-////        System.out.println(bname);
-////        wrapper.like("Bookname",bname);
-////        System.out.println(wrapper);
-//        return bookMapper.selectPage(page,wrapper);
-//    }//根据书名，作者，isbn进行模糊查询，后面有完善版
-
-//    @Override
-//    public List<BookBooktype> adminselbooktype(String booktypename) {
-//        int m=bookMapper.selectbytypename(booktypename);
-//        System.out.println(m);
-//        return bookMapper.selectbookbytype(m);
-//    }//按类型查询
 
     @Override
-    public Page<Book> bookpagebyall(int page, int size, Object text) {
+    public List<Book> bookpagebyall(int page, int size, Object text) {
         int pagenum=(page-1)*size;
-        Page<Book> page1=new Page<>(page,size);
-        QueryWrapper<Book> wrapper = new QueryWrapper<>();
-        wrapper.like("Bookname",text).or().like("author", text).or().like("isbn",text);
-        return bookMapper.selectPage(page1,wrapper);
+//        Page<Book> page1=new Page<>(page,size);
+//        QueryWrapper<Book> wrapper = new QueryWrapper<>();
+//        wrapper.like("Bookname",text).or().like("author", text).or().like("isbn",text);
+        Object text1=text;
+//        return bookMapper.selectPage(page1,wrapper);
+        return bookMapper.adminselbook(text,text1,text,pagenum,size);
     }//按书籍，作者，isbn模糊查询分页最终版
 
     @Override
@@ -171,9 +124,7 @@ public class BookServiceImpl implements BookService {
             Page<Booktype> page1 = new Page(page, size);
             QueryWrapper<Booktype> wrapper = new QueryWrapper<>();
             wrapper.like("type",type );
-//        wrapper.like("name", t.getName());
             return booktypeMapper.selectPage(page1,wrapper);
-//        return bookMapper.selectbookbytype(m);
         }
 
     @Override
@@ -186,15 +137,7 @@ public class BookServiceImpl implements BookService {
         return booktypeMapper.selectPage(page1,wrapper);
     }
 
-//    @Override
-//    public Page<BookBooktype> pagetest(int page, int size, String type) {
-//
-//        Page<Booktype> page1 = new Page(page, size);
-//        QueryWrapper<Booktype> wrapper = new QueryWrapper<>();
-//        wrapper.like("type",type );
-////        wrapper.like("name", t.getName());
-//        return booktypeMapper.selectPage(page1,wrapper);
-//    }
+
 
     @Override
     public Result addshelf(Integer userid, Long isbn)
@@ -248,6 +191,27 @@ public class BookServiceImpl implements BookService {
         if(bookshelfMapper.delete(wrapper)!=0){
             return result.success();
         }else return result.error("400","faild");
+    }
+
+    @Override
+    public Result Booktypetest(String type ,Integer page,Integer size)
+            //进行按类型进行查询，连表进行分页查询
+    {
+        Result result=new Result();
+        page=(page-1)*size;
+        System.out.println(bookMapper.selectbookbytypetest(type, page, size));
+        if(bookMapper.selectbookbytypetest(type, page, size)!= null){
+            Book booktest=new Book();
+            List<Book> book=new ArrayList<>();
+            List<type> a=bookMapper.selectbookbytypetest(type, page, size);
+            for(type type1: a){
+                System.out.println(type1.getBooks());
+                book.add(type1.getBooks());
+            }
+            return result.success(book);//这种类型的书籍
+        }else {
+            return result.error("400","faild");
+        }
     }
 }
 

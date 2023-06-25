@@ -6,15 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("type_copy1")
-public class BookBooktype {
-    int isbn;
-    int type;
+@Data
+@TableName("booktype")
+public class type {
+    String type;
+    long isbn;
     @TableField(exist = false)
-    private List<Book> books;
+    private Book books;
 }

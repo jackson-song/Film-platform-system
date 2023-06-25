@@ -166,7 +166,7 @@ public class CommentController {
         }
     }
     @PutMapping("good/{userid}/{commentid}")
-    //请求路径为 http://localhost:3000/comments/2/2，2就是userid，2是commentid
+    //用户进行点赞，请求路径为 http://localhost:3000/comments/2/2，2就是userid，2是commentid
     // 进行点赞前端要传给我后端点赞的commentid是多少，点赞人的userid为多少
     public Result likeings(@PathVariable Integer userid,@PathVariable Integer commentid){
         Result result=new Result();
@@ -174,12 +174,12 @@ public class CommentController {
         if(r!=0){
             return result.success();
         }else {
-            return result.error("400","已经点赞");
+            return result.error("500","你已经点赞了 ");
         }
     }
 
     @DeleteMapping ("good/{userid}/{commentid}")
-    //请求路径为 http://localhost:3000/comments/2/2，2就是userid，2是commentid
+    //用户进行解除点赞，请求路径为 http://localhost:3000/comments/2/2，2就是userid，2是commentid
     // 解除点赞前端要传给我后端点赞的commentid是多少，点赞人的userid为多少
     public Result Delikeings(@PathVariable Integer userid,@PathVariable Integer commentid){
         Result result=new Result();
@@ -187,7 +187,7 @@ public class CommentController {
         if(r!=0){
             return result.success();
         }else {
-            return result.error("400","failed");
+            return result.error("500","你还没有进行点赞哦");
         }
     }
 

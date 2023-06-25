@@ -4,16 +4,17 @@
 <mapper namespace="com.read.read_book.Mapper.BookMapper">
 
     <select id="adminselbook" resultType="com.read.read_book.pojo.Book">
-        select *from book where 1=1
+        select *,locate(#{bookname},bookname) loc,locate(#{isbn},isbn) loc1,locate(#{author},author) loc2 from book where 1=1
             <if test="isbn !=null">
-                and isbn like concat('%',#{isbn},'%')
+               and  isbn like concat('%',#{isbn},'%')
             </if>
-            <if test="Bookname !=null">
-                and Bookname like concat('%',#{Bookname},'%')
+            <if test="bookname !=null">
+                or bookname like concat('%',#{bookname},'%')
             </if>
             <if test="author !=null">
-                and author like concat('%',#{author},'%')
+                or author like concat('%',#{author},'%')
             </if>
+            ORDER BY loc,loc1,loc2  limit #{page},#{size};
     </select>
 
 <select id="total" resultType="Integer">

@@ -215,11 +215,15 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
 
     @Override//根据userid或email查询user
     public Result seleuser(int page, int size, Object text) {
-        Page<User> page1 = new Page<>(page, size);
+//        Page<User> page1 = new Page<>(page, size);
         Result result = new Result();
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.like("username", text).or().like("email", text);
-        return result.success(userMapper.selectPage(page1, wrapper));
+//        QueryWrapper<User> wrapper = new QueryWrapper<>();
+//        wrapper.like("username", text).or().like("email", text);
+//        return result.success(userMapper.selectPage(page1, wrapper));
+
+        int pagenum=(page-1)*size;
+        Object text1=text;
+        return result.success(userMapper.adminseluser(text,text1,pagenum,size));
     }
 
     @Override//冻结

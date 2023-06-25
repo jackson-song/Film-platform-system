@@ -40,7 +40,8 @@ public interface UserMapper extends BaseMapper<User> {
     @Update("update user set state = #{state} where userid=#{userid}")
     int freezeuser(@Param("state") int state,@Param("userid") int userid);//冻结
 
-
+    @Select("select *,locate(#{username},username) loc,locate(#{email},email) loc1 from user where 1=1 and username like concat('%',#{username},'%') or email like concat('%',#{email},'%') ORDER BY loc,loc1  limit #{page},#{size};")
+    List<User> adminseluser(@Param("username") Object text,@Param("email") Object text1,int page, int size);
 
 
 }

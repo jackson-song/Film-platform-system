@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @TableName("type")
 public class Booktype {
@@ -18,6 +20,8 @@ public class Booktype {
     String Publicationtime;
     String synopsis;
     String type;
+    @TableField(exist = false)
+    private Book books;
 
 
 }

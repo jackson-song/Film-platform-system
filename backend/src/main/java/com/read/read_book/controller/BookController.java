@@ -1,18 +1,12 @@
 package com.read.read_book.controller;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.read.read_book.common.Result;
-import com.read.read_book.dto.Bookshelf;
-import com.read.read_book.dto.bookpage;
 import com.read.read_book.pojo.Book;
-import com.read.read_book.pojo.BookBooktype;
 import com.read.read_book.pojo.Booktype;
 import com.read.read_book.service.BookService;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -97,6 +91,7 @@ public class BookController {
         System.out.println(size);
         System.out.println(text);
         Result result=new Result();
+        System.out.println(bookService.bookpagebyall(page,size,text));
         return result.success(bookService.bookpagebyall(page,size,text));
 //        return bookService.bookpagebyall(page,size,text);
     }
@@ -258,5 +253,13 @@ public class BookController {
         return bookService.delshelf(userid, isbn);
     }
 
+    @GetMapping("/typetest/{type}")//根据类别进行连表进行分页查询，优化了数据库表
+    public Result Booktypetest(@RequestParam(defaultValue = "1") int page,
+                               @RequestParam(defaultValue = "10") int size,@PathVariable String type)
+    {
+        Result result=new Result();
+        System.out.println(type);
+        return bookService.Booktypetest(type,page,size);
+    }
 //
 }

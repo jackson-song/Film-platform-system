@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class Likeings {
     Integer userid;
     Integer commentid;
-    Long isbn;
 }
