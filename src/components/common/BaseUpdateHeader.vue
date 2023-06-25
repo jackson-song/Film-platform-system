@@ -83,6 +83,7 @@
         <el-button type="text" @click="click1">首页</el-button>
         <el-button type="text" @click="click2">书籍分类</el-button>
           <el-button type="text" @click="click3">热门书籍</el-button>
+        <el-button type="text" @click="click4">后台管理</el-button>
 
 <!--        <li v-for="type in moduleTypes"
             :key="type.value">
@@ -183,6 +184,9 @@ export default {
     },
     click3 () {
       this.$router.replace('book-hot')
+    },
+    click4 () {
+      window.location.href = 'https://www.baidu.com'
     },
     logout () {
       this.$confirm('确定退出吗？', '提示', {

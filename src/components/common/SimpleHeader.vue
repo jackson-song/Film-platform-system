@@ -89,7 +89,7 @@ export default {
           type: 'success',
           message: '返回主页成功'
         })
-        this.$router.push('/book-index-first')
+        this.$router.push('/book-final-update')
         // sessionStorage.clear()
       }).catch(() => {
         this.$message({

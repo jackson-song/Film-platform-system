@@ -38,28 +38,149 @@
       </el-table-column>
     </el-table>
   </div>
+    <div>
+      <div>
+        <div align="left">
+          <h2 style="border:black">热门书评</h2>
+        </div>
+        <el-table align="center" :data="commentHotList" stripe style="width: 100%">
+          <el-table-column prop="imgurl" label="书籍" width="100">
+            <template slot-scope="scope">
+              <img referrerpolicy="no-referrer" :src="scope.row.imgurl"  max-width="100" height="110" :alt=scope.row.imgurl :title=scope.row.imgurl />
+              <span>{{ scope.row.bookname }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="username" label="用户昵称" width="80">
+          </el-table-column>
+          <el-table-column prop="comment" label="评论" width="180">
+          </el-table-column>
+          <el-table-column  label="书籍评分" width="170">
+            <template slot-scope="scope">
+              <el-rate v-model="scope.row.rate" disabled show-score text-color="#ff9900"></el-rate>
+            </template>
+          </el-table-column>
+          <!-- <el-table-column prop="likeing" width="170">
+            <template slot-scope="scope">
+              <el-button @click="good(scope.row.commentid)" type="primary" icon="el-icon-star-on" size="mini">点赞{{ scope.row.likeing }}</el-button>
+            </template>
+          </el-table-column> -->
+        </el-table>
+        <el-pagination
+          @size-change="handleSizeChange1"
+          @current-change="handleCurrentChange1"
+          :current-page="searchModel.pageNo"
+          :page-sizes="[3,5,15]"
+          :page-size="searchModel.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+          align="center">
+        </el-pagination>
+      </div>
+      <div>
+        <div align="left">
+          <h2 style="border:black">最新书评</h2>
+        </div>
+        <el-table align="center" :data="CommentNewList" stripe style="width: 100%">
+          <el-table-column prop="imgurl" label="书籍" width="100">
+            <template slot-scope="scope">
+              <img referrerpolicy="no-referrer" :src="scope.row.imgurl"  max-width="100" height="110" :alt=scope.row.imgurl :title=scope.row.imgurl />
+              <span>{{ scope.row.bookname }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="username" label="用户昵称" width="80">
+          </el-table-column>
+          <el-table-column prop="comment" label="评论" width="180">
+          </el-table-column>
+          <el-table-column  label="书籍评分" width="170">
+            <template slot-scope="scope">
+              <el-rate v-model="scope.row.rate" disabled show-score text-color="#ff9900"></el-rate>
+            </template>
+          </el-table-column>
+          <!-- <el-table-column prop="likeing" width="170">
+            <template slot-scope="scope">
+              <el-button @click="good(scope.row.commentid)" type="primary" icon="el-icon-star-on" size="mini">点赞{{ scope.row.likeing }}</el-button>
+            </template>
+          </el-table-column> -->
+        </el-table>
+        <el-pagination
+          @size-change="handleSizeChange1"
+          @current-change="handleCurrentChange1"
+          :current-page="searchModel.pageNo"
+          :page-sizes="[3,5,15]"
+          :page-size="searchModel.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+          align="center">
+        </el-pagination>
+      </div>
+    </div>
   </el-card>
 </template>
 <script>
 import bookApi from '@/api/bookManage'
+import commentApi from '@/api/Comment'
 export default {
   data () {
     return {
-      searchModel: {
+      searchbook: {
         pageNo: 1,
         pageSize: 10,
         book: ''
       },
+      searchModel: {
+        pageNo: 1,
+        pageSize: 3
+      },
+      total: 0,
       bookList: [],
-      showList: []
+      commentHotList: [],
+      CommentNewList: []
     }
+  // },
+  //   return {
+  //     searchModel: {
+  //       pageNo: 1,
+  //       pageSize: 10,
+  //       book: ''
+  //     },
+  //     bookList: [],
+  //     showList: []
+  //   }
   },
   methods: {
+    getCommentHot () {
+      commentApi.CommentHot(this.searchModel).then(response => {
+        this.commentHotList = response.data
+        this.total = response.total
+      })
+    },
+    getCommentNew () {
+      commentApi.CommentNew(this.searchModel).then(response => {
+        this.CommentNewList = response.data
+        this.total = response.total
+      })
+    },
+    handleSizeChange1 (pageSize) {
+      this.searchModel.pageSize = pageSize
+      this.getCommentHot()
+    },
+    handleCurrentChange1 (pageNo) {
+      this.searchModel.pageNo = pageNo
+      this.getCommentHot()
+    },
+    handleSizeChange2 (pageSize) {
+      this.searchModel.pageSize = pageSize
+      this.getCommentNew()
+    },
+    handleCurrentChange2 (pageNo) {
+      this.searchModel.pageNo = pageNo
+      this.getCommentNew()
+    },
     more () {
       this.$router.push('/book-index')
     },
     getBookList () {
-      bookApi.getBookList(this.searchModel).then(response => {
+      bookApi.getBookList(this.searchbook).then(response => {
         this.bookList.push({'a0': response.data.records[0]})
         this.bookList[0]['a1'] = response.data.records[1]
         this.bookList[0]['a1'] = response.data.records[1]
@@ -114,6 +235,8 @@ export default {
   },
   created () {
     this.getBookList()
+    this.getCommentHot()
+    this.getCommentNew()
   }
 }
 </script>

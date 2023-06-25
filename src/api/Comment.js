@@ -79,5 +79,25 @@ export default{
       url: 'http://localhost:3000/comments/' + commentid,
       method: 'delete'
     })
+  },
+  CommentHot (searchModel) {
+    return request({
+      url: 'http://localhost:3000/comments/newest',
+      method: 'get',
+      params: {
+        page: searchModel.pageNo,
+        size: searchModel.pageSize
+      }
+    })
+  },
+  CommentNew (searchModel) {
+    return request({
+      url: 'http://localhost:3000/comments/hotcomment',
+      method: 'get',
+      params: {
+        page: searchModel.pageNo,
+        size: searchModel.pageSize
+      }
+    })
   }
 }
