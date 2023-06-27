@@ -206,7 +206,7 @@ export default {
           })
         } else {
           return false
-        }
+        }   
       })
     },
     deletecomment () {

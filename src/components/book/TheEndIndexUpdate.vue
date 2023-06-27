@@ -29,9 +29,14 @@
 <script>
 // import axios from 'axios'
 
+import axios from 'axios'
+import {log} from 'nightwatch/lib/util/logger'
+// import {data} from "autoprefixer";
+
 export default {
   data () {
     return {
+      user: JSON.parse(sessionStorage.getItem('CurUser')),
       tableData: []
     }
   },
@@ -56,11 +61,19 @@ export default {
       })
     },
     getInfo () {
-      fetch('http://localhost:3000/userbased')
+      /*      fetch('http://localhost:3000/userbased')
         .then(res => res.json()).then(res => {
           console.log(res)
+          // this.u
           this.tableData = res
           // this.total = res.data.total
+        }) */
+      axios.post('http://localhost:3000/userbasedall?userid=' + this.user.userid)
+        .then(response => {
+          console.log(this.user.userid)
+          console.log(response.data.data)
+          this.tableData = response.data.data
+          return response.data.data
         })
     }
   }
