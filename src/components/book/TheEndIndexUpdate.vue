@@ -30,7 +30,7 @@
 // import axios from 'axios'
 
 import axios from 'axios'
-import {log} from 'nightwatch/lib/util/logger'
+// import {log} from 'nightwatch/lib/util/logger'
 // import {data} from "autoprefixer";
 
 export default {
