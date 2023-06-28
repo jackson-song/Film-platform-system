@@ -82,7 +82,7 @@ export default{
   },
   CommentHot (searchModel) {
     return request({
-      url: 'http://localhost:3000/comments/newest',
+      url: 'http://localhost:3000/comments/hotcomment',
       method: 'get',
       params: {
         page: searchModel.pageNo,
@@ -92,7 +92,7 @@ export default{
   },
   CommentNew (searchModel) {
     return request({
-      url: 'http://localhost:3000/comments/hotcomment',
+      url: 'http://localhost:3000/comments/newest',
       method: 'get',
       params: {
         page: searchModel.pageNo,
