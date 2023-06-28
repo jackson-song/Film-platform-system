@@ -1,0 +1,56 @@
+#数据库连接的驱动、url、用户名、密码，修改自己的数据库名称 用户名 密码 部分
+#spring:
+#  mvc:
+#    view:
+#      prefix: /
+#      suffix: .html
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver #mysql8以上使用
+#    url: jdbc:mysql://127.0.0.1:3306/read?useUnicode=true &characterEncoding=utf-8 &useSSL=true & serverTimezone=Asia/Shanghai #mysql8以上必须添加serverTimezone时区设置
+#    username: root
+#    password: 52530
+  #配置mybatis的xml路径、自动扫描实体类所在的包
+#  mybatis:
+#    mapper-locations: classpath:/mapper/*.xml
+#    type-aliases-package: com/read/read_book/entity
+#    configuration:
+#    map-underscore-to-camel-case: true #数据库字段下划线对应对象属性的驼峰命名转换 开启
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置log4j
+#mybatis-plus:
+#      configuration:
+#          map-underscore-to-camel-case: true
+#  服务器端口号
+#  server:
+#    port: 3000
+
+# springsSession过期时间
+#server:
+#  servlet:
+#    session:
+#      timeout: 30m
+
+
+#server:
+#  servlet:
+#    container: Tomcat
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.log4j2.Log4j2AbstractLoggerImpl
+
+spring:
+  mail:
+  #    protocol: smtps
+  protocol: smtp
+  # 配置 SMTP 服务器地址
+  host: smtp.qq.com
+  # 发送者邮箱
+  #    username: xqnode@163.com
+  username: 2971387095@qq.com
+  # 配置密码，注意不是真正的密码，而是刚刚申请到的授权码
+  password: zpnrrgmvdbamdgdb
+  # 端口号465或587
+  #    port: 465
+  port: 465
+  # 默认的邮件编码为UTF-8
+  default-encoding: UTF-8
+
