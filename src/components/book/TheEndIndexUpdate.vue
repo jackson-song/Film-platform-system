@@ -71,9 +71,9 @@ export default {
       axios.post('http://localhost:3000/userbasedall?userid=' + this.user.userid)
         .then(response => {
           console.log(this.user.userid)
-          console.log(response.data.data)
-          this.tableData = response.data.data
-          return response.data.data
+          console.log(response.data)
+          this.tableData = response.data
+          return response.data
         })
     }
   }

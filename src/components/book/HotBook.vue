@@ -4,22 +4,24 @@
     <div class="content-header">
       <h2>热门图书榜</h2>
       <el-table :data="tableData" @row-click="handleRowClick">
-        <el-table-column prop="imgurl" label="封面" width="200">
+        <el-table-column prop="imgurl" label="封面" width="170">
           <template   slot-scope="scope">
             <img referrerpolicy="no-referrer" :src="scope.row.imgurl"  min-width="170" height="170" :alt=scope.row.imgurl :title=scope.row.imgurl />
           </template>
         </el-table-column>
-        <el-table-column prop="bookname" label="书名" width="80">
+        <el-table-column prop="bookname" label="书名" width="70">
         </el-table-column>
-        <el-table-column prop="isbn" label="ISBN" width="80">
+        <el-table-column prop="isbn" label="ISBN" width="70">
         </el-table-column>
-        <el-table-column prop="author" label="作者" width="80">
+        <el-table-column prop="author" label="作者" width="70">
         </el-table-column>
-        <el-table-column prop="press" label="出版社" width="80">
+        <el-table-column prop="press" label="出版社" width="70">
         </el-table-column>
-        <el-table-column prop="publicationtime" label="出版时间" width="80">
+        <el-table-column prop="publicationtime" label="出版时间" width="70">
         </el-table-column>
-        <el-table-column prop="bookgrading" label="评分" width="80">
+        <el-table-column prop="bookgrading" label="评分" width="70">
+        </el-table-column>
+        <el-table-column prop="ratnum" label="热度" width="70">
         </el-table-column>
         <el-table-column prop="synopsis" label="简介" width="200">
         </el-table-column>
