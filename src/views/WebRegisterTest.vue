@@ -130,16 +130,21 @@ export default {
           email: this.ruleForm.email
         }).then(response => {
         console.log(response.data)
+        console.log(response.data.code)
+
         this.$confirm('验证码一分钟有效，请及时注册，注意保存', '提示', {
           confirmButtonText: '确定',
           type: 'warning',
           center: true
         }).then(() => {
-          // update()
-          this.$message({
-            type: 'success',
-            message: '验证码已发送至邮箱请获取,不要频繁点击'
-          })
+          if (response.data.code == 500) {
+            Message.error('不要重复发验证码')
+          } else {
+            this.$message({
+              type: 'success',
+              message: '验证码已发送至邮箱请获取,不要频繁点击'
+            })
+          }
         }).catch(() => {
           this.$message({
             type: 'info',
